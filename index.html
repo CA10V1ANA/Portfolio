@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <title>Caio de Oliveira Viana | Full Stack Developer</title>
+    <meta
+      name="description"
+      content="Portfólio profissional de Caio de Oliveira Viana, Full Stack Developer e estudante de Engenharia de Software. Especialista em Java, Spring Boot, React, Angular, TypeScript, PostgreSQL, Docker e Git."
+    />
+    <meta
+      name="keywords"
+      content="Caio de Oliveira Viana, Full Stack Developer, Java Developer, React Developer, Spring Boot, TypeScript, Software Engineer, Portfólio"
+    />
+    <meta name="author" content="Caio de Oliveira Viana" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Caio de Oliveira Viana | Full Stack Developer" />
+    <meta
+      property="og:description"
+      content="Portfólio profissional de Caio de Oliveira Viana, Full Stack Developer e estudante de Engenharia de Software."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Caio de Oliveira Viana" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Caio de Oliveira Viana | Full Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfólio profissional de Caio de Oliveira Viana, Full Stack Developer e estudante de Engenharia de Software."
+    />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script type="text/javascript">
+      // GitHub Pages SPA redirect: restaura o caminho original codificado pelo 404.html
+      // antes do React Router assumir o roteamento (https://github.com/rafgraph/spa-github-pages)
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
