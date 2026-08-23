@@ -6,7 +6,7 @@ export const EDUCATION: EducationItem[] = [
     institution: 'UniAteneu — Centro Universitário Ateneu',
     degree: 'Bacharelado',
     field: 'Engenharia de Software',
-    startDate: '2023-08',
+    startDate: '2026-02',
     current: true,
     description:
       'Formação com foco em engenharia de software, arquitetura de sistemas, estrutura de dados, banco de dados, desenvolvimento web e boas práticas de programação.',

@@ -29,28 +29,28 @@ export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
 
 export const ABOUT_TIMELINE: TimelineEntry[] = [
   {
-    id: 'inicio-graduacao',
-    date: '2023',
-    title: 'Início da Graduação',
-    subtitle: 'Engenharia de Software — UniAteneu',
-    description:
-      'Início dos estudos em Engenharia de Software, com foco em lógica, algoritmos e fundamentos de programação.',
-  },
-  {
     id: 'primeiros-projetos',
-    date: '2023 — 2024',
+    date: 'Projetos próprios',
     title: 'Primeiros Projetos',
     subtitle: 'Java, React e Banco de Dados',
     description:
       'Desenvolvimento de projetos pessoais e acadêmicos utilizando Java, Spring Boot, React e PostgreSQL.',
   },
   {
-    id: 'acs-full-stack',
-    date: '2024 — atual',
+    id: 'rav-full-stack',
+    date: 'Ago 2025 — atual',
     title: 'Desenvolvedor Full Stack',
-    subtitle: 'ACS Automação Comercial e Sistemas',
+    subtitle: 'RAV Tecnologia',
     description:
       'Atuação profissional desenvolvendo e mantendo sistemas corporativos com Java, Spring Boot, React e TypeScript.',
+  },
+  {
+    id: 'inicio-graduacao',
+    date: 'Fev 2026 — atual',
+    title: 'Início da Graduação',
+    subtitle: 'Engenharia de Software — UniAteneu',
+    description:
+      'Início dos estudos em Engenharia de Software, com foco em lógica, algoritmos e fundamentos de programação.',
   },
   {
     id: 'evolucao-continua',

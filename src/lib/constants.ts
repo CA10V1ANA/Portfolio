@@ -3,7 +3,7 @@ export const PERSONAL_INFO = {
   firstName: 'Caio',
   title: 'Full Stack Developer',
   subtitle: 'Software Engineering Student',
-  email: 'vianacaio009@gmail.com',
+  email: 'caiodeoliveira076@gmail.com',
   location: 'Fortaleza, Ceará, Brasil',
   roles: [
     'Full Stack Developer',

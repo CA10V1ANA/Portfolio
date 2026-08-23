@@ -2,11 +2,11 @@ import type { ExperienceItem } from '@/types';
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    id: 'acs',
+    id: 'rav-tecnologia',
     role: 'Desenvolvedor Full Stack',
-    company: 'ACS Automação Comercial e Sistemas',
+    company: 'RAV Tecnologia',
     location: 'Fortaleza, Ceará',
-    startDate: '2024-01',
+    startDate: '2025-08',
     current: true,
     description: [
       'Desenvolvimento e manutenção de sistemas corporativos utilizando Java e Spring Boot.',
