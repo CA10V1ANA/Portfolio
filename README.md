@@ -45,8 +45,8 @@ code-splitting, acessibilidade e integração com APIs externas (GitHub e EmailJ
   digitação (typewriter) e botões com efeito magnético.
 - **Tema escuro por padrão** com alternância para tema claro, persistido em
   `localStorage`.
-- **Seções completas**: Sobre, Skills, Experiência, Projetos, Certificados,
-  Formação, GitHub e Contato.
+- **Seções completas**: Sobre, Skills, Experiência, Projetos, Formação, GitHub
+  e Contato.
 - **Skills categorizadas** (Frontend, Backend, Banco de Dados, Ferramentas,
   Cloud) com nível de proficiência, ícone e animações de hover.
 - **Cards de projeto com efeito tilt 3D**, badges de tecnologias e links para
@@ -104,8 +104,8 @@ Pré-requisitos: [Node.js](https://nodejs.org/) 20+ e npm.
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/CA10V1ANA/Portf-lio.git
-cd Portf-lio
+git clone https://github.com/CA10V1ANA/Portfolio.git
+cd Portfolio
 
 # Instalar dependências
 npm install
@@ -160,7 +160,7 @@ npm run deploy
 O projeto inclui o truque de redirecionamento de SPA para GitHub Pages
 (`public/404.html` + script em `index.html`), permitindo que rotas profundas
 do React Router funcionem corretamente em um projeto hospedado em um
-subdiretório (`/Portf-lio/`).
+subdiretório (`/Portfolio/`).
 
 ### Vercel
 

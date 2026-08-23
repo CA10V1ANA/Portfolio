@@ -11,8 +11,7 @@ export const PERSONAL_INFO = {
     'React Developer',
     'Software Engineering Student',
   ],
-  resumeUrl: '/resume-caio-viana.pdf',
-  avatarUrl: '/avatar.jpg',
+  avatarUrl: 'https://avatars.githubusercontent.com/u/149689861?v=4',
 };
 
 export const SOCIAL_LINKS = {
@@ -29,7 +28,6 @@ export const NAV_LINKS = [
   { label: 'Skills', href: '#skills' },
   { label: 'Experiência', href: '#experience' },
   { label: 'Projetos', href: '#projects' },
-  { label: 'Certificados', href: '#certificates' },
   { label: 'Formação', href: '#education' },
   { label: 'GitHub', href: '#github' },
   { label: 'Contato', href: '#contact' },

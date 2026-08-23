@@ -45,15 +45,6 @@ export interface EducationItem {
   description?: string;
 }
 
-export interface Certificate {
-  id: string;
-  title: string;
-  issuer: string;
-  date: string;
-  credentialUrl?: string;
-  image?: string;
-}
-
 export interface SocialLink {
   name: string;
   url: string;

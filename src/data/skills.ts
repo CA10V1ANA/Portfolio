@@ -8,6 +8,8 @@ import {
   SiAngular,
   SiRedux,
   SiVite,
+  SiFlutter,
+  SiDart,
   SiSpring,
   SiNodedotjs,
   SiExpress,
@@ -40,6 +42,8 @@ export const SKILLS: Skill[] = [
   { name: 'Tailwind CSS', category: 'frontend', level: 88, icon: SiTailwindcss, color: '#06B6D4' },
   { name: 'Redux', category: 'frontend', level: 70, icon: SiRedux, color: '#764ABC' },
   { name: 'Vite', category: 'frontend', level: 85, icon: SiVite, color: '#646CFF' },
+  { name: 'Flutter', category: 'frontend', level: 75, icon: SiFlutter, color: '#02569B' },
+  { name: 'Dart', category: 'frontend', level: 72, icon: SiDart, color: '#0175C2' },
 
   // Backend
   { name: 'Java', category: 'backend', level: 90, icon: FaJava, color: '#E76F00' },

@@ -14,9 +14,6 @@ const Experience = lazy(() =>
 const Projects = lazy(() =>
   import('@/components/sections/Projects').then((m) => ({ default: m.Projects })),
 );
-const Certificates = lazy(() =>
-  import('@/components/sections/Certificates').then((m) => ({ default: m.Certificates })),
-);
 const Education = lazy(() =>
   import('@/components/sections/Education').then((m) => ({ default: m.Education })),
 );
@@ -40,7 +37,6 @@ const SECTIONS = [
   Skills,
   Experience,
   Projects,
-  Certificates,
   Education,
   GithubStats,
   Contact,

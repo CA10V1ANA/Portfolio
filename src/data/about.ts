@@ -17,7 +17,7 @@ export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
     icon: 'Layers',
     title: 'Stack Moderna',
     description:
-      'Java, Spring Boot, React, Angular e TypeScript para construir aplicações robustas e escaláveis.',
+      'Java, Spring Boot, React, TypeScript e Flutter para construir produtos robustos para web e mobile.',
   },
   {
     icon: 'Users',
@@ -56,8 +56,8 @@ export const ABOUT_TIMELINE: TimelineEntry[] = [
     id: 'evolucao-continua',
     date: 'Presente',
     title: 'Evolução Contínua',
-    subtitle: 'Angular, Docker e Cloud',
+    subtitle: 'Flutter, Docker e Cloud',
     description:
-      'Aprofundamento em Angular, contêinerização com Docker e boas práticas de arquitetura de software.',
+      'Evolução em aplicações web e mobile, contêinerização com Docker, segurança e arquitetura de software.',
   },
 ];
