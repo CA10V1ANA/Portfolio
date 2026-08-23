@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Mail } from 'lucide-react';
+import { ArrowDown, Download, Mail } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { AuroraBackground } from '@/components/shared/AuroraBackground';
 import { TypewriterText } from '@/components/shared/TypewriterText';
@@ -75,6 +75,15 @@ export function Hero() {
         <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-4">
           <MagneticButton>
             <Button size="lg" asChild>
+              <a href={PERSONAL_INFO.resumeUrl} download>
+                <Download className="h-4 w-4" />
+                Download CV
+              </a>
+            </Button>
+          </MagneticButton>
+
+          <MagneticButton>
+            <Button size="lg" variant="outline" asChild>
               <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer">
                 <FaGithub className="h-4 w-4" />
                 GitHub

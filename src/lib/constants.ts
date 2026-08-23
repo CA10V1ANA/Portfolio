@@ -7,10 +7,12 @@ export const PERSONAL_INFO = {
   location: 'Fortaleza, Ceará, Brasil',
   roles: [
     'Full Stack Developer',
+    'Estagiário em Desenvolvimento de Sistemas',
     'Java Developer',
     'React Developer',
     'Software Engineering Student',
   ],
+  resumeUrl: '/Caio-Viana-Curriculo.pdf',
   avatarUrl: 'https://avatars.githubusercontent.com/u/149689861?v=4',
 };
 

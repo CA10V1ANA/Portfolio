@@ -11,7 +11,7 @@ export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
     icon: 'GraduationCap',
     title: 'Formação Sólida',
     description:
-      'Estudante de Engenharia de Software no UniAteneu, aplicando fundamentos de arquitetura e boas práticas no dia a dia.',
+      'Técnico em Desenvolvimento de Sistemas e estudante de Engenharia de Software no UniAteneu.',
   },
   {
     icon: 'Layers',
@@ -39,10 +39,10 @@ export const ABOUT_TIMELINE: TimelineEntry[] = [
   {
     id: 'rav-full-stack',
     date: 'Ago 2025 — atual',
-    title: 'Desenvolvedor Full Stack',
+    title: 'Estagiário em Desenvolvimento de Sistemas',
     subtitle: 'RAV Tecnologia',
     description:
-      'Atuação profissional desenvolvendo e mantendo sistemas corporativos com Java, Spring Boot, React e TypeScript.',
+      'Atuação em interfaces React e Next.js, integrações REST e apoio no back-end com Node.js, NestJS, JWT e MySQL.',
   },
   {
     id: 'inicio-graduacao',
