@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ArrowUpRight, House, Menu, Moon, Sun, X } from 'lucide-react';
+import { House, Menu, Moon, Sun, X } from 'lucide-react';
 import { NAV_LINKS, PERSONAL_INFO } from '@/lib/constants';
 import { useTheme } from '@/hooks/useTheme';
 import { cn } from '@/lib/utils';
@@ -81,13 +81,6 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <CommandPalette />
-          <a
-            href={PERSONAL_INFO.resumeUrl}
-            download
-            className="hidden items-center gap-1 rounded-sm font-mono text-xs font-semibold uppercase tracking-widest text-foreground hover:text-accent sm:inline-flex"
-          >
-            CV <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </a>
           <button
             type="button"
             onClick={toggleTheme}
@@ -127,14 +120,6 @@ export function Navbar() {
               {link.label}
             </NavLink>
           ))}
-          <a
-            href={PERSONAL_INFO.resumeUrl}
-            download
-            onClick={() => setIsOpen(false)}
-            className="block min-h-11 py-3 text-sm"
-          >
-            Baixar currículo
-          </a>
         </nav>
       )}
     </header>

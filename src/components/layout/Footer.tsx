@@ -1,6 +1,7 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { Mail, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
+import { CONTACT_LINKS, PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
 
 const SOCIALS = [
   { name: 'GitHub', href: SOCIAL_LINKS.github, icon: FaGithub },
@@ -30,6 +31,27 @@ export function Footer() {
               <social.icon className="h-5 w-5" />
             </a>
           ))}
+        </div>
+
+        <div className="flex w-full max-w-2xl flex-col items-stretch justify-center gap-3 sm:flex-row">
+          <a
+            href={CONTACT_LINKS.email.href}
+            aria-label={CONTACT_LINKS.email.ariaLabel}
+            className="inline-flex min-h-11 min-w-0 items-center justify-center gap-3 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
+          >
+            <Mail className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+            <span className="min-w-0 break-all sm:break-normal">{CONTACT_LINKS.email.label}</span>
+          </a>
+          <a
+            href={CONTACT_LINKS.whatsapp.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={CONTACT_LINKS.whatsapp.ariaLabel}
+            className="inline-flex min-h-11 items-center justify-center gap-3 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
+          >
+            <MessageCircle className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+            <span>{CONTACT_LINKS.whatsapp.label}</span>
+          </a>
         </div>
 
         <p className="text-sm text-muted-foreground">

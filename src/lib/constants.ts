@@ -14,6 +14,19 @@ export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/in/caio-viana-898811312',
 };
 
+export const CONTACT_LINKS = {
+  email: {
+    label: 'caiodeoliveira076@gmail.com',
+    href: 'mailto:caiodeoliveira076@gmail.com',
+    ariaLabel: 'Enviar e-mail para Caio Viana',
+  },
+  whatsapp: {
+    label: '+55 (85) 98111-2664',
+    href: 'https://wa.me/5585981112664',
+    ariaLabel: 'Conversar com Caio Viana pelo WhatsApp',
+  },
+} as const;
+
 export const GITHUB_USERNAME = 'CA10V1ANA';
 
 export const PAGES = [

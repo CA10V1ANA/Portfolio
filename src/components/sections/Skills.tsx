@@ -22,6 +22,7 @@ export function Skills() {
   const reducedMotion = useReducedMotion();
   const active = TECHNOLOGIES[activeIndex];
   const branch = BRANCHES.find((item) => item.id === active.branch)!;
+  const activeBranchIndex = BRANCHES.findIndex((item) => item.id === active.branch);
   const branchItems = useMemo(
     () => TECHNOLOGIES.filter((item) => item.branch === active.branch),
     [active.branch],
@@ -38,7 +39,7 @@ export function Skills() {
 
   useEffect(() => {
     if (reducedMotion || hovered || focused || hidden) return;
-    const delay = Math.max(4000, manualUntil - Date.now());
+    const delay = Math.max(6000, manualUntil - Date.now());
     const timer = window.setTimeout(() => setActiveIndex(technologyIndex(next)), delay);
     return () => window.clearTimeout(timer);
   }, [activeIndex, focused, hidden, hovered, manualUntil, next, reducedMotion]);
@@ -54,6 +55,8 @@ export function Skills() {
   }
 
   const orbitNodes = [previous, active, next];
+  const paused = Boolean(reducedMotion || hovered || focused || hidden);
+  const branchStart = 125 + activeBranchIndex * 250;
 
   return (
     <section
@@ -73,7 +76,7 @@ export function Skills() {
         </div>
 
         <div
-          className="stack-board"
+          className={cn('stack-board', paused && 'is-paused')}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           onFocusCapture={() => setFocused(true)}
@@ -124,6 +127,15 @@ export function Skills() {
             })}
           </div>
 
+          <svg
+            className="stack-orbit-bridge"
+            viewBox="0 0 1000 72"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path d={`M ${branchStart} 0 C ${branchStart} 42 500 20 500 72`} />
+          </svg>
+
           <div className="stack-detail">
             <div
               className="stack-orbit"
@@ -131,6 +143,14 @@ export function Skills() {
               role="group"
               aria-label={`${STACK_COPY.technologySelector}: ${branch.label}`}
             >
+              <svg
+                className="stack-orbit-cable"
+                viewBox="0 0 1000 220"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path d="M 145 92 C 280 92 350 112 500 104 C 650 96 720 116 855 116" />
+              </svg>
               {orbitNodes.map((technology, position) => {
                 const Icon = technology.icon;
                 const isActive = position === 1;
