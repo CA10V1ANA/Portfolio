@@ -136,21 +136,20 @@
     animation: route-enter 240ms ease-out both;
   }
 
-  .chapter-nav,
+  .project-toolbar {
+    @apply mb-12 flex flex-wrap items-center justify-between gap-4;
+  }
+
   .project-pager {
-    @apply mx-auto flex w-full max-w-7xl items-stretch justify-between gap-4 border-t border-border px-6 py-8 sm:px-8 lg:px-10;
+    @apply flex items-center gap-2;
   }
 
-  .chapter-nav-link {
-    @apply flex min-h-14 items-center gap-3 text-sm font-medium text-foreground transition-colors hover:text-accent;
+  .project-pager a {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-accent/60 hover:bg-primary/10 hover:text-foreground;
   }
 
-  .chapter-nav-link small {
-    @apply mb-1 block font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground;
-  }
-
-  .chapter-nav-next {
-    @apply text-right;
+  .project-pager svg {
+    @apply h-5 w-5;
   }
 
   .status-chip {
@@ -175,10 +174,6 @@
 
   .project-visual img {
     @apply block h-auto w-full;
-  }
-
-  .project-pager {
-    @apply mt-20;
   }
 
   .stack-board {
@@ -210,10 +205,6 @@
     @apply relative z-10 mt-16 grid grid-cols-2 gap-3 lg:grid-cols-4;
   }
 
-  .stack-mobile-tracks {
-    @apply hidden;
-  }
-
   .stack-branch {
     @apply flex min-h-16 flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-md border border-border bg-background px-2 py-3 text-center text-sm text-muted-foreground transition-colors hover:border-accent/60 hover:text-foreground sm:px-4;
   }
@@ -227,49 +218,62 @@
   }
 
   .stack-detail {
-    @apply mx-auto mt-10 max-w-3xl border-t border-border pt-7;
+    @apply mx-auto mt-10 max-w-4xl border-t border-border pt-8;
   }
 
-  .stack-neighbors {
-    @apply flex items-center justify-between gap-4;
+  .stack-orbit {
+    @apply relative mx-auto grid min-h-48 max-w-2xl grid-cols-[1fr_1.45fr_1fr] items-center gap-3 px-2 sm:gap-8 sm:px-8;
+    animation: stack-orbit-change 260ms ease-out both;
   }
 
-  .stack-neighbor {
-    @apply flex min-h-12 min-w-24 flex-col justify-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground disabled:cursor-default disabled:opacity-30;
+  .stack-orbit::before {
+    content: '';
+    @apply absolute left-[16%] right-[16%] top-1/2 h-px bg-border;
   }
 
-  .stack-neighbor:last-child {
-    @apply items-end text-right;
+  .stack-orbit::after {
+    content: '';
+    @apply absolute left-1/2 top-0 h-[28%] w-px bg-border;
   }
 
-  .stack-neighbor small,
+  .stack-node {
+    @apply relative z-10 mx-auto flex min-h-32 w-full max-w-28 flex-col items-center justify-center gap-3 rounded-full text-center text-muted-foreground opacity-60 transition-[opacity,transform,color] hover:scale-105 hover:text-foreground hover:opacity-100 sm:min-h-40 sm:max-w-36;
+  }
+
+  .stack-node.is-head {
+    @apply min-h-40 max-w-40 text-foreground opacity-100 sm:min-h-48 sm:max-w-48;
+  }
+
+  .stack-node-icon {
+    @apply flex h-16 w-16 items-center justify-center rounded-full border border-border bg-card text-3xl shadow-[0_0_24px_rgba(143,82,214,0.08)] sm:h-20 sm:w-20 sm:text-4xl;
+  }
+
+  .stack-node.is-head .stack-node-icon {
+    @apply h-28 w-28 border-accent/60 bg-primary/15 text-5xl text-accent shadow-[0_0_44px_rgba(143,82,214,0.20)] sm:h-36 sm:w-36 sm:text-6xl;
+  }
+
+  .stack-node-name {
+    @apply max-w-24 font-mono text-[0.65rem] font-semibold leading-tight sm:max-w-32 sm:text-xs;
+  }
+
   .head-label {
-    @apply font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground;
+    @apply absolute -top-1 inline-flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-widest text-accent sm:top-0;
   }
 
-  .head-label {
-    @apply inline-flex items-center gap-2 text-accent;
+  .stack-active-copy {
+    @apply mx-auto mt-6 flex min-h-48 max-w-md flex-col items-center justify-center text-center;
   }
 
-  .stack-active {
-    @apply mx-auto mt-8 flex min-h-64 max-w-md flex-col items-center justify-center text-center;
-    animation: stack-change 180ms ease-out both;
-  }
-
-  .stack-active-icon {
-    @apply mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-primary/10 text-accent;
-  }
-
-  .stack-active .eyebrow {
+  .stack-active-copy .eyebrow {
     @apply text-[0.65rem];
   }
 
-  .stack-active h2 {
+  .stack-active-copy h2 {
     @apply mt-2 font-display text-3xl font-semibold tracking-tight;
   }
 
-  .stack-active > p:nth-of-type(2) {
-    @apply mt-1;
+  .stack-active-copy > p:nth-of-type(2) {
+    @apply mt-1 text-muted-foreground;
   }
 
   .stack-context {
@@ -277,30 +281,34 @@
   }
 
   .stack-tech-list {
-    @apply flex flex-wrap justify-center gap-2;
+    @apply mt-2 flex flex-wrap justify-center gap-2;
   }
 
   .stack-tech-list .tech-chip[aria-pressed='true'] {
     @apply border-accent bg-primary/15 text-foreground;
   }
-
-  .stack-controls {
-    @apply mt-8 flex items-center justify-between border-t border-border pt-5 font-mono text-xs text-muted-foreground;
-  }
-
-  .stack-controls button {
-    @apply inline-flex min-h-11 items-center gap-2 text-foreground transition-colors hover:text-accent;
-  }
 }
 
 @keyframes route-enter {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes stack-change {
-  from { opacity: 0.55; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes stack-orbit-change {
+  from {
+    opacity: 0.45;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @layer utilities {
@@ -325,21 +333,47 @@
     transition-duration: 0.01ms !important;
   }
   .route-content,
-  .stack-active {
+  .stack-orbit {
     animation: none !important;
   }
 }
 
 @media (max-width: 639px) {
-  .stack-board { padding-inline: 1rem; }
-  .stack-branches { display: none; }
-  .stack-branches-list { display: none; }
-  .stack-mobile-tracks { @apply mt-8 grid gap-3; }
-  .stack-mobile-track { @apply border-l border-border pl-3; }
-  .stack-mobile-track > button { @apply mb-2 min-h-8 font-mono text-[0.65rem] uppercase tracking-widest text-accent; }
-  .stack-mobile-track > div { @apply flex flex-wrap gap-2; }
-  .stack-mobile-track > div button { @apply min-h-9 rounded-sm border border-border px-2 text-xs text-muted-foreground aria-pressed:border-accent aria-pressed:text-foreground; }
-  .stack-tech-list { display: none; }
-  .stack-neighbor { min-width: 5rem; font-size: 0.75rem; }
-  .chapter-nav, .project-pager { padding-inline: 1.5rem; }
+  .stack-board {
+    padding-inline: 1rem;
+  }
+  .stack-branches {
+    display: none;
+  }
+  .stack-branches-list {
+    @apply mt-8 grid-cols-2;
+  }
+  .stack-orbit {
+    grid-template-columns: 0.8fr 1.4fr 0.8fr;
+    gap: 0;
+    padding-inline: 0;
+  }
+  .stack-node {
+    min-height: 7rem;
+  }
+  .stack-node.is-head {
+    min-height: 10rem;
+  }
+  .stack-node-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
+  }
+  .stack-node.is-head .stack-node-icon {
+    width: 7rem;
+    height: 7rem;
+    font-size: 2.75rem;
+  }
+  .stack-node-name {
+    max-width: 4.5rem;
+    font-size: 0.58rem;
+  }
+  .project-toolbar > div {
+    @apply flex-wrap;
+  }
 }

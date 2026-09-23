@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Menu, Moon, Sun, X } from 'lucide-react';
+import { ArrowUpRight, House, Menu, Moon, Sun, X } from 'lucide-react';
 import { NAV_LINKS, PERSONAL_INFO } from '@/lib/constants';
 import { useTheme } from '@/hooks/useTheme';
 import { cn } from '@/lib/utils';
@@ -30,10 +30,17 @@ export function Navbar() {
 
   useEffect(() => setIsOpen(false), [location.pathname]);
 
-  const isActive = (href: string) => href === '/projetos/js-boy'
-    ? location.pathname.startsWith('/projetos')
-    : location.pathname === href;
-  const linkClass = (href: string) => cn('rounded-sm px-2 py-2 text-sm transition-colors hover:text-foreground', isActive(href) ? 'text-foreground font-semibold after:ml-2 after:text-accent after:content-["•"]' : 'text-muted-foreground');
+  const isActive = (href: string) =>
+    href === '/projetos/js-boy'
+      ? location.pathname.startsWith('/projetos')
+      : location.pathname === href;
+  const linkClass = (href: string) =>
+    cn(
+      'rounded-sm px-2 py-2 text-sm transition-colors hover:text-foreground',
+      isActive(href)
+        ? 'text-foreground font-semibold after:ml-2 after:text-accent after:content-["•"]'
+        : 'text-muted-foreground',
+    );
 
   return (
     <header
@@ -62,9 +69,11 @@ export function Navbar() {
             <NavLink
               key={link.href}
               to={link.href}
-              className={linkClass(link.href)}
+              className={cn('inline-flex items-center gap-1.5', linkClass(link.href))}
               aria-current={isActive(link.href) ? 'page' : undefined}
+              aria-label={link.href === '/' ? 'Ir para o início' : undefined}
             >
+              {link.href === '/' && <House className="h-3.5 w-3.5" aria-hidden="true" />}
               {link.label}
             </NavLink>
           ))}
@@ -110,9 +119,11 @@ export function Navbar() {
               key={link.href}
               to={link.href}
               onClick={() => setIsOpen(false)}
-              className={cn('block min-h-11 py-3', linkClass(link.href))}
+              className={cn('flex min-h-11 items-center gap-2 py-3', linkClass(link.href))}
               aria-current={isActive(link.href) ? 'page' : undefined}
+              aria-label={link.href === '/' ? 'Ir para o início' : undefined}
             >
+              {link.href === '/' && <House className="h-4 w-4" aria-hidden="true" />}
               {link.label}
             </NavLink>
           ))}

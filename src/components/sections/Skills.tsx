@@ -1,7 +1,17 @@
-import { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, GitBranch } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { GitBranch } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
-import { BRANCHES, TECHNOLOGIES } from '@/data/technologies';
+import {
+  BRANCHES,
+  STACK_COPY,
+  TECHNOLOGIES,
+  type PortfolioTechnology,
+  type StackBranch,
+} from '@/data/technologies';
+import { cn } from '@/lib/utils';
+
+const technologyIndex = (technology: PortfolioTechnology) =>
+  TECHNOLOGIES.findIndex((item) => item.id === technology.id);
 
 export function Skills() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -12,8 +22,13 @@ export function Skills() {
   const reducedMotion = useReducedMotion();
   const active = TECHNOLOGIES[activeIndex];
   const branch = BRANCHES.find((item) => item.id === active.branch)!;
-  const branchItems = TECHNOLOGIES.filter((item) => item.branch === active.branch);
+  const branchItems = useMemo(
+    () => TECHNOLOGIES.filter((item) => item.branch === active.branch),
+    [active.branch],
+  );
   const branchIndex = branchItems.findIndex((item) => item.id === active.id);
+  const previous = branchItems[(branchIndex - 1 + branchItems.length) % branchItems.length];
+  const next = branchItems[(branchIndex + 1) % branchItems.length];
 
   useEffect(() => {
     const onVisibility = () => setHidden(document.hidden);
@@ -24,78 +39,143 @@ export function Skills() {
   useEffect(() => {
     if (reducedMotion || hovered || focused || hidden) return;
     const delay = Math.max(4000, manualUntil - Date.now());
-    const timer = window.setTimeout(() => setActiveIndex((index) => (index + 1) % TECHNOLOGIES.length), delay);
+    const timer = window.setTimeout(() => setActiveIndex(technologyIndex(next)), delay);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, focused, hidden, hovered, manualUntil, reducedMotion]);
+  }, [activeIndex, focused, hidden, hovered, manualUntil, next, reducedMotion]);
 
   function select(index: number) {
     setActiveIndex(index);
     setManualUntil(Date.now() + 7000);
   }
-  function selectBranch(branchId: string) {
+
+  function selectBranch(branchId: StackBranch) {
     const first = TECHNOLOGIES.findIndex((technology) => technology.branch === branchId);
     if (first >= 0) select(first);
   }
 
+  const orbitNodes = [previous, active, next];
+
   return (
-    <section id="skills" className="page-section border-y border-border bg-card/50" aria-labelledby="stack-title">
+    <section
+      id="skills"
+      className="page-section border-y border-border bg-card/50"
+      aria-labelledby="stack-title"
+    >
       <div className="section-container">
         <div className="mb-12 max-w-3xl">
-          <p className="eyebrow">04 / Ecossistema técnico</p>
-          <h1 id="stack-title" className="page-title">Stack Branch Orbit</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">Tecnologias organizadas por camada. Cada branch parte da integração Full Stack e retorna à main.</p>
+          <p className="eyebrow">{STACK_COPY.eyebrow}</p>
+          <h1 id="stack-title" className="page-title">
+            {STACK_COPY.title}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+            {STACK_COPY.introduction}
+          </p>
         </div>
 
-        <div className="stack-board" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocusCapture={() => setFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false); }}>
-          <div className="stack-main" aria-label="Branch principal: main, integração Full Stack">
-            <span className="stack-main-mark"><GitBranch size={16} aria-hidden="true" /> main</span>
-            <strong>Full Stack Integration</strong>
-            <span className="stack-merge" aria-hidden="true">merge</span>
+        <div
+          className="stack-board"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onFocusCapture={() => setFocused(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null))
+              setFocused(false);
+          }}
+        >
+          <div className="stack-main" aria-label={STACK_COPY.mainBranch}>
+            <span className="stack-main-mark">
+              <GitBranch size={16} aria-hidden="true" /> main
+            </span>
+            <strong>{STACK_COPY.mainTitle}</strong>
+            <span className="stack-merge" aria-hidden="true">
+              merge
+            </span>
           </div>
-          <svg className="stack-branches" viewBox="0 0 1000 150" preserveAspectRatio="none" aria-hidden="true">
+
+          <svg
+            className="stack-branches"
+            viewBox="0 0 1000 150"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
             <path d="M500 0 C500 55 125 30 125 145" />
             <path d="M500 0 C500 70 375 55 375 145" />
             <path d="M500 0 C500 70 625 55 625 145" />
             <path d="M500 0 C500 55 875 30 875 145" />
           </svg>
-          <div className="stack-branches-list" role="group" aria-label="Selecionar branch técnica">
+
+          <div className="stack-branches-list" role="group" aria-label={STACK_COPY.branchSelector}>
             {BRANCHES.map((item) => {
               const Icon = item.icon;
               const isActive = item.id === active.branch;
-              return <button key={item.id} type="button" onClick={() => selectBranch(item.id)} aria-pressed={isActive} className={`stack-branch${isActive ? ' is-active' : ''}`}><Icon size={15} aria-hidden="true" /><span>{item.label}</span><code>{item.gitLabel}</code></button>;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => selectBranch(item.id)}
+                  aria-pressed={isActive}
+                  className={cn('stack-branch', isActive && 'is-active')}
+                >
+                  <Icon size={15} aria-hidden="true" />
+                  <span>{item.label}</span>
+                  <code>{item.gitLabel}</code>
+                </button>
+              );
             })}
-          </div>
-          <div className="stack-mobile-tracks" role="group" aria-label="Trilhas de tecnologias">
-            {BRANCHES.map((item) => <div className="stack-mobile-track" key={item.id}>
-              <button type="button" onClick={() => selectBranch(item.id)} aria-pressed={item.id === active.branch}>{item.label}</button>
-              <div>{TECHNOLOGIES.filter((technology) => technology.branch === item.id).map((technology) => <button key={technology.id} type="button" onClick={() => select(TECHNOLOGIES.findIndex((entry) => entry.id === technology.id))} aria-pressed={technology.id === active.id}>{technology.name}</button>)}</div>
-            </div>)}
           </div>
 
           <div className="stack-detail">
-            <div className="stack-neighbors" aria-label="Tecnologias vizinhas nesta branch">
-              <button type="button" className="stack-neighbor" onClick={() => branchIndex > 0 && select(TECHNOLOGIES.findIndex((item) => item.id === branchItems[branchIndex - 1].id))} disabled={branchIndex <= 0}>
-                <span>{branchItems[branchIndex - 1]?.name ?? '—'}</span><small>Anterior</small>
-              </button>
-              <span className="head-label"><span aria-hidden="true">●</span> HEAD</span>
-              <button type="button" className="stack-neighbor" onClick={() => branchIndex < branchItems.length - 1 && select(TECHNOLOGIES.findIndex((item) => item.id === branchItems[branchIndex + 1].id))} disabled={branchIndex >= branchItems.length - 1}>
-                <span>{branchItems[branchIndex + 1]?.name ?? '—'}</span><small>Próxima</small>
-              </button>
+            <div
+              className="stack-orbit"
+              key={`${active.branch}-${active.id}`}
+              role="group"
+              aria-label={`${STACK_COPY.technologySelector}: ${branch.label}`}
+            >
+              {orbitNodes.map((technology, position) => {
+                const Icon = technology.icon;
+                const isActive = position === 1;
+                return (
+                  <button
+                    key={`${position}-${technology.id}`}
+                    type="button"
+                    className={cn('stack-node', isActive && 'is-head')}
+                    onClick={() => select(technologyIndex(technology))}
+                    aria-label={`Selecionar ${technology.name}`}
+                    aria-pressed={isActive}
+                  >
+                    {isActive && <span className="head-label">● {STACK_COPY.head}</span>}
+                    <span className="stack-node-icon">
+                      <Icon aria-hidden="true" />
+                    </span>
+                    <span className="stack-node-name">{technology.name}</span>
+                  </button>
+                );
+              })}
             </div>
-            <div className="stack-active" key={active.id}>
-              <span className="stack-active-icon"><active.icon size={34} aria-hidden="true" /></span>
+
+            <div className="stack-active-copy" aria-live="polite">
               <p className="eyebrow">{active.branchLabel} → main</p>
               <h2>{active.name}</h2>
-              <p className="text-muted-foreground">{branch.label}</p>
+              <p>{branch.label}</p>
               <p className="stack-context">{active.context}</p>
             </div>
-            <div className="stack-tech-list" role="group" aria-label={`Tecnologias de ${branch.label}`}>
-              {branchItems.map((technology) => <button type="button" key={technology.id} onClick={() => select(TECHNOLOGIES.findIndex((item) => item.id === technology.id))} aria-pressed={technology.id === active.id} className="tech-chip">{technology.name}</button>)}
-            </div>
-            <div className="stack-controls">
-              <button type="button" onClick={() => select((activeIndex - 1 + TECHNOLOGIES.length) % TECHNOLOGIES.length)} aria-label="Tecnologia anterior"><ArrowLeft size={17} aria-hidden="true" /> Anterior</button>
-              <span>{String(activeIndex + 1).padStart(2, '0')} / {String(TECHNOLOGIES.length).padStart(2, '0')}</span>
-              <button type="button" onClick={() => select((activeIndex + 1) % TECHNOLOGIES.length)} aria-label="Próxima tecnologia">Próxima <ArrowRight size={17} aria-hidden="true" /></button>
+
+            <div
+              className="stack-tech-list"
+              role="group"
+              aria-label={`${STACK_COPY.technologySelector}: ${branch.label}`}
+            >
+              {branchItems.map((technology) => (
+                <button
+                  type="button"
+                  key={technology.id}
+                  onClick={() => select(technologyIndex(technology))}
+                  aria-pressed={technology.id === active.id}
+                  className="tech-chip"
+                >
+                  {technology.name}
+                </button>
+              ))}
             </div>
           </div>
         </div>
