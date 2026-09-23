@@ -15,6 +15,8 @@ export interface Project {
   status: 'staging' | 'deployed' | 'active' | 'study' | 'archived';
   statusLabel: string;
   description: string;
+  context?: string;
+  solution?: string;
   problem?: string;
   contribution?: string;
   image?: string;
@@ -23,6 +25,7 @@ export interface Project {
   githubUrl?: string;
   demoUrl?: string;
   docsUrl?: string;
+  screenshots?: Array<{ src: string; alt: string }>;
   featured: boolean;
 }
 

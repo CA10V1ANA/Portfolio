@@ -2,18 +2,15 @@ import type { ExperienceItem } from '@/types';
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    id: 'rav-tecnologia',
-    role: 'Estagiário em Desenvolvimento de Sistemas',
-    company: 'RAV Tecnologia',
-    location: 'Fortaleza, Ceará',
-    startDate: '2025-08',
+    id: 'acs-automacao',
+    role: 'Estagiário de Desenvolvimento Full Stack',
+    company: 'ACS Automação Comercial e Sistemas',
+    startDate: '2025',
     current: true,
     description: [
-      'Desenvolvimento e manutenção de interfaces e funcionalidades de sistemas corporativos.',
-      'Consumo e integração com APIs REST.',
-      'Correção de bugs e colaboração em tarefas de front-end e back-end.',
-      'Versionamento de código com Git e GitHub.',
+      'Manutenção e evolução de sistemas corporativos.',
+      'Implementação de funcionalidades e correção de bugs em aplicações e APIs REST.',
     ],
-    technologies: ['JavaScript', 'React', 'APIs REST', 'Git'],
+    technologies: ['Java', 'Kotlin', 'Spring Boot', 'Angular', 'JPA / Hibernate', 'PostgreSQL', 'Git', 'Docker'],
   },
 ];

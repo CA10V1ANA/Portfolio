@@ -1,28 +1,27 @@
 export function About() {
   return (
-    <section id="about" className="border-y border-border bg-card/50" aria-labelledby="about-title">
-      <div className="section-container grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+    <section id="about" className="page-section border-y border-border bg-card/50" aria-labelledby="about-title">
+      <div className="section-container grid min-h-[65svh] gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-center lg:gap-20">
         <div>
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">
-            04 / Sobre
+            02 / Sobre
           </p>
-          <h2
+          <h1
             id="about-title"
             className="font-display text-4xl font-semibold tracking-tight sm:text-6xl"
           >
             Antes do código, o problema.
-          </h2>
+          </h1>
         </div>
         <div className="space-y-6 text-lg leading-8 text-muted-foreground">
           <p>
-            Sou desenvolvedor Full Stack e estudante de Engenharia de Software. Atuo no
-            desenvolvimento e na manutenção de sistemas, trabalhando com interfaces web, serviços e
-            bancos de dados.
+            Sou desenvolvedor Full Stack e estudante de Engenharia de Software. Minha atuação passa
+            por sistemas corporativos, projetos criados para problemas reais e diferentes camadas de
+            uma aplicação.
           </p>
           <p>
-            Em paralelo à experiência profissional, desenvolvo projetos próprios e soluções para
-            contextos reais, como uma plataforma de entregas para a empresa da minha família e
-            aplicações criadas para estudar desafios de operação.
+            Tenho interesse em backend, frontend, arquitetura e produto. No JS BOY, por exemplo,
+            desenvolvo uma plataforma de gestão de entregas para uma operação familiar.
           </p>
           <p>
             Gosto de entender o problema antes de escolher a tecnologia e acompanhar o caminho da

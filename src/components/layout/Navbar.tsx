@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Menu, Moon, Sun, X } from 'lucide-react';
 import { NAV_LINKS, PERSONAL_INFO } from '@/lib/constants';
-import { useActiveSection } from '@/hooks/useActiveSection';
 import { useTheme } from '@/hooks/useTheme';
 import { cn } from '@/lib/utils';
 import { CommandPalette } from '@/components/navigation/CommandPalette';
 
-const SECTION_IDS = ['hero', ...NAV_LINKS.map((link) => link.href.slice(1))];
-
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const activeId = useActiveSection(SECTION_IDS);
+  const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -30,11 +28,12 @@ export function Navbar() {
     return () => window.removeEventListener('keydown', onEscape);
   }, [isOpen]);
 
-  const linkClass = (href: string) =>
-    cn(
-      'rounded-sm px-2 py-2 text-sm transition-colors hover:text-foreground',
-      activeId === href.slice(1) ? 'text-foreground' : 'text-muted-foreground',
-    );
+  useEffect(() => setIsOpen(false), [location.pathname]);
+
+  const isActive = (href: string) => href === '/projetos/js-boy'
+    ? location.pathname.startsWith('/projetos')
+    : location.pathname === href;
+  const linkClass = (href: string) => cn('rounded-sm px-2 py-2 text-sm transition-colors hover:text-foreground', isActive(href) ? 'text-foreground font-semibold after:ml-2 after:text-accent after:content-["•"]' : 'text-muted-foreground');
 
   return (
     <header
@@ -46,8 +45,8 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-6 sm:px-8 lg:px-10">
-        <a
-          href="#hero"
+        <Link
+          to="/"
           className="flex items-center gap-3 font-display text-sm font-bold tracking-tight sm:text-base"
           aria-label="Caio Viana — início"
           onClick={() => setIsOpen(false)}
@@ -56,18 +55,18 @@ export function Navbar() {
             &gt;_
           </span>
           <span>{PERSONAL_INFO.firstName} Viana</span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-2 lg:flex" aria-label="Navegação principal">
           {NAV_LINKS.map((link) => (
-            <a
+            <NavLink
               key={link.href}
-              href={link.href}
+              to={link.href}
               className={linkClass(link.href)}
-              aria-current={activeId === link.href.slice(1) ? 'location' : undefined}
+              aria-current={isActive(link.href) ? 'page' : undefined}
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
@@ -107,14 +106,15 @@ export function Navbar() {
           className="border-t border-border bg-background px-6 pb-5 pt-3 lg:hidden"
         >
           {NAV_LINKS.map((link) => (
-            <a
+            <NavLink
               key={link.href}
-              href={link.href}
+              to={link.href}
               onClick={() => setIsOpen(false)}
               className={cn('block min-h-11 py-3', linkClass(link.href))}
+              aria-current={isActive(link.href) ? 'page' : undefined}
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
           <a
             href={PERSONAL_INFO.resumeUrl}

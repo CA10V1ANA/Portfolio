@@ -1,94 +1,101 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { TECHNOLOGIES } from '@/data/technologies';
+import { ArrowLeft, ArrowRight, GitBranch } from 'lucide-react';
+import { useReducedMotion } from 'framer-motion';
+import { BRANCHES, TECHNOLOGIES } from '@/data/technologies';
 
 export function Skills() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [manualUntil, setManualUntil] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [hidden, setHidden] = useState(document.hidden);
   const reducedMotion = useReducedMotion();
   const active = TECHNOLOGIES[activeIndex];
+  const branch = BRANCHES.find((item) => item.id === active.branch)!;
+  const branchItems = TECHNOLOGIES.filter((item) => item.branch === active.branch);
+  const branchIndex = branchItems.findIndex((item) => item.id === active.id);
 
   useEffect(() => {
-    if (reducedMotion) return;
-    const timer = window.setInterval(() => {
-      if (Date.now() >= manualUntil) setActiveIndex((index) => (index + 1) % TECHNOLOGIES.length);
-    }, 3600);
-    return () => window.clearInterval(timer);
-  }, [manualUntil, reducedMotion]);
+    const onVisibility = () => setHidden(document.hidden);
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => document.removeEventListener('visibilitychange', onVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion || hovered || focused || hidden) return;
+    const delay = Math.max(4000, manualUntil - Date.now());
+    const timer = window.setTimeout(() => setActiveIndex((index) => (index + 1) % TECHNOLOGIES.length), delay);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, focused, hidden, hovered, manualUntil, reducedMotion]);
 
   function select(index: number) {
     setActiveIndex(index);
-    setManualUntil(Date.now() + 12000);
+    setManualUntil(Date.now() + 7000);
+  }
+  function selectBranch(branchId: string) {
+    const first = TECHNOLOGIES.findIndex((technology) => technology.branch === branchId);
+    if (first >= 0) select(first);
   }
 
   return (
-    <section
-      id="skills"
-      className="border-y border-border bg-card/50"
-      aria-labelledby="stack-title"
-    >
+    <section id="skills" className="page-section border-y border-border bg-card/50" aria-labelledby="stack-title">
       <div className="section-container">
-        <div className="max-w-2xl">
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">
-            02 / Ecossistema técnico
-          </p>
-          <h2
-            id="stack-title"
-            className="font-display text-4xl font-semibold tracking-tight sm:text-6xl"
-          >
-            Tecnologias em contexto
-          </h2>
-          <p className="mt-6 leading-7 text-muted-foreground">
-            Ferramentas que aparecem no meu trabalho e nos projetos. Selecione uma tecnologia para
-            ver onde ela se encaixa.
-          </p>
+        <div className="mb-12 max-w-3xl">
+          <p className="eyebrow">04 / Ecossistema técnico</p>
+          <h1 id="stack-title" className="page-title">Stack Branch Orbit</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">Tecnologias organizadas por camada. Cada branch parte da integração Full Stack e retorna à main.</p>
         </div>
 
-        <div className="relative mt-14 overflow-hidden rounded-lg border border-border bg-background px-5 pb-12 pt-10 sm:px-10 sm:pt-14">
-          <div
-            className="pointer-events-none absolute left-1/2 top-36 hidden h-52 w-px -translate-x-1/2 bg-gradient-to-b from-border to-transparent lg:block"
-            aria-hidden="true"
-          />
-          <div
-            className="relative z-10 flex flex-wrap justify-center gap-3 sm:gap-4"
-            role="group"
-            aria-label="Selecionar tecnologia"
-          >
-            {TECHNOLOGIES.map((technology, index) => (
-              <button
-                key={technology.name}
-                type="button"
-                onClick={() => select(index)}
-                aria-pressed={index === activeIndex}
-                className={`flex min-h-12 items-center gap-2 rounded-full border px-4 py-2 font-mono text-xs transition-colors sm:text-sm ${index === activeIndex ? 'border-accent bg-primary/20 text-foreground' : 'border-border text-muted-foreground hover:border-accent hover:text-foreground'}`}
-              >
-                <technology.icon className="h-5 w-5" aria-hidden="true" />
-                {technology.name}
-              </button>
-            ))}
+        <div className="stack-board" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocusCapture={() => setFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false); }}>
+          <div className="stack-main" aria-label="Branch principal: main, integração Full Stack">
+            <span className="stack-main-mark"><GitBranch size={16} aria-hidden="true" /> main</span>
+            <strong>Full Stack Integration</strong>
+            <span className="stack-merge" aria-hidden="true">merge</span>
+          </div>
+          <svg className="stack-branches" viewBox="0 0 1000 150" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M500 0 C500 55 125 30 125 145" />
+            <path d="M500 0 C500 70 375 55 375 145" />
+            <path d="M500 0 C500 70 625 55 625 145" />
+            <path d="M500 0 C500 55 875 30 875 145" />
+          </svg>
+          <div className="stack-branches-list" role="group" aria-label="Selecionar branch técnica">
+            {BRANCHES.map((item) => {
+              const Icon = item.icon;
+              const isActive = item.id === active.branch;
+              return <button key={item.id} type="button" onClick={() => selectBranch(item.id)} aria-pressed={isActive} className={`stack-branch${isActive ? ' is-active' : ''}`}><Icon size={15} aria-hidden="true" /><span>{item.label}</span><code>{item.gitLabel}</code></button>;
+            })}
+          </div>
+          <div className="stack-mobile-tracks" role="group" aria-label="Trilhas de tecnologias">
+            {BRANCHES.map((item) => <div className="stack-mobile-track" key={item.id}>
+              <button type="button" onClick={() => selectBranch(item.id)} aria-pressed={item.id === active.branch}>{item.label}</button>
+              <div>{TECHNOLOGIES.filter((technology) => technology.branch === item.id).map((technology) => <button key={technology.id} type="button" onClick={() => select(TECHNOLOGIES.findIndex((entry) => entry.id === technology.id))} aria-pressed={technology.id === active.id}>{technology.name}</button>)}</div>
+            </div>)}
           </div>
 
-          <div className="relative z-10 mx-auto mt-14 flex max-w-md flex-col items-center text-center sm:mt-20">
-            <div className="flex h-48 w-48 items-center justify-center rounded-full border border-accent/40 bg-primary/10 shadow-[0_0_70px_rgba(113,39,186,0.12)] sm:h-56 sm:w-56">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active.name}
-                  initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: -28, scale: 0.85 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 18, scale: 0.9 }}
-                  transition={{ duration: reducedMotion ? 0.12 : 0.35 }}
-                  className="flex flex-col items-center gap-4"
-                >
-                  <active.icon className="h-14 w-14 text-accent" aria-hidden="true" />
-                  <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                    {active.category}
-                  </span>
-                </motion.div>
-              </AnimatePresence>
+          <div className="stack-detail">
+            <div className="stack-neighbors" aria-label="Tecnologias vizinhas nesta branch">
+              <button type="button" className="stack-neighbor" onClick={() => branchIndex > 0 && select(TECHNOLOGIES.findIndex((item) => item.id === branchItems[branchIndex - 1].id))} disabled={branchIndex <= 0}>
+                <span>{branchItems[branchIndex - 1]?.name ?? '—'}</span><small>Anterior</small>
+              </button>
+              <span className="head-label"><span aria-hidden="true">●</span> HEAD</span>
+              <button type="button" className="stack-neighbor" onClick={() => branchIndex < branchItems.length - 1 && select(TECHNOLOGIES.findIndex((item) => item.id === branchItems[branchIndex + 1].id))} disabled={branchIndex >= branchItems.length - 1}>
+                <span>{branchItems[branchIndex + 1]?.name ?? '—'}</span><small>Próxima</small>
+              </button>
             </div>
-            <div aria-live="polite" aria-atomic="true">
-              <h3 className="mt-8 text-2xl font-semibold">{active.name}</h3>
-              <p className="mt-2 text-muted-foreground">{active.context}</p>
+            <div className="stack-active" key={active.id}>
+              <span className="stack-active-icon"><active.icon size={34} aria-hidden="true" /></span>
+              <p className="eyebrow">{active.branchLabel} → main</p>
+              <h2>{active.name}</h2>
+              <p className="text-muted-foreground">{branch.label}</p>
+              <p className="stack-context">{active.context}</p>
+            </div>
+            <div className="stack-tech-list" role="group" aria-label={`Tecnologias de ${branch.label}`}>
+              {branchItems.map((technology) => <button type="button" key={technology.id} onClick={() => select(TECHNOLOGIES.findIndex((item) => item.id === technology.id))} aria-pressed={technology.id === active.id} className="tech-chip">{technology.name}</button>)}
+            </div>
+            <div className="stack-controls">
+              <button type="button" onClick={() => select((activeIndex - 1 + TECHNOLOGIES.length) % TECHNOLOGIES.length)} aria-label="Tecnologia anterior"><ArrowLeft size={17} aria-hidden="true" /> Anterior</button>
+              <span>{String(activeIndex + 1).padStart(2, '0')} / {String(TECHNOLOGIES.length).padStart(2, '0')}</span>
+              <button type="button" onClick={() => select((activeIndex + 1) % TECHNOLOGIES.length)} aria-label="Próxima tecnologia">Próxima <ArrowRight size={17} aria-hidden="true" /></button>
             </div>
           </div>
         </div>

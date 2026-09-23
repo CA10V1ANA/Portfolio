@@ -1,7 +1,5 @@
 import type { Project } from '@/types';
 
-// Capturas reais podem ser adicionadas em public/projects/ e referenciadas em image.
-// Até lá, a interface exibe um espaço reservado explícito para cada case.
 export const PROJECTS: Project[] = [
   {
     id: 'js-boy',
@@ -10,6 +8,7 @@ export const PROJECTS: Project[] = [
     category: 'Projeto real · Full Stack',
     status: 'staging',
     statusLabel: 'Em homologação',
+    context: 'Projeto real · Full Stack',
     description:
       'Plataforma para organizar a operação de uma empresa familiar de entregas empresariais, com gestão de clientes, entregadores, pedidos, preços e acompanhamento operacional.',
     problem:
@@ -18,15 +17,17 @@ export const PROJECTS: Project[] = [
       'Desenvolvimento da aplicação web, API e base de dados, com autenticação por perfil e evolução contínua do fluxo operacional.',
     technologies: ['Java 21', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'Flyway'],
     githubUrl: 'https://github.com/CA10V1ANA/js-boy',
+    // O endereço de homologação do briefing retornava 404 na verificação registrada no README.
     featured: true,
   },
   {
     id: 'windops',
     title: 'WindOps Control Center',
     subtitle: 'Operação e monitoramento de ativos de energia',
-    category: 'Estudo para hackathon · Full Stack',
+    category: 'Preparação para hackathon · Full Stack',
     status: 'deployed',
     statusLabel: 'Publicado',
+    context: 'Preparação para hackathon · Full Stack',
     description:
       'Aplicação operacional criada como preparação técnica para um hackathon do setor de energia, com visão de ativos, telemetria, alertas e classificações.',
     contribution:
@@ -44,6 +45,7 @@ export const PROJECTS: Project[] = [
     category: 'Projeto para cliente',
     status: 'deployed',
     statusLabel: 'Publicado',
+    context: 'Projeto para cliente',
     description:
       'Site para apresentar os serviços, trabalhos e posicionamento profissional de uma cliente de social media.',
     technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
@@ -57,9 +59,10 @@ export const PROJECTS: Project[] = [
     category: 'AI Engineering',
     status: 'active',
     statusLabel: 'Em desenvolvimento',
+    context: 'AI Engineering',
     description:
       'Agente pessoal criado para apoiar decisões técnicas durante um hackathon, com planejamento, debugging, revisão de código e controle de contexto por projeto.',
-    technologies: ['TypeScript', 'Runtime local', 'Agentes de IA'],
+    technologies: ['TypeScript', 'Runtime local'],
     featured: true,
   },
   {

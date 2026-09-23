@@ -1,4 +1,5 @@
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
 
 export function Hero() {
@@ -24,12 +25,18 @@ export function Hero() {
             em produtos de software.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <a
-              href="#projects"
+            <Link
+              to="/sobre"
               className="inline-flex min-h-12 items-center gap-3 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-secondary"
             >
-              Explorar projetos <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+              Conhecer meu trabalho <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link
+              to="/projetos/js-boy"
+              className="inline-flex min-h-12 items-center gap-3 rounded-md border border-border px-6 py-3 font-semibold transition-colors hover:border-accent hover:text-accent"
+            >
+              Projeto em destaque <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
             <a
               href={SOCIAL_LINKS.github}
               target="_blank"

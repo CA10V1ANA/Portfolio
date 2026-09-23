@@ -1,4 +1,5 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
 
 const SOCIALS = [
@@ -12,9 +13,9 @@ export function Footer() {
   return (
     <footer className="border-t border-border">
       <div className="section-container flex flex-col items-center gap-6 !py-12 text-center">
-        <a href="#hero" className="font-display text-xl font-bold">
+        <Link to="/" className="font-display text-xl font-bold">
           <span className="text-gradient">{PERSONAL_INFO.name}</span>
-        </a>
+        </Link>
 
         <div className="flex items-center gap-3">
           {SOCIALS.map((social) => (

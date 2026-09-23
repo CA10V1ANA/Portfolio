@@ -7,17 +7,17 @@ export function Experience() {
   const technical = EDUCATION[1];
 
   return (
-    <section id="experience" className="section-container" aria-labelledby="experience-title">
+    <section id="experience" className="section-container page-section" aria-labelledby="experience-title">
       <div className="max-w-3xl">
         <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">
-          03 / Trajetória
+          05 / Trajetória
         </p>
-        <h2
+        <h1
           id="experience-title"
           className="font-display text-4xl font-semibold tracking-tight sm:text-6xl"
         >
           Experiência e formação
-        </h2>
+        </h1>
         <p className="mt-6 leading-7 text-muted-foreground">
           Uma trajetória em construção entre trabalho profissional, formação e projetos próprios.
         </p>
@@ -29,11 +29,11 @@ export function Experience() {
             aria-hidden="true"
           />
           <p className="font-mono text-xs uppercase tracking-widest text-accent">
-            feat/professional-experience
+            feat/full-stack-experience
           </p>
           <h3 className="mt-3 text-2xl font-semibold">{role.role}</h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            {role.company} · {role.location}
+            {role.company} · {role.startDate} — atual
           </p>
           <ul className="mt-5 max-w-3xl list-disc space-y-2 pl-5 leading-7 text-muted-foreground">
             {role.description.map((line) => (
