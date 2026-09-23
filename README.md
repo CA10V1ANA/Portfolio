@@ -16,7 +16,7 @@ npm run lint
 npm run build
 ```
 
-O projeto mantém `npm run build:gh-pages` para o caminho `/Portfolio/`. `public/404.html` restaura rotas profundas no GitHub Pages e `vercel.json` fornece o rewrite para a Vercel.
+O projeto é publicado pela Vercel. O arquivo `vercel.json` direciona as rotas da aplicação para o React Router.
 
 ## Conteúdo e estrutura
 
@@ -39,4 +39,4 @@ O projeto mantém `npm run build:gh-pages` para o caminho `/Portfolio/`. `public
 
 ## Deploy
 
-Nenhuma publicação é feita por esta alteração local. Verifique as rotas profundas, links dos projetos, capturas, metadados e o currículo no ambiente de produção antes de publicar.
+Os pushes para `main` são publicados pela integração da Vercel com o GitHub. Verifique as rotas profundas, links dos projetos, capturas, metadados e o currículo no ambiente de produção após cada publicação.
