@@ -1,57 +1,102 @@
 import type { Project } from '@/types';
 
+// Capturas reais podem ser adicionadas em public/projects/ e referenciadas em image.
+// Até lá, a interface exibe um espaço reservado explícito para cada case.
 export const PROJECTS: Project[] = [
   {
     id: 'js-boy',
-    title: 'JS Boy — Gestão de Entregas',
+    title: 'JS BOY',
+    subtitle: 'Gestão de Entregas Empresariais',
+    category: 'Projeto real · Full Stack',
+    status: 'staging',
+    statusLabel: 'Em homologação',
     description:
-      'Plataforma operacional para gestão de entregas, clientes, entregadores, pagamentos e financeiro, com painel web, API e aplicativo móvel integrados.',
-    image: 'https://opengraph.githubassets.com/portfolio/CA10V1ANA/js-boy',
-    technologies: ['React', 'TypeScript', 'Java 21', 'Spring Boot', 'PostgreSQL', 'Flutter'],
+      'Plataforma para organizar a operação de uma empresa familiar de entregas empresariais, com gestão de clientes, entregadores, pedidos, preços e acompanhamento operacional.',
+    problem:
+      'Processos manuais e informações descentralizadas dificultavam o acompanhamento das entregas.',
+    contribution:
+      'Desenvolvimento da aplicação web, API e base de dados, com autenticação por perfil e evolução contínua do fluxo operacional.',
+    technologies: ['Java 21', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'Flyway'],
     githubUrl: 'https://github.com/CA10V1ANA/js-boy',
-    demoUrl: undefined,
     featured: true,
+  },
+  {
+    id: 'windops',
+    title: 'WindOps Control Center',
+    subtitle: 'Operação e monitoramento de ativos de energia',
+    category: 'Estudo para hackathon · Full Stack',
+    status: 'deployed',
+    statusLabel: 'Publicado',
+    description:
+      'Aplicação operacional criada como preparação técnica para um hackathon do setor de energia, com visão de ativos, telemetria, alertas e classificações.',
+    contribution:
+      'Construção de interface Angular e API NestJS para explorar fluxos operacionais completos.',
+    technologies: ['Angular', 'NestJS', 'TypeScript', 'SCSS', 'REST'],
+    githubUrl: 'https://github.com/CA10V1ANA/windops-api',
+    demoUrl: 'https://windops-web.onrender.com/',
+    docsUrl: 'https://ca10v1ana.github.io/windops-api/',
+    featured: true,
+  },
+  {
+    id: 'if-make',
+    title: 'IF Make',
+    subtitle: 'Portfólio de Social Media',
+    category: 'Projeto para cliente',
+    status: 'deployed',
+    statusLabel: 'Publicado',
+    description:
+      'Site para apresentar os serviços, trabalhos e posicionamento profissional de uma cliente de social media.',
+    technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+    demoUrl: 'https://if-make.vercel.app/',
+    featured: true,
+  },
+  {
+    id: 'devpilot',
+    title: 'DevPilot',
+    subtitle: 'Agente de apoio à liderança técnica',
+    category: 'AI Engineering',
+    status: 'active',
+    statusLabel: 'Em desenvolvimento',
+    description:
+      'Agente pessoal criado para apoiar decisões técnicas durante um hackathon, com planejamento, debugging, revisão de código e controle de contexto por projeto.',
+    technologies: ['TypeScript', 'Runtime local', 'Agentes de IA'],
+    featured: true,
+  },
+  {
+    id: 'pokedex',
+    title: 'Pokédex — Pokémon Explorer',
+    subtitle: 'Catálogo interativo de Pokémon',
+    category: 'Projeto de estudo',
+    status: 'study',
+    statusLabel: 'Estudo',
+    description: 'Aplicação de estudo para explorar dados de Pokémon.',
+    technologies: ['Angular', 'TypeScript'],
+    demoUrl: 'https://ca10v1ana.github.io/pokedex-hackaton/',
+    featured: false,
   },
   {
     id: 'gymflow',
     title: 'GymFlow Pro',
-    description:
-      'Sistema completo de gestão de academias com alunos, matrículas, treinos, frequência, financeiro, estoque, autenticação JWT e controle por perfis.',
-    image: 'https://opengraph.githubassets.com/portfolio/CA10V1ANA/GymFlow',
-    technologies: ['React', 'TypeScript', 'Java 21', 'Spring Boot', 'PostgreSQL', 'Docker'],
+    subtitle: 'Gestão de academias',
+    category: 'Projeto Full Stack',
+    status: 'study',
+    statusLabel: 'Projeto',
+    description: 'Sistema de gestão de academias com alunos, matrículas, treinos e financeiro.',
+    technologies: ['Java', 'Spring Boot', 'React', 'PostgreSQL'],
     githubUrl: 'https://github.com/CA10V1ANA/GymFlow',
-    demoUrl: undefined,
-    featured: true,
+    featured: false,
   },
   {
     id: 'codementor-ia',
     title: 'CodeMentor IA',
+    subtitle: 'Chat acadêmico de programação',
+    category: 'Projeto de estudo',
+    status: 'study',
+    statusLabel: 'Projeto',
     description:
-      'Chat acadêmico com IA especializado em programação, histórico em SQLite, upload de códigos e imagens e respostas formatadas em Markdown.',
-    image: 'https://opengraph.githubassets.com/portfolio/CA10V1ANA/CodeMentor-IA',
-    technologies: ['Python', 'Flask', 'SQLite', 'JavaScript', 'OpenRouter API'],
+      'Chat para apoio ao estudo de programação com histórico local e respostas em Markdown.',
+    technologies: ['Python', 'Flask', 'SQLite', 'JavaScript'],
     githubUrl: 'https://github.com/CA10V1ANA/CodeMentor-IA',
-    demoUrl: undefined,
-    featured: true,
-  },
-  {
-    id: 'chronos-pomodoro',
-    title: 'Chronos Pomodoro',
-    description:
-      'Aplicação de produtividade baseada na técnica Pomodoro, desenvolvida com React e TypeScript para organizar ciclos de foco e descanso.',
-    image: 'https://opengraph.githubassets.com/portfolio/CA10V1ANA/Chronos-Pomodoro',
-    technologies: ['React', 'TypeScript', 'Vite'],
-    githubUrl: 'https://github.com/CA10V1ANA/Chronos-Pomodoro',
-    demoUrl: undefined,
-  },
-  {
-    id: 'portfolio',
-    title: 'Portfólio Pessoal',
-    description:
-      'Aplicação React responsiva com animações, temas claro e escuro, integração dinâmica com o GitHub e formulário de contato.',
-    image: 'https://opengraph.githubassets.com/portfolio/CA10V1ANA/Portfolio',
-    technologies: ['React 19', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
-    githubUrl: 'https://github.com/CA10V1ANA/Portfolio',
-    demoUrl: undefined,
+    featured: false,
   },
 ];

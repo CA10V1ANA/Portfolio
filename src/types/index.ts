@@ -1,25 +1,29 @@
 import type { IconType } from 'react-icons';
 
-export type SkillCategory = 'frontend' | 'backend' | 'database' | 'tools' | 'cloud';
-
-export interface Skill {
+export interface Technology {
   name: string;
-  category: SkillCategory;
-  level: number; // 0-100
+  category: string;
+  context: string;
   icon: IconType;
-  color: string;
 }
 
 export interface Project {
   id: string;
   title: string;
+  subtitle: string;
+  category: string;
+  status: 'staging' | 'deployed' | 'active' | 'study' | 'archived';
+  statusLabel: string;
   description: string;
-  longDescription?: string;
-  image: string;
+  problem?: string;
+  contribution?: string;
+  image?: string;
+  imageAlt?: string;
   technologies: string[];
   githubUrl?: string;
   demoUrl?: string;
-  featured?: boolean;
+  docsUrl?: string;
+  featured: boolean;
 }
 
 export interface ExperienceItem {
@@ -49,47 +53,4 @@ export interface SocialLink {
   name: string;
   url: string;
   icon: string;
-}
-
-export interface GithubUser {
-  login: string;
-  name: string;
-  avatar_url: string;
-  bio: string | null;
-  public_repos: number;
-  followers: number;
-  following: number;
-  html_url: string;
-  created_at: string;
-}
-
-export interface GithubRepo {
-  id: number;
-  name: string;
-  html_url: string;
-  description: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  language: string | null;
-  fork: boolean;
-}
-
-export interface ContactFormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
-export interface AboutHighlight {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-export interface TimelineEntry {
-  id: string;
-  date: string;
-  title: string;
-  subtitle: string;
-  description: string;
 }

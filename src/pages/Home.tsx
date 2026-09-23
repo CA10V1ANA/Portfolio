@@ -14,12 +14,6 @@ const Experience = lazy(() =>
 const Projects = lazy(() =>
   import('@/components/sections/Projects').then((m) => ({ default: m.Projects })),
 );
-const Education = lazy(() =>
-  import('@/components/sections/Education').then((m) => ({ default: m.Education })),
-);
-const GithubStats = lazy(() =>
-  import('@/components/sections/GithubStats').then((m) => ({ default: m.GithubStats })),
-);
 const Contact = lazy(() =>
   import('@/components/sections/Contact').then((m) => ({ default: m.Contact })),
 );
@@ -32,15 +26,7 @@ function SectionFallback() {
   );
 }
 
-const SECTIONS = [
-  About,
-  Skills,
-  Experience,
-  Projects,
-  Education,
-  GithubStats,
-  Contact,
-];
+const SECTIONS = [Projects, Skills, Experience, About, Contact];
 
 export function Home() {
   return (

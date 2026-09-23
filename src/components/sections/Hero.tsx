@@ -1,130 +1,77 @@
-import { motion } from 'framer-motion';
-import { ArrowDown, Download, Mail } from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { AuroraBackground } from '@/components/shared/AuroraBackground';
-import { TypewriterText } from '@/components/shared/TypewriterText';
-import { MagneticButton } from '@/components/shared/MagneticButton';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
-
-const container = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-};
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden px-6"
-      aria-label="Hero"
+      className="relative isolate flex min-h-[90svh] items-center border-b border-border px-6 pb-20 pt-32 sm:px-8 lg:px-10"
     >
-      <AuroraBackground />
-
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="visible"
-        className="mx-auto flex max-w-4xl flex-col items-center gap-8 text-center"
-      >
-        <motion.div variants={item}>
-          <Avatar className="h-36 w-36 border-2 border-white/10 shadow-2xl shadow-primary/20 sm:h-44 sm:w-44">
-            <AvatarImage src={PERSONAL_INFO.avatarUrl} alt={PERSONAL_INFO.name} />
-            <AvatarFallback className="text-4xl">CV</AvatarFallback>
-          </Avatar>
-        </motion.div>
-
-        <motion.span
-          variants={item}
-          className="rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary"
-        >
-          Disponível para novas oportunidades
-        </motion.span>
-
-        <motion.h1
-          variants={item}
-          className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
-        >
-          Olá, eu sou{' '}
-          <span className="text-gradient">{PERSONAL_INFO.name.split(' ')[0]} Viana</span>
-        </motion.h1>
-
-        <motion.div
-          variants={item}
-          className="h-9 font-display text-xl font-medium text-muted-foreground sm:text-2xl"
-        >
-          <TypewriterText words={PERSONAL_INFO.roles} />
-        </motion.div>
-
-        <motion.p
-          variants={item}
-          className="max-w-2xl text-balance text-muted-foreground sm:text-lg"
-        >
-          Construo produtos digitais completos com Java, Spring Boot, React, TypeScript e Flutter —
-          do banco de dados às experiências web e mobile.
-        </motion.p>
-
-        <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-4">
-          <MagneticButton>
-            <Button size="lg" asChild>
-              <a href={PERSONAL_INFO.resumeUrl} download>
-                <Download className="h-4 w-4" />
-                Download CV
-              </a>
-            </Button>
-          </MagneticButton>
-
-          <MagneticButton>
-            <Button size="lg" variant="outline" asChild>
-              <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer">
-                <FaGithub className="h-4 w-4" />
-                GitHub
-              </a>
-            </Button>
-          </MagneticButton>
-
-          <MagneticButton>
-            <Button size="lg" variant="outline" asChild>
-              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer">
-                <FaLinkedin className="h-4 w-4" />
-                LinkedIn
-              </a>
-            </Button>
-          </MagneticButton>
-
-          <MagneticButton>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() =>
-                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
-              }
+      <div
+        className="pointer-events-none absolute right-0 top-0 -z-10 h-[36rem] w-[36rem] max-w-full rounded-full bg-primary/10 blur-[110px]"
+        aria-hidden="true"
+      />
+      <div className="mx-auto grid w-full max-w-7xl gap-16 lg:grid-cols-[minmax(0,1.4fr)_minmax(300px,0.6fr)] lg:items-end">
+        <div>
+          <p className="mb-7 font-mono text-xs font-medium uppercase tracking-[0.24em] text-accent">
+            Full Stack Developer · Fortaleza, CE
+          </p>
+          <h1 className="max-w-4xl font-display text-[clamp(4rem,10vw,8.75rem)] font-semibold leading-[0.96] tracking-[-0.075em]">
+            Caio <span className="text-accent">Viana.</span>
+          </h1>
+          <p className="mt-10 max-w-[42rem] text-xl leading-relaxed text-muted-foreground sm:text-2xl">
+            Desenvolvo aplicações completas, do backend à interface, transformando problemas reais
+            em produtos de software.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a
+              href="#projects"
+              className="inline-flex min-h-12 items-center gap-3 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-secondary"
             >
-              <Mail className="h-4 w-4" />
-              Contato
-            </Button>
-          </MagneticButton>
-        </motion.div>
-      </motion.div>
+              Explorar projetos <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <a
+              href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center gap-3 rounded-md border border-border px-6 py-3 font-semibold transition-colors hover:border-accent hover:text-accent"
+            >
+              GitHub <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
 
-      <motion.button
-        onClick={() => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })}
-        aria-label="Rolar para a próxima seção"
-        className="absolute bottom-8 flex flex-col items-center gap-2 text-muted-foreground"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <span className="text-xs uppercase tracking-widest">Scroll</span>
-        <ArrowDown className="h-4 w-4" />
-      </motion.button>
+        <div className="border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-9 lg:pt-0">
+          <p className="mb-5 hidden font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground sm:block">
+            developer.ts
+          </p>
+          <pre className="hidden overflow-x-auto font-mono text-xs leading-7 text-muted-foreground sm:block sm:text-sm">
+            <code>{`const developer = {
+  name: "Caio Viana",
+  role: "Full Stack Developer",
+  focus: ["Web", "Backend",
+          "Software Engineering"]
+};`}</code>
+          </pre>
+          <dl className="mt-8 grid gap-3 border-t border-border pt-6 font-mono text-xs sm:grid-cols-2 lg:grid-cols-1">
+            <div className="flex gap-4">
+              <dt className="text-muted-foreground">location</dt>
+              <dd>Fortaleza — CE</dd>
+            </div>
+            <div className="flex gap-4">
+              <dt className="text-muted-foreground">education</dt>
+              <dd>Engenharia de Software</dd>
+            </div>
+          </dl>
+          <a
+            className="mt-8 inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+            href={PERSONAL_INFO.resumeUrl}
+            download
+          >
+            Baixar currículo <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    --background: 240 10% 4%;
-    --foreground: 0 0% 98%;
+    --background: 270 52% 5%;
+    --foreground: 270 17% 96%;
 
-    --card: 240 10% 7%;
-    --card-foreground: 0 0% 98%;
+    --card: 268 50% 9%;
+    --card-foreground: 270 17% 96%;
 
-    --popover: 240 10% 6%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 268 50% 9%;
+    --popover-foreground: 270 17% 96%;
 
-    --primary: 258 90% 66%;
+    --primary: 271 65% 44%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 189 94% 55%;
-    --secondary-foreground: 240 10% 4%;
+    --secondary: 269 61% 34%;
+    --secondary-foreground: 270 17% 96%;
 
-    --muted: 240 6% 14%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 269 46% 12%;
+    --muted-foreground: 268 9% 68%;
 
-    --accent: 280 87% 65%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 272 58% 71%;
+    --accent-foreground: 270 52% 5%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 6% 18%;
-    --input: 240 6% 18%;
-    --ring: 258 90% 66%;
+    --border: 270 35% 16%;
+    --input: 270 35% 16%;
+    --ring: 271 51% 55%;
 
-    --radius: 1rem;
+    --radius: 0.625rem;
   }
 
   .light {
@@ -48,13 +48,13 @@
     --primary: 258 82% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 189 80% 42%;
+    --secondary: 269 61% 34%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 240 5% 96%;
     --muted-foreground: 240 4% 40%;
 
-    --accent: 280 75% 55%;
+    --accent: 271 65% 37%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
@@ -73,6 +73,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -84,6 +85,11 @@
 
   ::selection {
     @apply bg-primary/30 text-foreground;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
   }
 
   ::-webkit-scrollbar {
@@ -102,29 +108,11 @@
 
 @layer components {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent;
-  }
-
-  .glass {
-    @apply border border-white/10 bg-white/5 backdrop-blur-xl;
+    @apply text-accent;
   }
 
   .section-container {
-    @apply mx-auto w-full max-w-6xl px-6 py-24 sm:px-8 lg:px-10;
-  }
-
-  .glow-border {
-    @apply relative;
-  }
-
-  .glow-border::before {
-    content: '';
-    @apply absolute -inset-px rounded-[inherit] bg-gradient-to-r from-primary/50 via-accent/50 to-secondary/50 opacity-0 transition-opacity duration-500;
-    z-index: -1;
-  }
-
-  .glow-border:hover::before {
-    @apply opacity-100;
+    @apply mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-10;
   }
 }
 
@@ -138,16 +126,15 @@
   }
 }
 
-/* custom cursor */
-@media (hover: hover) and (pointer: fine) {
+@media (prefers-reduced-motion: reduce) {
   html {
-    cursor: none;
+    scroll-behavior: auto;
   }
-  a,
-  button,
-  input,
-  textarea,
-  [role='button'] {
-    cursor: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

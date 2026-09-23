@@ -1,69 +1,74 @@
-import { Briefcase, MapPin } from 'lucide-react';
-import { SectionTitle } from '@/components/shared/SectionTitle';
-import { Reveal } from '@/components/shared/Reveal';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { EDUCATION } from '@/data/education';
 import { EXPERIENCE } from '@/data/experience';
-import { formatDate } from '@/lib/utils';
 
 export function Experience() {
+  const role = EXPERIENCE[0];
+  const degree = EDUCATION[0];
+  const technical = EDUCATION[1];
+
   return (
-    <section id="experience" className="section-container" aria-label="Experiência profissional">
-      <SectionTitle
-        eyebrow="Experiência"
-        title="Trajetória Profissional"
-        description="Minha atuação no mercado de trabalho como desenvolvedor full stack."
-      />
-
-      <div className="mx-auto flex max-w-3xl flex-col gap-8">
-        {EXPERIENCE.map((exp, index) => (
-          <Reveal key={exp.id} delay={index * 0.1}>
-            <Card className="overflow-hidden border-white/10 transition-all hover:border-primary/40">
-              <CardContent className="p-6 sm:p-8">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary">
-                      <Briefcase className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-display text-xl font-semibold">{exp.role}</h3>
-                      <p className="font-medium text-primary">{exp.company}</p>
-                      {exp.location && (
-                        <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                          <MapPin className="h-3.5 w-3.5" />
-                          {exp.location}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <Badge variant="secondary">
-                    {formatDate(exp.startDate)} — {exp.current ? 'Atual' : formatDate(exp.endDate!)}
-                  </Badge>
-                </div>
-
-                <ul className="mt-6 flex flex-col gap-2.5">
-                  {exp.description.map((line) => (
-                    <li key={line} className="flex gap-2.5 text-sm text-muted-foreground">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                      {line}
-                    </li>
-                  ))}
-                </ul>
-
-                {exp.technologies && (
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {exp.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </Reveal>
-        ))}
+    <section id="experience" className="section-container" aria-labelledby="experience-title">
+      <div className="max-w-3xl">
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">
+          03 / Trajetória
+        </p>
+        <h2
+          id="experience-title"
+          className="font-display text-4xl font-semibold tracking-tight sm:text-6xl"
+        >
+          Experiência e formação
+        </h2>
+        <p className="mt-6 leading-7 text-muted-foreground">
+          Uma trajetória em construção entre trabalho profissional, formação e projetos próprios.
+        </p>
       </div>
+      <ol className="relative mt-14 border-l border-border pl-7 sm:pl-12">
+        <li className="relative border-b border-border pb-10">
+          <span
+            className="absolute -left-[2.05rem] top-1 h-3 w-3 rounded-full border-2 border-accent bg-background sm:-left-[3.35rem]"
+            aria-hidden="true"
+          />
+          <p className="font-mono text-xs uppercase tracking-widest text-accent">
+            feat/professional-experience
+          </p>
+          <h3 className="mt-3 text-2xl font-semibold">{role.role}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {role.company} · {role.location}
+          </p>
+          <ul className="mt-5 max-w-3xl list-disc space-y-2 pl-5 leading-7 text-muted-foreground">
+            {role.description.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+          <p className="mt-5 font-mono text-xs text-muted-foreground">
+            {role.technologies?.join(' · ')}
+          </p>
+        </li>
+        <li className="relative border-b border-border py-10">
+          <span
+            className="absolute -left-[2.05rem] top-11 h-3 w-3 rounded-full border-2 border-accent bg-background sm:-left-[3.35rem]"
+            aria-hidden="true"
+          />
+          <p className="font-mono text-xs uppercase tracking-widest text-accent">
+            feat/software-engineering
+          </p>
+          <h3 className="mt-3 text-2xl font-semibold">{degree.field}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">{degree.institution} · em andamento</p>
+        </li>
+        <li className="relative pt-10">
+          <span
+            className="absolute -left-[2.05rem] top-11 h-3 w-3 rounded-full border-2 border-accent bg-background sm:-left-[3.35rem]"
+            aria-hidden="true"
+          />
+          <p className="font-mono text-xs uppercase tracking-widest text-accent">
+            chore/technical-foundation
+          </p>
+          <h3 className="mt-3 text-2xl font-semibold">{technical.field}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {technical.institution} · {technical.startDate}–{technical.endDate}
+          </p>
+        </li>
+      </ol>
     </section>
   );
 }
