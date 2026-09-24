@@ -1,0 +1,43 @@
+{
+  "eyebrow": "04 / Ecosistema técnico",
+  "title": "Stack Branch Orbit",
+  "introduction": "Tecnologías organizadas por capa. Cada branch parte de la integración Full Stack y regresa a main.",
+  "mainBranch": "Branch principal: main, integración Full Stack",
+  "mainTitle": "Full Stack Integration",
+  "branchSelector": "Seleccionar branch técnica",
+  "technologySelector": "Tecnologías de la branch",
+  "head": "HEAD",
+  "seo": {
+    "title": "Stack — Caio Viana",
+    "description": "Tecnologías de frontend, backend, datos y herramientas utilizadas por Caio Viana."
+  },
+  "branches": {
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "data": "Datos y Persistencia",
+    "tooling": "Herramientas"
+  },
+  "tech": {
+    "angular": "Interfaces corporativas y aplicaciones operacionales.",
+    "react": "Interfaces web en proyectos Full Stack.",
+    "typescript": "Aplicaciones web y servicios con tipado estático.",
+    "javascript": "Desarrollo de aplicaciones web.",
+    "html": "Estructura de interfaces web.",
+    "css": "Estilización de interfaces y aplicaciones Angular.",
+    "java": "Aplicaciones corporativas y APIs.",
+    "kotlin": "Desarrollo backend.",
+    "spring-boot": "Servicios REST y aplicaciones corporativas.",
+    "grails": "Desarrollo de sistemas backend.",
+    "nestjs": "APIs REST con TypeScript.",
+    "nodejs": "Runtime para aplicaciones y servicios TypeScript.",
+    "postgresql": "Persistencia relacional en aplicaciones Full Stack.",
+    "oracle": "Base de datos relacional en sistemas corporativos.",
+    "jpa-hibernate": "Mapeo objeto-relacional para aplicaciones Java.",
+    "docker": "Entornos de desarrollo y servicios.",
+    "git": "Control de versiones y colaboración en código.",
+    "github": "Alojamiento de código y colaboración.",
+    "swagger": "Documentación de APIs REST.",
+    "maven": "Build y dependencias en proyectos Java.",
+    "vite": "Herramientas de desarrollo frontend."
+  }
+}

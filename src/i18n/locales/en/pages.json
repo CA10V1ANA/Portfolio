@@ -1,0 +1,73 @@
+{
+  "home": {
+    "eyebrow": "Full Stack Developer · Fortaleza, CE",
+    "description": "I build end-to-end applications, from backend to interface, turning real problems into software products.",
+    "ctaAbout": "Learn about my work",
+    "ctaProject": "Featured project",
+    "devFile": "developer.ts",
+    "locationLabel": "location",
+    "locationValue": "Fortaleza — CE",
+    "educationLabel": "education",
+    "educationValue": "Software Engineering",
+    "seo": {
+      "title": "Caio Viana — Full Stack Developer",
+      "description": "Portfolio of Caio Viana, Full Stack Developer based in Fortaleza, Brazil."
+    }
+  },
+  "about": {
+    "eyebrow": "02 / About",
+    "title": "Before the code, the problem.",
+    "p1": "I'm a Full Stack Developer and Software Engineering student. My work spans enterprise systems, projects built for real-world problems and different layers of an application.",
+    "p2": "I'm interested in backend, frontend, architecture and product. In JS BOY, for instance, I'm building a delivery management platform for a family business.",
+    "p3": "I like to understand the problem before choosing the technology and follow the solution path — from data modeling to the experience of the person using the product.",
+    "seo": {
+      "title": "About — Caio Viana",
+      "description": "Learn about Caio Viana's approach, background and work in software development."
+    }
+  },
+  "experience": {
+    "eyebrow": "05 / Background",
+    "title": "Experience and education",
+    "subtitle": "A path being built through professional work, formal education and personal projects.",
+    "current": "current",
+    "ongoing": "in progress",
+    "role": {
+      "acsAutomacao": "Full Stack Development Intern",
+      "acsDesc1": "Maintaining and evolving enterprise systems.",
+      "acsDesc2": "Implementing features and fixing bugs across applications and REST APIs."
+    },
+    "education": {
+      "uniateneuField": "Software Engineering",
+      "uniateneuDegree": "Bachelor's degree",
+      "uniateneuDesc": "Focused on software engineering, systems architecture, data structures, databases, web development and programming best practices.",
+      "marwinField": "Systems Development",
+      "marwinDegree": "High School with Integrated Technical Diploma",
+      "marwinDesc": "Technical training integrated with high school education, covering programming fundamentals and systems development."
+    },
+    "seo": {
+      "title": "Experience — Caio Viana",
+      "description": "Professional experience and Software Engineering education of Caio Viana."
+    }
+  },
+  "contact": {
+    "eyebrow": "06 / Contact",
+    "title": "Let's build something useful.",
+    "description": "Have an opportunity, project or want to talk about development? Let's connect.",
+    "seo": {
+      "title": "Contact — Caio Viana",
+      "description": "Get in touch with Caio Viana to discuss software development."
+    }
+  },
+  "notFound": {
+    "seo": {
+      "title": "Page not found — Caio Viana",
+      "description": "The requested page was not found in Caio Viana's portfolio."
+    }
+  },
+  "projectSeo": {
+    "caseSuffix": "Full Stack Case | Caio Viana",
+    "notFoundTitle": "Project not found — Caio Viana",
+    "notFoundDesc": "The requested page was not found in Caio Viana's portfolio.",
+    "techPrefix": "Technologies:"
+  }
+}

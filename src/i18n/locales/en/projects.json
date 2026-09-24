@@ -1,0 +1,46 @@
+{
+  "jsBoy": {
+    "subtitle": "Enterprise Delivery Management",
+    "category": "Real-world project · Full Stack",
+    "statusLabel": "In staging",
+    "context": "Real-world project · Full Stack",
+    "description": "Platform for managing a family delivery business, with client management, delivery agents, orders, pricing and operational tracking.",
+    "problem": "Manual processes and decentralized information made it hard to track deliveries.",
+    "contribution": "Building the web application, API and database, with role-based authentication and ongoing evolution of the operational flow."
+  },
+  "pokedex": {
+    "subtitle": "Interactive Pokémon catalog",
+    "category": "Study project · Frontend",
+    "statusLabel": "Completed",
+    "context": "Study project · Frontend",
+    "description": "Modern, responsive Pokédex for exploring, searching, filtering and favoriting Pokémon using real-time data from the PokéAPI.",
+    "problem": "Organizing a large amount of PokéAPI data into a fast, visual and easy-to-explore experience.",
+    "contribution": "Building the Angular application, component architecture, reactive state with Signals, PokéAPI integration, local favorites and unit tests."
+  },
+  "ifMake": {
+    "subtitle": "Social Media Portfolio",
+    "category": "Client project",
+    "statusLabel": "Published",
+    "context": "Client project",
+    "description": "Website to showcase the services, work and professional positioning of a social media client."
+  },
+  "devpilot": {
+    "subtitle": "Technical leadership support agent",
+    "category": "AI Engineering",
+    "statusLabel": "In development",
+    "context": "AI Engineering",
+    "description": "Personal agent built to support technical decisions during a hackathon, with planning, debugging, code review and per-project context control."
+  },
+  "gymflow": {
+    "subtitle": "Gym management system",
+    "category": "Full Stack project",
+    "statusLabel": "Project",
+    "description": "Gym management system with students, enrollments, workout plans and finances."
+  },
+  "codementorIa": {
+    "subtitle": "Academic programming chat",
+    "category": "Study project",
+    "statusLabel": "Project",
+    "description": "Chat for programming study support with local history and Markdown responses."
+  }
+}

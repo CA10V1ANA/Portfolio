@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "projects": "Projetos",
+    "stack": "Stack",
+    "experience": "Experiência",
+    "contact": "Contato"
+  },
+  "actions": {
+    "viewCode": "Ver código",
+    "viewProject": "Ver aplicação",
+    "viewDocs": "Documentação",
+    "exploreGithub": "Explorar GitHub",
+    "downloadResume": "Baixar currículo",
+    "previousProject": "Projeto anterior",
+    "nextProject": "Próximo projeto",
+    "openJsBoy": "Abrir JS BOY"
+  },
+  "theme": {
+    "light": "Ativar tema claro",
+    "dark": "Ativar tema escuro"
+  },
+  "language": {
+    "label": "Selecionar idioma",
+    "current": "Idioma atual"
+  },
+  "footer": {
+    "copyright": "© {{year}} {{name}}. Todos os direitos reservados.",
+    "builtWith": "Desenvolvido com React, TypeScript e Tailwind CSS.",
+    "socialLabel": "Redes sociais e contato",
+    "emailLabel": "E-mail: {{email}}",
+    "whatsappLabel": "WhatsApp: {{phone}}"
+  },
+  "a11y": {
+    "skipToContent": "Pular para o conteúdo",
+    "mainNav": "Navegação principal",
+    "mobileNav": "Navegação móvel",
+    "projectNav": "Navegação entre projetos",
+    "goHome": "Ir para o início",
+    "homeLink": "Caio Viana — início",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "selectTech": "Selecionar {{name}}",
+    "techOf": "Tecnologias de {{name}}"
+  },
+  "status": {
+    "loading": "Carregando página…",
+    "staging": "Em homologação",
+    "deployed": "Concluído",
+    "active": "Em desenvolvimento",
+    "study": "Projeto",
+    "archived": "Arquivado",
+    "published": "Publicado"
+  },
+  "error": {
+    "sectionLoad": "Ocorreu um erro ao carregar esta seção.",
+    "notFoundTitle": "Página não encontrada",
+    "notFoundDescription": "A página que você está procurando não existe ou foi movida.",
+    "backHome": "Voltar para o início",
+    "projectNotFound": "Projeto não encontrado"
+  },
+  "contact": {
+    "emailAriaLabel": "Enviar e-mail para Caio Viana",
+    "whatsappAriaLabel": "Conversar com Caio Viana pelo WhatsApp"
+  },
+  "projects": {
+    "label": "Projetos",
+    "counter": "{{current}} de {{total}}",
+    "problem": "Problema.",
+    "contribution": "Minha atuação.",
+    "technologies": "Tecnologias"
+  }
+}

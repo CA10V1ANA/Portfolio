@@ -1,0 +1,46 @@
+{
+  "jsBoy": {
+    "subtitle": "Gestión de Entregas Empresariales",
+    "category": "Proyecto real · Full Stack",
+    "statusLabel": "En homologación",
+    "context": "Proyecto real · Full Stack",
+    "description": "Plataforma para gestionar la operación de una empresa familiar de entregas empresariales, con gestión de clientes, repartidores, pedidos, precios y seguimiento operacional.",
+    "problem": "Los procesos manuales y la información descentralizada dificultaban el seguimiento de las entregas.",
+    "contribution": "Desarrollo de la aplicación web, API y base de datos, con autenticación por perfil y evolución continua del flujo operacional."
+  },
+  "pokedex": {
+    "subtitle": "Catálogo interactivo de Pokémon",
+    "category": "Proyecto de estudio · Frontend",
+    "statusLabel": "Completado",
+    "context": "Proyecto de estudio · Frontend",
+    "description": "Pokédex moderna y responsiva para explorar, buscar, filtrar y guardar Pokémon como favoritos, consumiendo datos de la PokéAPI en tiempo real.",
+    "problem": "Organizar una gran cantidad de información de la PokéAPI en una experiencia rápida, visual y fácil de explorar.",
+    "contribution": "Desarrollo de la aplicación Angular, arquitectura de componentes, estado reactivo con Signals, integración con la PokéAPI, persistencia de favoritos y pruebas unitarias."
+  },
+  "ifMake": {
+    "subtitle": "Portafolio de Social Media",
+    "category": "Proyecto para cliente",
+    "statusLabel": "Publicado",
+    "context": "Proyecto para cliente",
+    "description": "Sitio web para presentar los servicios, trabajos y posicionamiento profesional de una clienta de social media."
+  },
+  "devpilot": {
+    "subtitle": "Agente de apoyo al liderazgo técnico",
+    "category": "AI Engineering",
+    "statusLabel": "En desarrollo",
+    "context": "AI Engineering",
+    "description": "Agente personal creado para apoyar decisiones técnicas durante un hackathon, con planificación, debugging, revisión de código y control de contexto por proyecto."
+  },
+  "gymflow": {
+    "subtitle": "Gestión de gimnasios",
+    "category": "Proyecto Full Stack",
+    "statusLabel": "Proyecto",
+    "description": "Sistema de gestión de gimnasios con alumnos, matrículas, planes de entrenamiento y finanzas."
+  },
+  "codementorIa": {
+    "subtitle": "Chat académico de programación",
+    "category": "Proyecto de estudio",
+    "statusLabel": "Proyecto",
+    "description": "Chat de apoyo al estudio de programación con historial local y respuestas en Markdown."
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "home": {
+    "eyebrow": "Full Stack Developer · Fortaleza, CE",
+    "description": "Desenvolvo aplicações completas, do backend à interface, transformando problemas reais em produtos de software.",
+    "ctaAbout": "Conhecer meu trabalho",
+    "ctaProject": "Projeto em destaque",
+    "devFile": "developer.ts",
+    "locationLabel": "location",
+    "locationValue": "Fortaleza — CE",
+    "educationLabel": "education",
+    "educationValue": "Engenharia de Software",
+    "seo": {
+      "title": "Caio Viana — Desenvolvedor Full Stack",
+      "description": "Portfólio de Caio Viana, desenvolvedor Full Stack em Fortaleza, CE."
+    }
+  },
+  "about": {
+    "eyebrow": "02 / Sobre",
+    "title": "Antes do código, o problema.",
+    "p1": "Sou desenvolvedor Full Stack e estudante de Engenharia de Software. Minha atuação passa por sistemas corporativos, projetos criados para problemas reais e diferentes camadas de uma aplicação.",
+    "p2": "Tenho interesse em backend, frontend, arquitetura e produto. No JS BOY, por exemplo, desenvolvo uma plataforma de gestão de entregas para uma operação familiar.",
+    "p3": "Gosto de entender o problema antes de escolher a tecnologia e acompanhar o caminho da solução, da modelagem à experiência final de quem usa o produto.",
+    "seo": {
+      "title": "Sobre — Caio Viana",
+      "description": "Conheça a atuação, formação e abordagem de Caio Viana em desenvolvimento de software."
+    }
+  },
+  "experience": {
+    "eyebrow": "05 / Trajetória",
+    "title": "Experiência e formação",
+    "subtitle": "Uma trajetória em construção entre trabalho profissional, formação e projetos próprios.",
+    "current": "atual",
+    "ongoing": "em andamento",
+    "role": {
+      "acsAutomacao": "Estagiário de Desenvolvimento Full Stack",
+      "acsDesc1": "Manutenção e evolução de sistemas corporativos.",
+      "acsDesc2": "Implementação de funcionalidades e correção de bugs em aplicações e APIs REST."
+    },
+    "education": {
+      "uniateneuField": "Engenharia de Software",
+      "uniateneuDegree": "Bacharelado",
+      "uniateneuDesc": "Formação com foco em engenharia de software, arquitetura de sistemas, estrutura de dados, banco de dados, desenvolvimento web e boas práticas de programação.",
+      "marwinField": "Desenvolvimento de Sistemas",
+      "marwinDegree": "Ensino Médio e Técnico Integrado",
+      "marwinDesc": "Formação técnica integrada ao ensino médio, com fundamentos de programação e desenvolvimento de sistemas."
+    },
+    "seo": {
+      "title": "Experiência — Caio Viana",
+      "description": "Experiência profissional e formação em Engenharia de Software de Caio Viana."
+    }
+  },
+  "contact": {
+    "eyebrow": "06 / Contato",
+    "title": "Vamos construir algo útil.",
+    "description": "Tem uma oportunidade, projeto ou quer conversar sobre desenvolvimento? Vamos nos conectar.",
+    "seo": {
+      "title": "Contato — Caio Viana",
+      "description": "Entre em contato com Caio Viana para conversar sobre desenvolvimento de software."
+    }
+  },
+  "notFound": {
+    "seo": {
+      "title": "Página não encontrada — Caio Viana",
+      "description": "A página solicitada não foi encontrada no portfólio de Caio Viana."
+    }
+  },
+  "projectSeo": {
+    "caseSuffix": "Case Full Stack | Caio Viana",
+    "notFoundTitle": "Projeto não encontrado — Caio Viana",
+    "notFoundDesc": "A página solicitada não foi encontrada no portfólio de Caio Viana.",
+    "techPrefix": "Tecnologias:"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "eyebrow": "04 / Technical ecosystem",
+  "title": "Stack Branch Orbit",
+  "introduction": "Technologies organized by layer. Each branch starts from the Full Stack integration and merges back to main.",
+  "mainBranch": "Main branch: main, Full Stack integration",
+  "mainTitle": "Full Stack Integration",
+  "branchSelector": "Select technical branch",
+  "technologySelector": "Branch technologies",
+  "head": "HEAD",
+  "seo": {
+    "title": "Stack — Caio Viana",
+    "description": "Frontend, backend, data and tooling technologies used by Caio Viana."
+  },
+  "branches": {
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "data": "Data & Persistence",
+    "tooling": "Tooling"
+  },
+  "tech": {
+    "angular": "Enterprise interfaces and operational applications.",
+    "react": "Web interfaces for Full Stack projects.",
+    "typescript": "Web apps and services with static typing.",
+    "javascript": "Web application development.",
+    "html": "Web interface structure.",
+    "css": "Interface styling and Angular applications.",
+    "java": "Enterprise applications and APIs.",
+    "kotlin": "Backend development.",
+    "spring-boot": "REST services and enterprise applications.",
+    "grails": "Backend systems development.",
+    "nestjs": "REST APIs with TypeScript.",
+    "nodejs": "Runtime for TypeScript apps and services.",
+    "postgresql": "Relational persistence for Full Stack applications.",
+    "oracle": "Relational database for enterprise systems.",
+    "jpa-hibernate": "Object-relational mapping for Java applications.",
+    "docker": "Development environments and services.",
+    "git": "Version control and code collaboration.",
+    "github": "Code hosting and collaboration.",
+    "swagger": "REST API documentation.",
+    "maven": "Build and dependency management for Java projects.",
+    "vite": "Frontend development tooling."
+  }
+}

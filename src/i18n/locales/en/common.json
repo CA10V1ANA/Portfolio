@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "stack": "Stack",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "actions": {
+    "viewCode": "View code",
+    "viewProject": "View project",
+    "viewDocs": "Documentation",
+    "exploreGithub": "Explore GitHub",
+    "downloadResume": "Download resume",
+    "previousProject": "Previous project",
+    "nextProject": "Next project",
+    "openJsBoy": "Open JS BOY"
+  },
+  "theme": {
+    "light": "Switch to light theme",
+    "dark": "Switch to dark theme"
+  },
+  "language": {
+    "label": "Select language",
+    "current": "Current language"
+  },
+  "footer": {
+    "copyright": "© {{year}} {{name}}. All rights reserved.",
+    "builtWith": "Built with React, TypeScript and Tailwind CSS.",
+    "socialLabel": "Social media and contact",
+    "emailLabel": "Email: {{email}}",
+    "whatsappLabel": "WhatsApp: {{phone}}"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "projectNav": "Project navigation",
+    "goHome": "Go to home",
+    "homeLink": "Caio Viana — home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "selectTech": "Select {{name}}",
+    "techOf": "Technologies used in {{name}}"
+  },
+  "status": {
+    "loading": "Loading page…",
+    "staging": "In staging",
+    "deployed": "Completed",
+    "active": "In development",
+    "study": "Project",
+    "archived": "Archived",
+    "published": "Published"
+  },
+  "error": {
+    "sectionLoad": "An error occurred while loading this section.",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to home",
+    "projectNotFound": "Project not found"
+  },
+  "contact": {
+    "emailAriaLabel": "Send email to Caio Viana",
+    "whatsappAriaLabel": "Chat with Caio Viana on WhatsApp"
+  },
+  "projects": {
+    "label": "Projects",
+    "counter": "{{current}} of {{total}}",
+    "problem": "Problem.",
+    "contribution": "My role.",
+    "technologies": "Technologies"
+  }
+}
