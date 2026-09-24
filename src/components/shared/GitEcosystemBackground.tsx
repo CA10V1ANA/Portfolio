@@ -11,6 +11,7 @@ interface Node {
   baseX: number;
   vx: number;
   vy: number;
+  side?: 'left' | 'right';
   type: 'commit' | 'hash' | 'branch' | 'tech';
   text: string;
   color: string;
@@ -126,14 +127,19 @@ export function GitEcosystemBackground() {
           IconComponent = tech.Icon;
         }
 
+        const side = Math.random() > 0.5 ? 'left' : 'right';
+        const margin = window.innerWidth < 768 ? window.innerWidth * 0.15 : window.innerWidth * 0.25;
+        const startX = side === 'left' ? Math.random() * margin : window.innerWidth - (Math.random() * margin);
+
         newNodes.push({
           id: `node-${i}-${Date.now()}`,
-          x: Math.random() * window.innerWidth,
+          x: startX,
           y: Math.random() * window.innerHeight,
           baseX: 0,
           baseY: 0,
           vx: (Math.random() - 0.5) * 0.3, // slightly faster
           vy: (Math.random() - 0.5) * 0.3,
+          side,
           type,
           text,
           color,
@@ -192,9 +198,17 @@ export function GitEcosystemBackground() {
           node.baseX += node.vx;
           node.baseY += node.vy;
 
-          // Wrap around edges slowly
-          if (node.baseX < -50) node.baseX = width + 50;
-          if (node.baseX > width + 50) node.baseX = -50;
+          const margin = width < 768 ? width * 0.15 : width * 0.25;
+
+          // Wrap around edges slowly, respecting their side
+          if (node.side === 'left') {
+            if (node.baseX < -50) node.baseX = margin;
+            if (node.baseX > margin) node.baseX = -50;
+          } else {
+            if (node.baseX < width - margin) node.baseX = width + 50;
+            if (node.baseX > width + 50) node.baseX = width - margin;
+          }
+
           if (node.baseY < -50) node.baseY = height + 50;
           if (node.baseY > height + 50) node.baseY = -50;
 
@@ -300,16 +314,16 @@ export function GitEcosystemBackground() {
 
   if (!ENABLE_GIT_ECOSYSTEM_BACKGROUND) return null;
 
-  const isProjectsPage = location.pathname.startsWith('/projetos');
+  const isBlurredPage = ['/sobre', '/projetos', '/stack', '/experiencia', '/contato'].some(p => location.pathname.startsWith(p));
 
   return (
     <>
       <canvas
         ref={canvasRef}
-        className={`fixed inset-0 -z-10 pointer-events-none transition-all duration-700 ${isProjectsPage ? 'blur-[4px]' : ''}`}
+        className={`fixed inset-0 -z-10 pointer-events-none transition-all duration-700 ${isBlurredPage ? 'blur-[4px]' : ''}`}
         aria-hidden="true"
       />
-      <div className={`fixed inset-0 -z-10 pointer-events-none overflow-hidden transition-all duration-700 ${isProjectsPage ? 'blur-[4px]' : ''}`} aria-hidden="true">
+      <div className={`fixed inset-0 -z-10 pointer-events-none overflow-hidden transition-all duration-700 ${isBlurredPage ? 'blur-[4px]' : ''}`} aria-hidden="true">
         {techNodes.map(node => {
           const Icon = node.IconComponent;
           if (!Icon) return null;
