@@ -10,8 +10,9 @@ export function Experience() {
 
   return (
     <section id="experience" className="section-container page-section" aria-labelledby="experience-title">
-      <div className="max-w-3xl">
-        <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">
+      <div className="relative rounded-2xl border border-border bg-background/95 px-6 py-10 shadow-sm backdrop-blur-md sm:px-12 sm:py-14">
+        <div className="max-w-3xl">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">
           {t('experience.eyebrow')}
         </p>
         <h1
@@ -70,6 +71,7 @@ export function Experience() {
           </p>
         </li>
       </ol>
+      </div>
     </section>
   );
 }

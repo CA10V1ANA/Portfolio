@@ -52,6 +52,7 @@ export function ProjectPage() {
 
   return (
     <section className="section-container page-section" aria-labelledby="project-title">
+      <div className="relative rounded-2xl border border-border bg-background/95 px-6 py-10 shadow-sm backdrop-blur-md sm:px-12 sm:py-14">
       <div className="project-toolbar">
         <div className="flex items-center gap-4">
           <p className="eyebrow">
@@ -145,6 +146,7 @@ export function ProjectPage() {
             <img src={project.screenshots[0].src} alt={project.screenshots[0].alt} loading="lazy" />
           </figure>
         )}
+      </div>
       </div>
     </section>
   );
