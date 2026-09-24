@@ -55,7 +55,7 @@ export function Skills() {
   }
 
   const orbitNodes = [previous, active, next];
-  const paused = Boolean(reducedMotion || hovered || focused || hidden);
+  const paused = Boolean(reducedMotion || hidden);
   const branchStart = 125 + activeBranchIndex * 250;
 
   return (
@@ -149,7 +149,7 @@ export function Skills() {
                 preserveAspectRatio="none"
                 aria-hidden="true"
               >
-                <path d="M 145 92 C 280 92 350 112 500 104 C 650 96 720 116 855 116" />
+                <path d="M 145 104 C 280 104 350 104 500 104 C 650 104 720 104 855 104" />
               </svg>
               {orbitNodes.map((technology, position) => {
                 const Icon = technology.icon;

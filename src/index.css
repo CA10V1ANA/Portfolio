@@ -237,7 +237,7 @@
   }
 
   .stack-orbit-cable path {
-    animation: stack-cable-wave 5s ease-in-out infinite;
+    animation: stack-cable-wave 4s ease-in-out infinite;
   }
 
   .stack-orbit::after {
@@ -250,15 +250,15 @@
   }
 
   .stack-node:nth-of-type(1) {
-    animation: stack-wave-left 5s ease-in-out infinite;
+    animation: stack-wave-left 4s ease-in-out infinite;
   }
 
   .stack-node:nth-of-type(2) {
-    animation: stack-wave-center 5s ease-in-out infinite;
+    animation: stack-wave-center 4s ease-in-out infinite;
   }
 
   .stack-node:nth-of-type(3) {
-    animation: stack-wave-right 5s ease-in-out infinite;
+    animation: stack-wave-right 4s ease-in-out infinite;
   }
 
   .stack-node.is-head {
@@ -344,30 +344,42 @@
 @keyframes stack-wave-left {
   0%,
   100% {
-    transform: translateY(-10px);
+    transform: translateY(-12px);
+  }
+  25%,
+  75% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
 }
 
 @keyframes stack-wave-center {
   0%,
+  50%,
   100% {
-    transform: translateY(-3px);
+    transform: translateY(0);
   }
-  50% {
-    transform: translateY(3px);
+  25% {
+    transform: translateY(-7px);
+  }
+  75% {
+    transform: translateY(7px);
   }
 }
 
 @keyframes stack-wave-right {
   0%,
   100% {
-    transform: translateY(10px);
+    transform: translateY(12px);
+  }
+  25%,
+  75% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-12px);
   }
 }
 
@@ -376,8 +388,14 @@
   100% {
     d: path('M 145 92 C 280 92 350 112 500 104 C 650 96 720 116 855 116');
   }
+  25% {
+    d: path('M 145 104 C 280 104 350 97 500 97 C 650 97 720 104 855 104');
+  }
   50% {
     d: path('M 145 116 C 280 116 350 96 500 104 C 650 112 720 92 855 92');
+  }
+  75% {
+    d: path('M 145 104 C 280 104 350 111 500 111 C 650 111 720 104 855 104');
   }
 }
 
@@ -454,28 +472,55 @@
   @keyframes stack-wave-left {
     0%,
     100% {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
+    }
+    25%,
+    75% {
+      transform: translateY(0);
     }
     50% {
-      transform: translateY(6px);
+      transform: translateY(8px);
     }
   }
   @keyframes stack-wave-center {
     0%,
+    50%,
     100% {
-      transform: translateY(-2px);
+      transform: translateY(0);
     }
-    50% {
-      transform: translateY(2px);
+    25% {
+      transform: translateY(-5px);
+    }
+    75% {
+      transform: translateY(5px);
     }
   }
   @keyframes stack-wave-right {
     0%,
     100% {
-      transform: translateY(6px);
+      transform: translateY(8px);
+    }
+    25%,
+    75% {
+      transform: translateY(0);
     }
     50% {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes stack-cable-wave {
+    0%,
+    100% {
+      d: path('M 145 96 C 280 96 350 104 500 104 C 650 104 720 112 855 112');
+    }
+    25% {
+      d: path('M 145 104 C 280 104 350 99 500 99 C 650 99 720 104 855 104');
+    }
+    50% {
+      d: path('M 145 112 C 280 112 350 104 500 104 C 650 104 720 96 855 96');
+    }
+    75% {
+      d: path('M 145 104 C 280 104 350 109 500 109 C 650 109 720 104 855 104');
     }
   }
   .project-toolbar > div {
