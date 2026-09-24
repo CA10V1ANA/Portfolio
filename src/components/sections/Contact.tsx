@@ -9,9 +9,10 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="section-container page-section min-h-[65svh] border-t border-border"
+      className="section-container page-section"
       aria-labelledby="contact-title"
     >
+      <div className="relative rounded-2xl border border-border bg-background/95 px-6 py-10 shadow-sm backdrop-blur-md sm:px-12 sm:py-14 min-h-[65svh]">
       <p className="eyebrow">{t('contact.eyebrow')}</p>
       <h1
         id="contact-title"
@@ -46,6 +47,7 @@ export function Contact() {
         >
           GitHub <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
         </a>
+      </div>
       </div>
     </section>
   );
