@@ -9,10 +9,9 @@ interface Node {
   x: number;
   y: number;
   baseX: number;
-  baseY: number;
   vx: number;
   vy: number;
-  type: 'commit' | 'hash' | 'binary' | 'branch' | 'tech';
+  type: 'commit' | 'hash' | 'branch' | 'tech';
   text: string;
   color: string;
   size: number;
@@ -45,11 +44,6 @@ function randomHash() {
   return Math.random().toString(16).substring(2, 9);
 }
 
-function randomBinary() {
-  const b = () => Math.random() > 0.5 ? '1' : '0';
-  return `${b()}${b()}${b()}${b()} ${b()}${b()}${b()}${b()}`;
-}
-
 export function GitEcosystemBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const location = useLocation();
@@ -65,15 +59,15 @@ export function GitEcosystemBackground() {
 
   // Determine target opacity based on route (increased visibility)
   useEffect(() => {
-    let opacity = 0.6;
+    let opacity = 0.15; // default
     const path = location.pathname;
     
-    if (path.startsWith('/projetos')) opacity = 0.5;
-    else if (path.startsWith('/stack')) opacity = 0.8;
-    else if (path.startsWith('/sobre')) opacity = 0.4;
-    else if (path.startsWith('/experiencia')) opacity = 0.5;
-    else if (path.startsWith('/contato')) opacity = 0.3;
-    else if (path === '/') opacity = 0.6;
+    if (path.startsWith('/projetos')) opacity = 0.15; // baixa
+    else if (path.startsWith('/stack')) opacity = 0.22; // média
+    else if (path.startsWith('/sobre')) opacity = 0.10; // muito baixa
+    else if (path.startsWith('/experiencia')) opacity = 0.15; // baixa
+    else if (path.startsWith('/contato')) opacity = 0.08; // mínima
+    else if (path === '/') opacity = 0.15; // baixa
 
     targetOpacityRef.current = opacity;
   }, [location.pathname]);
@@ -102,7 +96,7 @@ export function GitEcosystemBackground() {
 
     const initNodes = () => {
       const isMobile = window.innerWidth < 768;
-      const nodeCount = isMobile ? Math.floor(Math.random() * 10) + 15 : Math.floor(Math.random() * 20) + 35; // increased count slightly
+      const nodeCount = isMobile ? Math.floor(Math.random() * 11) + 10 : Math.floor(Math.random() * 21) + 25; // 10-20 mobile, 25-45 desktop
       const newNodes: Node[] = [];
 
       for (let i = 0; i < nodeCount; i++) {
@@ -113,18 +107,14 @@ export function GitEcosystemBackground() {
         let size = 3;
         let IconComponent: React.ElementType | undefined;
 
-        if (typeRand < 0.25) {
+        if (typeRand < 0.3) {
           type = 'commit';
           size = Math.random() * 3 + 3;
-        } else if (typeRand < 0.45) {
+        } else if (typeRand < 0.5) {
           type = 'hash';
           text = randomHash();
           color = COLORS.muted;
-        } else if (typeRand < 0.65) {
-          type = 'binary';
-          text = randomBinary();
-          color = COLORS.muted;
-        } else if (typeRand < 0.8) {
+        } else if (typeRand < 0.7) {
           type = 'branch';
           text = BRANCH_NAMES[Math.floor(Math.random() * BRANCH_NAMES.length)];
           color = COLORS.purple;
@@ -159,10 +149,10 @@ export function GitEcosystemBackground() {
         n.baseY = n.y;
       });
 
-      // Create sparse connections (graph structure)
+      // Create sparse connections (graph structure, same types only)
       newNodes.forEach(node => {
         const neighbors = [...newNodes]
-          .filter(n => n !== node)
+          .filter(n => n !== node && n.type === node.type)
           .sort((a, b) => {
             const da = Math.hypot(a.x - node.x, a.y - node.y);
             const db = Math.hypot(b.x - node.x, b.y - node.y);
@@ -193,7 +183,7 @@ export function GitEcosystemBackground() {
       ctx.globalAlpha = currentOpacityRef.current;
 
       const mouseRadius = width < 768 ? 0 : 160; 
-      const maxDisplacement = 40;
+      const maxDisplacement = 30;
 
       // Update positions
       nodes.forEach(node => {
@@ -256,7 +246,7 @@ export function GitEcosystemBackground() {
             ctx.quadraticCurveTo(cpX, cpY, target.x, target.y);
             
             // Fade out long connections
-            const alpha = Math.max(0, 1 - dist / 300) * 0.6; // stronger connections
+            const alpha = Math.max(0, 1 - dist / 300) * 0.3; // weaker connections
             ctx.strokeStyle = node.color.replace(/[\d.]+\)$/g, `${alpha})`);
             ctx.stroke();
           }
@@ -310,14 +300,16 @@ export function GitEcosystemBackground() {
 
   if (!ENABLE_GIT_ECOSYSTEM_BACKGROUND) return null;
 
+  const isProjectsPage = location.pathname.startsWith('/projetos');
+
   return (
     <>
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 -z-10 pointer-events-none"
+        className={`fixed inset-0 -z-10 pointer-events-none transition-all duration-700 ${isProjectsPage ? 'blur-[4px]' : ''}`}
         aria-hidden="true"
       />
-      <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+      <div className={`fixed inset-0 -z-10 pointer-events-none overflow-hidden transition-all duration-700 ${isProjectsPage ? 'blur-[4px]' : ''}`} aria-hidden="true">
         {techNodes.map(node => {
           const Icon = node.IconComponent;
           if (!Icon) return null;
