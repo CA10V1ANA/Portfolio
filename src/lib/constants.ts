@@ -1,5 +1,7 @@
 import type { Project } from '@/types';
 
+export const ENABLE_GIT_ECOSYSTEM_BACKGROUND = true;
+
 export const PERSONAL_INFO = {
   name: 'Caio de Oliveira Viana',
   firstName: 'Caio',

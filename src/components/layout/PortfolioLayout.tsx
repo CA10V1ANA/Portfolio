@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Footer } from '@/components/layout/Footer';
 import { Navbar } from '@/components/layout/Navbar';
 import { RouteMetadata } from '@/components/layout/RouteMetadata';
+import { GitEcosystemBackground } from '@/components/shared/GitEcosystemBackground';
 
 export function PortfolioLayout() {
   const location = useLocation();
@@ -24,6 +25,7 @@ export function PortfolioLayout() {
         {t('a11y.skipToContent')}
       </a>
       <RouteMetadata />
+      <GitEcosystemBackground />
       <Navbar />
       <main id="main-content" key={location.pathname} className="route-content">
         <Outlet />
