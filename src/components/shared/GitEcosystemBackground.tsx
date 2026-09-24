@@ -16,7 +16,6 @@ interface Node {
   text: string;
   color: string;
   size: number;
-  connections: Node[];
   IconComponent?: React.ElementType;
   domElement?: HTMLElement | null;
 }
@@ -133,7 +132,6 @@ export function GitEcosystemBackground() {
           text,
           color,
           size,
-          connections: [],
           IconComponent,
         });
       }
@@ -142,20 +140,6 @@ export function GitEcosystemBackground() {
       newNodes.forEach(n => {
         n.baseX = n.x;
         n.baseY = n.y;
-      });
-
-      // Create sparse connections (graph structure, same types only)
-      newNodes.forEach(node => {
-        const neighbors = [...newNodes]
-          .filter(n => n !== node && n.type === node.type)
-          .sort((a, b) => {
-            const da = Math.hypot(a.x - node.x, a.y - node.y);
-            const db = Math.hypot(b.x - node.x, b.y - node.y);
-            return da - db;
-          })
-          .slice(0, Math.floor(Math.random() * 2) + 1);
-        
-        node.connections = neighbors;
       });
 
       nodesRef.current = newNodes;
@@ -235,26 +219,7 @@ export function GitEcosystemBackground() {
         }
       });
 
-      // Draw connections
-      ctx.lineWidth = 1.5;
-      nodes.forEach(node => {
-        node.connections.forEach(target => {
-          const dist = Math.hypot(target.x - node.x, target.y - node.y);
-          if (dist < 300) { // increased connection distance
-            ctx.beginPath();
-            ctx.moveTo(node.x, node.y);
-            // Curving lines
-            const cpX = (node.x + target.x) / 2 + (target.y - node.y) * 0.15;
-            const cpY = (node.y + target.y) / 2 + (target.x - node.x) * 0.15;
-            ctx.quadraticCurveTo(cpX, cpY, target.x, target.y);
-            
-            // Fade out long connections
-            const alpha = Math.max(0, 1 - dist / 300) * 0.3; // weaker connections
-            ctx.strokeStyle = node.color.replace(/[\d.]+\)$/g, `${alpha})`);
-            ctx.stroke();
-          }
-        });
-      });
+
 
       // Draw nodes (except tech icons which are DOM elements)
       nodes.forEach(node => {
