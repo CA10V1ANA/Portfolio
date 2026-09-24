@@ -3,9 +3,6 @@ import type { Project } from '@/types';
 export const PERSONAL_INFO = {
   name: 'Caio de Oliveira Viana',
   firstName: 'Caio',
-  title: 'Full Stack Developer',
-  subtitle: 'Software Engineering Student',
-  location: 'Fortaleza, Ceará, Brasil',
   resumeUrl: '/Caio-Viana-Curriculo.pdf',
 };
 
@@ -18,63 +15,37 @@ export const CONTACT_LINKS = {
   email: {
     label: 'caiodeoliveira076@gmail.com',
     href: 'mailto:caiodeoliveira076@gmail.com',
-    ariaLabel: 'Enviar e-mail para Caio Viana',
   },
   whatsapp: {
     label: '+55 (85) 98111-2664',
     href: 'https://wa.me/5585981112664',
-    ariaLabel: 'Conversar com Caio Viana pelo WhatsApp',
   },
 } as const;
 
 export const GITHUB_USERNAME = 'CA10V1ANA';
 
-export const PAGES = [
-  {
-    label: 'Início',
-    path: '/',
-    title: 'Caio Viana — Desenvolvedor Full Stack',
-    description: 'Portfólio de Caio Viana, desenvolvedor Full Stack em Fortaleza, CE.',
-  },
-  {
-    label: 'Sobre',
-    path: '/sobre',
-    title: 'Sobre — Caio Viana',
-    description:
-      'Conheça a atuação, formação e abordagem de Caio Viana em desenvolvimento de software.',
-  },
-  {
-    label: 'Projetos',
-    path: '/projetos/js-boy',
-    title: 'Projetos — Caio Viana',
-    description: 'Projetos de software desenvolvidos por Caio Viana.',
-  },
-  {
-    label: 'Stack',
-    path: '/stack',
-    title: 'Stack — Caio Viana',
-    description: 'Tecnologias de frontend, backend, dados e ferramentas usadas por Caio Viana.',
-  },
-  {
-    label: 'Experiência',
-    path: '/experiencia',
-    title: 'Experiência — Caio Viana',
-    description: 'Experiência profissional e formação em Engenharia de Software de Caio Viana.',
-  },
-  {
-    label: 'Contato',
-    path: '/contato',
-    title: 'Contato — Caio Viana',
-    description:
-      'Entre em contato com Caio Viana para conversar sobre desenvolvimento de software.',
-  },
+/**
+ * Navigation link paths. Labels come from i18n `common:nav.*` keys.
+ */
+export const NAV_PATHS = [
+  { key: 'home', path: '/' },
+  { key: 'about', path: '/sobre' },
+  { key: 'projects', path: '/projetos/js-boy' },
+  { key: 'stack', path: '/stack' },
+  { key: 'experience', path: '/experiencia' },
+  { key: 'contact', path: '/contato' },
 ] as const;
 
-export const NAV_LINKS = PAGES.map(({ label, path }) => ({ label, href: path }));
-
-export const PROJECT_NAVIGATION_LABELS = {
-  previous: 'Projeto anterior',
-  next: 'Próximo projeto',
-} as const;
+/**
+ * SEO metadata keys per route. Used by RouteMetadata to look up translated
+ * title/description from the `pages` namespace.
+ */
+export const ROUTE_SEO_MAP: Record<string, { titleKey: string; descKey: string }> = {
+  '/': { titleKey: 'home.seo.title', descKey: 'home.seo.description' },
+  '/sobre': { titleKey: 'about.seo.title', descKey: 'about.seo.description' },
+  '/stack': { titleKey: 'stack:seo.title', descKey: 'stack:seo.description' },
+  '/experiencia': { titleKey: 'experience.seo.title', descKey: 'experience.seo.description' },
+  '/contato': { titleKey: 'contact.seo.title', descKey: 'contact.seo.description' },
+};
 
 export const PROJECT_PATH = (project: Pick<Project, 'id'>) => `/projetos/${project.id}`;
