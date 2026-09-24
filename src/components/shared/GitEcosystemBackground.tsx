@@ -12,7 +12,7 @@ interface Node {
   vx: number;
   vy: number;
   side?: 'left' | 'right';
-  type: 'commit' | 'hash' | 'branch' | 'tech';
+  type: 'branch' | 'tech';
   text: string;
   color: string;
   size: number;
@@ -40,10 +40,6 @@ const TECH_ICONS = [
 ];
 
 const BRANCH_NAMES = ['feat/frontend', 'feat/backend', 'data-layer', 'main'];
-
-function randomHash() {
-  return Math.random().toString(16).substring(2, 9);
-}
 
 export function GitEcosystemBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -102,20 +98,13 @@ export function GitEcosystemBackground() {
 
       for (let i = 0; i < nodeCount; i++) {
         const typeRand = Math.random();
-        let type: Node['type'] = 'commit';
+        let type: Node['type'] = 'branch';
         let text = '';
         let color = COLORS.purple;
         let size = 3;
         let IconComponent: React.ElementType | undefined;
 
-        if (typeRand < 0.3) {
-          type = 'commit';
-          size = Math.random() * 3 + 3;
-        } else if (typeRand < 0.5) {
-          type = 'hash';
-          text = randomHash();
-          color = COLORS.muted;
-        } else if (typeRand < 0.7) {
+        if (typeRand < 0.5) {
           type = 'branch';
           text = BRANCH_NAMES[Math.floor(Math.random() * BRANCH_NAMES.length)];
           color = COLORS.purple;
@@ -269,13 +258,8 @@ export function GitEcosystemBackground() {
 
       // Draw nodes (except tech icons which are DOM elements)
       nodes.forEach(node => {
-        if (node.type === 'commit') {
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
-          ctx.fillStyle = node.color;
-          ctx.fill();
-        } else if (node.type !== 'tech') {
-          ctx.font = node.type === 'branch' ? 'bold 13px monospace' : '12px monospace';
+        if (node.type !== 'tech') {
+          ctx.font = 'bold 13px monospace';
           ctx.fillStyle = node.color;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
