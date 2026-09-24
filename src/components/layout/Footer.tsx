@@ -1,11 +1,17 @@
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Mail, MessageCircle } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+import { Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CONTACT_LINKS, PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
 
-const SOCIALS = [
+const FOOTER_LINKS = [
   { name: 'GitHub', href: SOCIAL_LINKS.github, icon: FaGithub },
   { name: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: FaLinkedin },
+  { name: `E-mail: ${CONTACT_LINKS.email.label}`, href: CONTACT_LINKS.email.href, icon: Mail },
+  {
+    name: `WhatsApp: ${CONTACT_LINKS.whatsapp.label}`,
+    href: CONTACT_LINKS.whatsapp.href,
+    icon: FaWhatsapp,
+  },
 ];
 
 export function Footer() {
@@ -18,40 +24,20 @@ export function Footer() {
           <span className="text-gradient">{PERSONAL_INFO.name}</span>
         </Link>
 
-        <div className="flex items-center gap-3">
-          {SOCIALS.map((social) => (
+        <div className="flex items-center gap-3" role="group" aria-label="Redes sociais e contato">
+          {FOOTER_LINKS.map((social) => (
             <a
               key={social.name}
               href={social.href}
               target={social.href.startsWith('http') ? '_blank' : undefined}
-              rel={social.href.startsWith('http') ? 'noreferrer' : undefined}
+              rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               aria-label={social.name}
-              className="flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+              title={social.name}
+              className="flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              <social.icon className="h-5 w-5" />
+              <social.icon className="h-5 w-5" aria-hidden="true" />
             </a>
           ))}
-        </div>
-
-        <div className="flex w-full max-w-2xl flex-col items-stretch justify-center gap-3 sm:flex-row">
-          <a
-            href={CONTACT_LINKS.email.href}
-            aria-label={CONTACT_LINKS.email.ariaLabel}
-            className="inline-flex min-h-11 min-w-0 items-center justify-center gap-3 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
-          >
-            <Mail className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-            <span className="min-w-0 break-all sm:break-normal">{CONTACT_LINKS.email.label}</span>
-          </a>
-          <a
-            href={CONTACT_LINKS.whatsapp.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={CONTACT_LINKS.whatsapp.ariaLabel}
-            className="inline-flex min-h-11 items-center justify-center gap-3 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
-          >
-            <MessageCircle className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-            <span>{CONTACT_LINKS.whatsapp.label}</span>
-          </a>
         </div>
 
         <p className="text-sm text-muted-foreground">
