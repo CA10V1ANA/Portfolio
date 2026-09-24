@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useReducedMotion } from 'framer-motion';
 import { ENABLE_GIT_ECOSYSTEM_BACKGROUND } from '@/lib/constants';
+import { SiAngular, SiReact, SiTypescript, SiOpenjdk, SiSpringboot, SiPostgresql, SiDocker, SiGit } from 'react-icons/si';
 
 interface Node {
+  id: string;
   x: number;
   y: number;
   baseX: number;
@@ -15,24 +17,26 @@ interface Node {
   color: string;
   size: number;
   connections: Node[];
+  IconComponent?: React.ElementType;
+  domElement?: HTMLElement | null;
 }
 
 const COLORS = {
-  purple: 'rgba(139, 92, 246, 0.6)', // Frontend / Base
-  blue: 'rgba(59, 130, 246, 0.6)',   // Backend
-  green: 'rgba(16, 185, 129, 0.6)',  // Data
-  muted: 'rgba(107, 114, 128, 0.4)', // Hashes, binaries
+  purple: 'rgba(139, 92, 246, 1)', // Frontend / Base
+  blue: 'rgba(59, 130, 246, 1)',   // Backend
+  green: 'rgba(16, 185, 129, 1)',  // Data
+  muted: 'rgba(107, 114, 128, 0.8)', // Hashes, binaries
 };
 
-const TECH_LABELS = [
-  { text: 'React', color: COLORS.purple },
-  { text: 'Angular', color: COLORS.purple },
-  { text: 'TypeScript', color: COLORS.purple },
-  { text: 'Java', color: COLORS.blue },
-  { text: 'Spring', color: COLORS.blue },
-  { text: 'PostgreSQL', color: COLORS.green },
-  { text: 'Docker', color: COLORS.muted },
-  { text: 'Git', color: COLORS.muted },
+const TECH_ICONS = [
+  { Icon: SiReact, color: COLORS.purple, name: 'React' },
+  { Icon: SiAngular, color: COLORS.purple, name: 'Angular' },
+  { Icon: SiTypescript, color: COLORS.purple, name: 'TypeScript' },
+  { Icon: SiOpenjdk, color: COLORS.blue, name: 'Java' },
+  { Icon: SiSpringboot, color: COLORS.blue, name: 'Spring' },
+  { Icon: SiPostgresql, color: COLORS.green, name: 'PostgreSQL' },
+  { Icon: SiDocker, color: COLORS.muted, name: 'Docker' },
+  { Icon: SiGit, color: COLORS.muted, name: 'Git' },
 ];
 
 const BRANCH_NAMES = ['feat/frontend', 'feat/backend', 'data-layer', 'main'];
@@ -53,18 +57,23 @@ export function GitEcosystemBackground() {
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const targetOpacityRef = useRef(0);
   const currentOpacityRef = useRef(0);
+  
+  // State to hold tech nodes for React to render the SVG icons
+  const [techNodes, setTechNodes] = useState<Node[]>([]);
+  // We need to keep a mutable reference to all nodes for the animation loop
+  const nodesRef = useRef<Node[]>([]);
 
-  // Determine target opacity based on route
+  // Determine target opacity based on route (increased visibility)
   useEffect(() => {
-    let opacity = 0.15; // default low
+    let opacity = 0.6;
     const path = location.pathname;
     
-    if (path.startsWith('/projetos')) opacity = 0.15;
-    else if (path.startsWith('/stack')) opacity = 0.22;
-    else if (path.startsWith('/sobre')) opacity = 0.08;
-    else if (path.startsWith('/experiencia')) opacity = 0.12;
-    else if (path.startsWith('/contato')) opacity = 0.05;
-    else if (path === '/') opacity = 0.15;
+    if (path.startsWith('/projetos')) opacity = 0.5;
+    else if (path.startsWith('/stack')) opacity = 0.8;
+    else if (path.startsWith('/sobre')) opacity = 0.4;
+    else if (path.startsWith('/experiencia')) opacity = 0.5;
+    else if (path.startsWith('/contato')) opacity = 0.3;
+    else if (path === '/') opacity = 0.6;
 
     targetOpacityRef.current = opacity;
   }, [location.pathname]);
@@ -78,7 +87,6 @@ export function GitEcosystemBackground() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let nodes: Node[] = [];
     let isPaused = document.hidden;
     
     // Set up canvas sizing
@@ -94,63 +102,66 @@ export function GitEcosystemBackground() {
 
     const initNodes = () => {
       const isMobile = window.innerWidth < 768;
-      const nodeCount = isMobile ? Math.floor(Math.random() * 10) + 10 : Math.floor(Math.random() * 20) + 25; // 10-20 mobile, 25-45 desktop
-      nodes = [];
+      const nodeCount = isMobile ? Math.floor(Math.random() * 10) + 15 : Math.floor(Math.random() * 20) + 35; // increased count slightly
+      const newNodes: Node[] = [];
 
       for (let i = 0; i < nodeCount; i++) {
         const typeRand = Math.random();
         let type: Node['type'] = 'commit';
         let text = '';
         let color = COLORS.purple;
-        let size = 2;
+        let size = 3;
+        let IconComponent: React.ElementType | undefined;
 
-        if (typeRand < 0.3) {
+        if (typeRand < 0.25) {
           type = 'commit';
-          size = Math.random() * 2 + 2;
-        } else if (typeRand < 0.5) {
+          size = Math.random() * 3 + 3;
+        } else if (typeRand < 0.45) {
           type = 'hash';
           text = randomHash();
           color = COLORS.muted;
-        } else if (typeRand < 0.7) {
+        } else if (typeRand < 0.65) {
           type = 'binary';
           text = randomBinary();
           color = COLORS.muted;
-        } else if (typeRand < 0.85) {
+        } else if (typeRand < 0.8) {
           type = 'branch';
           text = BRANCH_NAMES[Math.floor(Math.random() * BRANCH_NAMES.length)];
           color = COLORS.purple;
         } else {
           type = 'tech';
-          const tech = TECH_LABELS[Math.floor(Math.random() * TECH_LABELS.length)];
-          text = tech.text;
+          const tech = TECH_ICONS[Math.floor(Math.random() * TECH_ICONS.length)];
+          text = tech.name;
           color = tech.color;
+          IconComponent = tech.Icon;
         }
 
-        nodes.push({
+        newNodes.push({
+          id: `node-${i}-${Date.now()}`,
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
           baseX: 0,
           baseY: 0,
-          vx: (Math.random() - 0.5) * 0.2, // Very slow natural drift
-          vy: (Math.random() - 0.5) * 0.2,
+          vx: (Math.random() - 0.5) * 0.3, // slightly faster
+          vy: (Math.random() - 0.5) * 0.3,
           type,
           text,
           color,
           size,
           connections: [],
+          IconComponent,
         });
       }
 
       // Initialize baseX/Y after generating
-      nodes.forEach(n => {
+      newNodes.forEach(n => {
         n.baseX = n.x;
         n.baseY = n.y;
       });
 
       // Create sparse connections (graph structure)
-      nodes.forEach(node => {
-        // Connect to 1-2 nearest nodes to form branches
-        const neighbors = [...nodes]
+      newNodes.forEach(node => {
+        const neighbors = [...newNodes]
           .filter(n => n !== node)
           .sort((a, b) => {
             const da = Math.hypot(a.x - node.x, a.y - node.y);
@@ -161,6 +172,9 @@ export function GitEcosystemBackground() {
         
         node.connections = neighbors;
       });
+
+      nodesRef.current = newNodes;
+      setTechNodes(newNodes.filter(n => n.type === 'tech'));
     };
 
     const update = () => {
@@ -168,6 +182,7 @@ export function GitEcosystemBackground() {
 
       const width = window.innerWidth;
       const height = window.innerHeight;
+      const nodes = nodesRef.current;
       
       ctx.clearRect(0, 0, width, height);
 
@@ -177,8 +192,8 @@ export function GitEcosystemBackground() {
 
       ctx.globalAlpha = currentOpacityRef.current;
 
-      const mouseRadius = width < 768 ? 0 : 140; // no interaction on mobile
-      const maxDisplacement = 30;
+      const mouseRadius = width < 768 ? 0 : 160; 
+      const maxDisplacement = 40;
 
       // Update positions
       nodes.forEach(node => {
@@ -218,38 +233,45 @@ export function GitEcosystemBackground() {
           node.x = node.baseX;
           node.y = node.baseY;
         }
+        
+        // Update DOM element if it exists (tech icons)
+        if (node.type === 'tech' && node.domElement) {
+          // Center the icon by offsetting by -12px (assuming 24x24 icon)
+          node.domElement.style.transform = `translate3d(${node.x - 12}px, ${node.y - 12}px, 0)`;
+          node.domElement.style.opacity = currentOpacityRef.current.toString();
+        }
       });
 
       // Draw connections
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 1.5;
       nodes.forEach(node => {
         node.connections.forEach(target => {
           const dist = Math.hypot(target.x - node.x, target.y - node.y);
-          if (dist < 250) {
+          if (dist < 300) { // increased connection distance
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             // Curving lines
-            const cpX = (node.x + target.x) / 2 + (target.y - node.y) * 0.1;
-            const cpY = (node.y + target.y) / 2 + (target.x - node.x) * 0.1;
+            const cpX = (node.x + target.x) / 2 + (target.y - node.y) * 0.15;
+            const cpY = (node.y + target.y) / 2 + (target.x - node.x) * 0.15;
             ctx.quadraticCurveTo(cpX, cpY, target.x, target.y);
             
             // Fade out long connections
-            const alpha = Math.max(0, 1 - dist / 250) * 0.5;
+            const alpha = Math.max(0, 1 - dist / 300) * 0.6; // stronger connections
             ctx.strokeStyle = node.color.replace(/[\d.]+\)$/g, `${alpha})`);
             ctx.stroke();
           }
         });
       });
 
-      // Draw nodes
+      // Draw nodes (except tech icons which are DOM elements)
       nodes.forEach(node => {
         if (node.type === 'commit') {
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
           ctx.fillStyle = node.color;
           ctx.fill();
-        } else {
-          ctx.font = node.type === 'branch' ? 'bold 11px monospace' : '10px monospace';
+        } else if (node.type !== 'tech') {
+          ctx.font = node.type === 'branch' ? 'bold 13px monospace' : '12px monospace';
           ctx.fillStyle = node.color;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
@@ -267,7 +289,6 @@ export function GitEcosystemBackground() {
     const handleVisibility = () => {
       isPaused = document.hidden;
       if (!isPaused) {
-        // Resume
         animationFrameId = requestAnimationFrame(update);
       }
     };
@@ -290,10 +311,28 @@ export function GitEcosystemBackground() {
   if (!ENABLE_GIT_ECOSYSTEM_BACKGROUND) return null;
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 -z-10 pointer-events-none"
-      aria-hidden="true"
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 -z-10 pointer-events-none"
+        aria-hidden="true"
+      />
+      <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+        {techNodes.map(node => {
+          const Icon = node.IconComponent;
+          if (!Icon) return null;
+          return (
+            <div
+              key={node.id}
+              ref={el => { node.domElement = el; }}
+              className="absolute left-0 top-0 will-change-transform drop-shadow-md"
+              style={{ color: node.color, opacity: 0 }}
+            >
+              <Icon size={28} />
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
