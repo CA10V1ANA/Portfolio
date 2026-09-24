@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Footer } from '@/components/layout/Footer';
 import { Navbar } from '@/components/layout/Navbar';
 import { RouteMetadata } from '@/components/layout/RouteMetadata';
 
 export function PortfolioLayout() {
   const location = useLocation();
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -19,7 +21,7 @@ export function PortfolioLayout() {
   return (
     <>
       <a className="skip-link" href="#main-content">
-        Pular para o conteúdo
+        {t('a11y.skipToContent')}
       </a>
       <RouteMetadata />
       <Navbar />

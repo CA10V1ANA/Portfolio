@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ThemeProvider } from '@/context/ThemeProvider';
 import { PortfolioLayout } from '@/components/layout/PortfolioLayout';
 import { Hero } from '@/components/sections/Hero';
@@ -12,7 +13,8 @@ const Experience = lazy(() => import('@/components/sections/Experience').then((m
 const Contact = lazy(() => import('@/components/sections/Contact').then((m) => ({ default: m.Contact })));
 
 function PageFallback() {
-  return <div className="section-container page-section" role="status">Carregando página…</div>;
+  const { t } = useTranslation('common');
+  return <div className="section-container page-section" role="status">{t('status.loading')}</div>;
 }
 
 function App() {

@@ -1,22 +1,26 @@
 import { ArrowUpRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
 
 export function Contact() {
+  const { t } = useTranslation('pages');
+  const { t: tc } = useTranslation('common');
+
   return (
     <section
       id="contact"
       className="section-container page-section min-h-[65svh] border-t border-border"
       aria-labelledby="contact-title"
     >
-      <p className="eyebrow">06 / Contato</p>
+      <p className="eyebrow">{t('contact.eyebrow')}</p>
       <h1
         id="contact-title"
         className="max-w-3xl font-display text-4xl font-semibold tracking-tight sm:text-6xl"
       >
-        Vamos construir algo útil.
+        {t('contact.title')}
       </h1>
       <p className="mt-7 max-w-xl text-lg leading-7 text-muted-foreground">
-        Tem uma oportunidade, projeto ou quer conversar sobre desenvolvimento? Vamos nos conectar.
+        {t('contact.description')}
       </p>
       <div className="mt-10 flex flex-wrap gap-3">
         <a
@@ -24,7 +28,7 @@ export function Contact() {
           download
           className="inline-flex min-h-12 items-center gap-2 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-secondary"
         >
-          Baixar currículo <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          {tc('actions.downloadResume')} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
         </a>
         <a
           href={SOCIAL_LINKS.linkedin}

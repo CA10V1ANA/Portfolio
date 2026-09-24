@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { House, Menu, Moon, Sun, X } from 'lucide-react';
-import { NAV_LINKS, PERSONAL_INFO } from '@/lib/constants';
+import { useTranslation } from 'react-i18next';
+import { NAV_PATHS, PERSONAL_INFO } from '@/lib/constants';
 import { useTheme } from '@/hooks/useTheme';
 import { cn } from '@/lib/utils';
-import { CommandPalette } from '@/components/navigation/CommandPalette';
+import { LanguageSelector } from '@/components/LanguageSelector';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 24);
@@ -55,7 +57,7 @@ export function Navbar() {
         <Link
           to="/"
           className="flex items-center gap-3 font-display text-sm font-bold tracking-tight sm:text-base"
-          aria-label="Caio Viana — início"
+          aria-label={t('a11y.homeLink')}
           onClick={() => setIsOpen(false)}
         >
           <span className="font-mono text-lg text-accent" aria-hidden="true">
@@ -64,34 +66,34 @@ export function Navbar() {
           <span>{PERSONAL_INFO.firstName} Viana</span>
         </Link>
 
-        <nav className="hidden items-center gap-2 lg:flex" aria-label="Navegação principal">
-          {NAV_LINKS.map((link) => (
+        <nav className="hidden items-center gap-2 lg:flex" aria-label={t('a11y.mainNav')}>
+          {NAV_PATHS.map((link) => (
             <NavLink
-              key={link.href}
-              to={link.href}
-              className={cn('inline-flex items-center gap-1.5', linkClass(link.href))}
-              aria-current={isActive(link.href) ? 'page' : undefined}
-              aria-label={link.href === '/' ? 'Ir para o início' : undefined}
+              key={link.path}
+              to={link.path}
+              className={cn('inline-flex items-center gap-1.5', linkClass(link.path))}
+              aria-current={isActive(link.path) ? 'page' : undefined}
+              aria-label={link.key === 'home' ? t('a11y.goHome') : undefined}
             >
-              {link.href === '/' && <House className="h-3.5 w-3.5" aria-hidden="true" />}
-              {link.label}
+              {link.key === 'home' && <House className="h-3.5 w-3.5" aria-hidden="true" />}
+              {t(`nav.${link.key}`)}
             </NavLink>
           ))}
         </nav>
 
         <div className="flex items-center gap-3">
-          <CommandPalette />
+          <LanguageSelector />
           <button
             type="button"
             onClick={toggleTheme}
-            aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
+            aria-label={theme === 'dark' ? t('theme.light') : t('theme.dark')}
             className="flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground"
           >
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
           <button
             type="button"
-            aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-label={isOpen ? t('a11y.closeMenu') : t('a11y.openMenu')}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsOpen((value) => !value)}
@@ -104,20 +106,20 @@ export function Navbar() {
       {isOpen && (
         <nav
           id="mobile-navigation"
-          aria-label="Navegação móvel"
+          aria-label={t('a11y.mobileNav')}
           className="border-t border-border bg-background px-6 pb-5 pt-3 lg:hidden"
         >
-          {NAV_LINKS.map((link) => (
+          {NAV_PATHS.map((link) => (
             <NavLink
-              key={link.href}
-              to={link.href}
+              key={link.path}
+              to={link.path}
               onClick={() => setIsOpen(false)}
-              className={cn('flex min-h-11 items-center gap-2 py-3', linkClass(link.href))}
-              aria-current={isActive(link.href) ? 'page' : undefined}
-              aria-label={link.href === '/' ? 'Ir para o início' : undefined}
+              className={cn('flex min-h-11 items-center gap-2 py-3', linkClass(link.path))}
+              aria-current={isActive(link.path) ? 'page' : undefined}
+              aria-label={link.key === 'home' ? t('a11y.goHome') : undefined}
             >
-              {link.href === '/' && <House className="h-4 w-4" aria-hidden="true" />}
-              {link.label}
+              {link.key === 'home' && <House className="h-4 w-4" aria-hidden="true" />}
+              {t(`nav.${link.key}`)}
             </NavLink>
           ))}
         </nav>

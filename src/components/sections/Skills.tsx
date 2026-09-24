@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { GitBranch } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   BRANCHES,
-  STACK_COPY,
   TECHNOLOGIES,
   type PortfolioTechnology,
   type StackBranch,
@@ -20,8 +20,10 @@ export function Skills() {
   const [focused, setFocused] = useState(false);
   const [hidden, setHidden] = useState(document.hidden);
   const reducedMotion = useReducedMotion();
+  const { t } = useTranslation('stack');
+  const { t: tc } = useTranslation('common');
   const active = TECHNOLOGIES[activeIndex];
-  const branch = BRANCHES.find((item) => item.id === active.branch)!;
+  const activeBranch = BRANCHES.find((item) => item.id === active.branch)!;
   const activeBranchIndex = BRANCHES.findIndex((item) => item.id === active.branch);
   const branchItems = useMemo(
     () => TECHNOLOGIES.filter((item) => item.branch === active.branch),
@@ -57,6 +59,7 @@ export function Skills() {
   const orbitNodes = [previous, active, next];
   const paused = Boolean(reducedMotion || hidden);
   const branchStart = 125 + activeBranchIndex * 250;
+  const branchLabel = t(`branches.${active.branch}`);
 
   return (
     <section
@@ -66,12 +69,12 @@ export function Skills() {
     >
       <div className="section-container">
         <div className="mb-12 max-w-3xl">
-          <p className="eyebrow">{STACK_COPY.eyebrow}</p>
+          <p className="eyebrow">{t('eyebrow')}</p>
           <h1 id="stack-title" className="page-title">
-            {STACK_COPY.title}
+            {t('title')}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            {STACK_COPY.introduction}
+            {t('introduction')}
           </p>
         </div>
 
@@ -85,11 +88,11 @@ export function Skills() {
               setFocused(false);
           }}
         >
-          <div className="stack-main" aria-label={STACK_COPY.mainBranch}>
+          <div className="stack-main" aria-label={t('mainBranch')}>
             <span className="stack-main-mark">
               <GitBranch size={16} aria-hidden="true" /> main
             </span>
-            <strong>{STACK_COPY.mainTitle}</strong>
+            <strong>{t('mainTitle')}</strong>
             <span className="stack-merge" aria-hidden="true">
               merge
             </span>
@@ -107,7 +110,7 @@ export function Skills() {
             <path d="M500 0 C500 55 875 30 875 145" />
           </svg>
 
-          <div className="stack-branches-list" role="group" aria-label={STACK_COPY.branchSelector}>
+          <div className="stack-branches-list" role="group" aria-label={t('branchSelector')}>
             {BRANCHES.map((item) => {
               const Icon = item.icon;
               const isActive = item.id === active.branch;
@@ -120,7 +123,7 @@ export function Skills() {
                   className={cn('stack-branch', isActive && 'is-active')}
                 >
                   <Icon size={15} aria-hidden="true" />
-                  <span>{item.label}</span>
+                  <span>{t(`branches.${item.id}`)}</span>
                   <code>{item.gitLabel}</code>
                 </button>
               );
@@ -141,7 +144,7 @@ export function Skills() {
               className="stack-orbit"
               key={`${active.branch}-${active.id}`}
               role="group"
-              aria-label={`${STACK_COPY.technologySelector}: ${branch.label}`}
+              aria-label={`${t('technologySelector')}: ${branchLabel}`}
             >
               <svg
                 className="stack-orbit-cable"
@@ -160,10 +163,10 @@ export function Skills() {
                     type="button"
                     className={cn('stack-node', isActive && 'is-head')}
                     onClick={() => select(technologyIndex(technology))}
-                    aria-label={`Selecionar ${technology.name}`}
+                    aria-label={tc('a11y.selectTech', { name: technology.name })}
                     aria-pressed={isActive}
                   >
-                    {isActive && <span className="head-label">● {STACK_COPY.head}</span>}
+                    {isActive && <span className="head-label">● {t('head')}</span>}
                     <span className="stack-node-icon">
                       <Icon aria-hidden="true" />
                     </span>
@@ -174,16 +177,16 @@ export function Skills() {
             </div>
 
             <div className="stack-active-copy" aria-live="polite">
-              <p className="eyebrow">{active.branchLabel} → main</p>
+              <p className="eyebrow">{activeBranch.gitLabel} → main</p>
               <h2>{active.name}</h2>
-              <p>{branch.label}</p>
-              <p className="stack-context">{active.context}</p>
+              <p>{branchLabel}</p>
+              <p className="stack-context">{t(`tech.${active.id}`)}</p>
             </div>
 
             <div
               className="stack-tech-list"
               role="group"
-              aria-label={`${STACK_COPY.technologySelector}: ${branch.label}`}
+              aria-label={`${t('technologySelector')}: ${branchLabel}`}
             >
               {branchItems.map((technology) => (
                 <button

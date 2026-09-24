@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { PROJECTS } from '@/data/projects';
-import { PROJECT_NAVIGATION_LABELS, PROJECT_PATH, SOCIAL_LINKS } from '@/lib/constants';
+import { useTranslation } from 'react-i18next';
+import { PROJECTS, PROJECT_I18N_MAP } from '@/data/projects';
+import { PROJECT_PATH, SOCIAL_LINKS } from '@/lib/constants';
 
 const FEATURED_PROJECTS = PROJECTS.filter((project) => project.featured).slice(0, 4);
 
@@ -12,6 +13,8 @@ export function ProjectPage() {
   const navigate = useNavigate();
   const index = projects.findIndex((project) => project.id === slug);
   const project = projects[index];
+  const { t: tc } = useTranslation('common');
+  const { t: tp } = useTranslation('projects');
 
   useEffect(() => {
     if (index < 0) return;
@@ -32,17 +35,18 @@ export function ProjectPage() {
   if (!project) {
     return (
       <section className="section-container page-section" aria-labelledby="missing-project-title">
-        <p className="eyebrow">Projetos</p>
+        <p className="eyebrow">{tc('projects.label')}</p>
         <h1 id="missing-project-title" className="page-title">
-          Projeto não encontrado
+          {tc('error.projectNotFound')}
         </h1>
         <Link className="text-link mt-8 inline-flex" to="/projetos/js-boy">
-          Abrir JS BOY
+          {tc('actions.openJsBoy')}
         </Link>
       </section>
     );
   }
 
+  const i18nKey = PROJECT_I18N_MAP[project.id] ?? project.id;
   const previous = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
 
@@ -51,20 +55,19 @@ export function ProjectPage() {
       <div className="project-toolbar">
         <div className="flex items-center gap-4">
           <p className="eyebrow">
-            Projetos / {String(index + 1).padStart(2, '0')} de{' '}
-            {String(projects.length).padStart(2, '0')}
+            {tc('projects.label')} / {tc('projects.counter', { current: String(index + 1).padStart(2, '0'), total: String(projects.length).padStart(2, '0') })}
           </p>
-          <nav className="project-pager" aria-label="Navegação entre projetos">
+          <nav className="project-pager" aria-label={tc('a11y.projectNav')}>
             <Link
               to={PROJECT_PATH(previous)}
-              aria-label={PROJECT_NAVIGATION_LABELS.previous}
+              aria-label={tc('actions.previousProject')}
               title={previous.title}
             >
               <ChevronLeft aria-hidden="true" />
             </Link>
             <Link
               to={PROJECT_PATH(next)}
-              aria-label={PROJECT_NAVIGATION_LABELS.next}
+              aria-label={tc('actions.nextProject')}
               title={next.title}
             >
               <ChevronRight aria-hidden="true" />
@@ -73,7 +76,7 @@ export function ProjectPage() {
         </div>
         <span className="status-chip">
           <span aria-hidden="true" />
-          {project.statusLabel}
+          {tp(`${i18nKey}.statusLabel`)}
         </span>
       </div>
       <div
@@ -84,30 +87,30 @@ export function ProjectPage() {
         }
       >
         <div>
-          <p className="eyebrow">{project.context ?? project.category}</p>
+          <p className="eyebrow">{tp(`${i18nKey}.context`, { defaultValue: tp(`${i18nKey}.category`) })}</p>
           <h1 id="project-title" className="page-title">
             {project.title}
           </h1>
-          <p className="mt-3 text-xl text-accent">{project.subtitle}</p>
+          <p className="mt-3 text-xl text-accent">{tp(`${i18nKey}.subtitle`)}</p>
           <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground">
-            {project.description}
+            {tp(`${i18nKey}.description`)}
           </p>
-          {project.problem && (
+          {tp(`${i18nKey}.problem`, { defaultValue: '' }) && (
             <p className="mt-7 max-w-2xl leading-7 text-muted-foreground">
-              <strong className="text-foreground">Problema. </strong>
-              {project.problem}
+              <strong className="text-foreground">{tc('projects.problem')} </strong>
+              {tp(`${i18nKey}.problem`)}
             </p>
           )}
-          {project.contribution && (
+          {tp(`${i18nKey}.contribution`, { defaultValue: '' }) && (
             <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">
-              <strong className="text-foreground">Minha atuação. </strong>
-              {project.contribution}
+              <strong className="text-foreground">{tc('projects.contribution')} </strong>
+              {tp(`${i18nKey}.contribution`)}
             </p>
           )}
           <h2 className="mt-10 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-            Tecnologias
+            {tc('projects.technologies')}
           </h2>
-          <ul className="mt-4 flex flex-wrap gap-2" aria-label={`Tecnologias de ${project.title}`}>
+          <ul className="mt-4 flex flex-wrap gap-2" aria-label={tc('a11y.techOf', { name: project.title })}>
             {project.technologies.map((technology) => (
               <li className="tech-chip" key={technology}>
                 {technology}
@@ -117,22 +120,22 @@ export function ProjectPage() {
           <div className="mt-10 flex flex-wrap gap-x-7 gap-y-4">
             {project.demoUrl && (
               <a className="text-link" href={project.demoUrl} target="_blank" rel="noreferrer">
-                Ver aplicação <ArrowUpRight size={16} aria-hidden="true" />
+                {tc('actions.viewProject')} <ArrowUpRight size={16} aria-hidden="true" />
               </a>
             )}
             {project.githubUrl && (
               <a className="text-link" href={project.githubUrl} target="_blank" rel="noreferrer">
-                Ver código <ArrowUpRight size={16} aria-hidden="true" />
+                {tc('actions.viewCode')} <ArrowUpRight size={16} aria-hidden="true" />
               </a>
             )}
             {project.docsUrl && (
               <a className="text-link" href={project.docsUrl} target="_blank" rel="noreferrer">
-                Documentação <ArrowUpRight size={16} aria-hidden="true" />
+                {tc('actions.viewDocs')} <ArrowUpRight size={16} aria-hidden="true" />
               </a>
             )}
             {project.id === 'devpilot' && (
               <a className="text-link" href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer">
-                Explorar GitHub <ArrowUpRight size={16} aria-hidden="true" />
+                {tc('actions.exploreGithub')} <ArrowUpRight size={16} aria-hidden="true" />
               </a>
             )}
           </div>

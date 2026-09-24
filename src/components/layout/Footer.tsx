@@ -1,21 +1,23 @@
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { CONTACT_LINKS, PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
-
-const FOOTER_LINKS = [
-  { name: 'GitHub', href: SOCIAL_LINKS.github, icon: FaGithub },
-  { name: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: FaLinkedin },
-  { name: `E-mail: ${CONTACT_LINKS.email.label}`, href: CONTACT_LINKS.email.href, icon: Mail },
-  {
-    name: `WhatsApp: ${CONTACT_LINKS.whatsapp.label}`,
-    href: CONTACT_LINKS.whatsapp.href,
-    icon: FaWhatsapp,
-  },
-];
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { t } = useTranslation('common');
+
+  const FOOTER_LINKS = [
+    { name: 'GitHub', href: SOCIAL_LINKS.github, icon: FaGithub },
+    { name: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: FaLinkedin },
+    { name: t('footer.emailLabel', { email: CONTACT_LINKS.email.label }), href: CONTACT_LINKS.email.href, icon: Mail },
+    {
+      name: t('footer.whatsappLabel', { phone: CONTACT_LINKS.whatsapp.label }),
+      href: CONTACT_LINKS.whatsapp.href,
+      icon: FaWhatsapp,
+    },
+  ];
 
   return (
     <footer className="border-t border-border">
@@ -24,7 +26,7 @@ export function Footer() {
           <span className="text-gradient">{PERSONAL_INFO.name}</span>
         </Link>
 
-        <div className="flex items-center gap-3" role="group" aria-label="Redes sociais e contato">
+        <div className="flex items-center gap-3" role="group" aria-label={t('footer.socialLabel')}>
           {FOOTER_LINKS.map((social) => (
             <a
               key={social.name}
@@ -41,10 +43,10 @@ export function Footer() {
         </div>
 
         <p className="text-sm text-muted-foreground">
-          &copy; {year} {PERSONAL_INFO.name}. Todos os direitos reservados.
+          {t('footer.copyright', { year, name: PERSONAL_INFO.name })}
         </p>
         <p className="text-xs text-muted-foreground/70">
-          Desenvolvido com React, TypeScript e Tailwind CSS.
+          {t('footer.builtWith')}
         </p>
       </div>
     </footer>
