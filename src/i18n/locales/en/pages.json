@@ -25,6 +25,11 @@
       "description": "Learn about Caio Viana's approach, background and work in software development."
     }
   },
+  "projectsSection": {
+    "eyebrow": "03 / Projects",
+    "title": "Software grounded in real context.",
+    "description": "A selection of products, studies and solutions built from the problem through to the interface."
+  },
   "experience": {
     "eyebrow": "05 / Background",
     "title": "Experience and education",

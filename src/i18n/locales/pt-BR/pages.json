@@ -25,6 +25,11 @@
       "description": "Conheça a atuação, formação e abordagem de Caio Viana em desenvolvimento de software."
     }
   },
+  "projectsSection": {
+    "eyebrow": "03 / Projetos",
+    "title": "Software com contexto real.",
+    "description": "Uma seleção de produtos, estudos e soluções construídas do problema à interface."
+  },
   "experience": {
     "eyebrow": "05 / Trajetória",
     "title": "Experiência e formação",

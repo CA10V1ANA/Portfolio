@@ -11,7 +11,8 @@ export function LanguageSelector() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const currentLocale = SUPPORTED_LOCALES.find((l) => l.code === i18n.language) ?? SUPPORTED_LOCALES[0];
+  const currentLocale =
+    SUPPORTED_LOCALES.find((l) => l.code === i18n.language) ?? SUPPORTED_LOCALES[0];
 
   const changeLanguage = useCallback(
     (locale: SupportedLocale) => {
@@ -76,11 +77,12 @@ export function LanguageSelector() {
   }, [open, i18n.language]);
 
   return (
-    <div ref={containerRef} className="relative" onKeyDown={onKeyDown}>
+    <div ref={containerRef} className="relative">
       <button
         ref={buttonRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
+        onKeyDown={onKeyDown}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={t('language.label')}
@@ -98,7 +100,9 @@ export function LanguageSelector() {
         <div
           ref={menuRef}
           role="menu"
+          tabIndex={-1}
           aria-label={t('language.label')}
+          onKeyDown={onKeyDown}
           className="absolute right-0 top-full z-50 mt-2 min-w-[12rem] overflow-hidden rounded-lg border border-border bg-card shadow-xl"
         >
           {SUPPORTED_LOCALES.map((locale) => {
@@ -112,7 +116,7 @@ export function LanguageSelector() {
                 onClick={() => changeLanguage(locale.code)}
                 className={cn(
                   'flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition-colors hover:bg-primary/10 focus-visible:bg-primary/10 focus-visible:outline-none',
-                  isSelected && 'text-accent font-medium',
+                  isSelected && 'font-medium text-accent',
                 )}
               >
                 <span className="w-6 font-mono text-xs font-semibold">{locale.shortCode}</span>

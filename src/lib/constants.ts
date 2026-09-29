@@ -30,12 +30,12 @@ export const GITHUB_USERNAME = 'CA10V1ANA';
  * Navigation link paths. Labels come from i18n `common:nav.*` keys.
  */
 export const NAV_PATHS = [
-  { key: 'home', path: '/' },
-  { key: 'about', path: '/sobre' },
-  { key: 'projects', path: '/projetos/js-boy' },
-  { key: 'stack', path: '/stack' },
-  { key: 'experience', path: '/experiencia' },
-  { key: 'contact', path: '/contato' },
+  { key: 'home', path: '/', section: 'hero' },
+  { key: 'about', path: '/#about', section: 'about' },
+  { key: 'projects', path: '/#projects', section: 'projects' },
+  { key: 'stack', path: '/#skills', section: 'skills' },
+  { key: 'experience', path: '/#experience', section: 'experience' },
+  { key: 'contact', path: '/#contact', section: 'contact' },
 ] as const;
 
 /**

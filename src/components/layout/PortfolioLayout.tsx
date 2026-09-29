@@ -11,13 +11,22 @@ export function PortfolioLayout() {
   const { t } = useTranslation('common');
 
   useEffect(() => {
+    const sectionId = location.hash.replace('#', '');
+
+    if (location.pathname === '/' && sectionId) {
+      const frame = window.requestAnimationFrame(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+
     window.scrollTo({ top: 0, behavior: 'instant' });
     const heading = document.querySelector<HTMLElement>('main h1');
     if (heading) {
       heading.tabIndex = -1;
       heading.focus({ preventScroll: true });
     }
-  }, [location.pathname]);
+  }, [location.hash, location.pathname]);
 
   return (
     <>

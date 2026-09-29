@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { House, Menu, Moon, Sun, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { NAV_PATHS, PERSONAL_INFO } from '@/lib/constants';
@@ -10,16 +10,40 @@ import { LanguageSelector } from '@/components/LanguageSelector';
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('hero');
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation('common');
 
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 24);
+    const update = () => {
+      setScrolled(window.scrollY > 24);
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0);
+    };
     update();
     window.addEventListener('scroll', update, { passive: true });
     return () => window.removeEventListener('scroll', update);
   }, []);
+
+  useEffect(() => {
+    if (location.pathname !== '/') return;
+    const sections = NAV_PATHS.map((link) => document.getElementById(link.section)).filter(
+      (section): section is HTMLElement => Boolean(section),
+    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target.id) setActiveSection(visible.target.id);
+      },
+      { rootMargin: '-28% 0px -58% 0px', threshold: [0, 0.2, 0.6] },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -30,16 +54,16 @@ export function Navbar() {
     return () => window.removeEventListener('keydown', onEscape);
   }, [isOpen]);
 
-  useEffect(() => setIsOpen(false), [location.pathname]);
+  useEffect(() => setIsOpen(false), [location.hash, location.pathname]);
 
-  const isActive = (href: string) =>
-    href === '/projetos/js-boy'
-      ? location.pathname.startsWith('/projetos')
-      : location.pathname === href;
-  const linkClass = (href: string) =>
+  const isActive = (section: string) =>
+    location.pathname === '/'
+      ? activeSection === section
+      : location.pathname.startsWith('/projetos') && section === 'projects';
+  const linkClass = (section: string) =>
     cn(
       'rounded-sm px-2 py-2 text-sm transition-colors hover:text-foreground',
-      isActive(href)
+      isActive(section)
         ? 'text-foreground font-semibold after:ml-2 after:text-accent after:content-["•"]'
         : 'text-muted-foreground',
     );
@@ -68,16 +92,16 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-2 lg:flex" aria-label={t('a11y.mainNav')}>
           {NAV_PATHS.map((link) => (
-            <NavLink
+            <Link
               key={link.path}
               to={link.path}
-              className={cn('inline-flex items-center gap-1.5', linkClass(link.path))}
-              aria-current={isActive(link.path) ? 'page' : undefined}
+              className={cn('inline-flex items-center gap-1.5', linkClass(link.section))}
+              aria-current={isActive(link.section) ? 'location' : undefined}
               aria-label={link.key === 'home' ? t('a11y.goHome') : undefined}
             >
               {link.key === 'home' && <House className="h-3.5 w-3.5" aria-hidden="true" />}
               {t(`nav.${link.key}`)}
-            </NavLink>
+            </Link>
           ))}
         </nav>
 
@@ -110,20 +134,25 @@ export function Navbar() {
           className="border-t border-border bg-background px-6 pb-5 pt-3 lg:hidden"
         >
           {NAV_PATHS.map((link) => (
-            <NavLink
+            <Link
               key={link.path}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className={cn('flex min-h-11 items-center gap-2 py-3', linkClass(link.path))}
-              aria-current={isActive(link.path) ? 'page' : undefined}
+              className={cn('flex min-h-11 items-center gap-2 py-3', linkClass(link.section))}
+              aria-current={isActive(link.section) ? 'location' : undefined}
               aria-label={link.key === 'home' ? t('a11y.goHome') : undefined}
             >
               {link.key === 'home' && <House className="h-4 w-4" aria-hidden="true" />}
               {t(`nav.${link.key}`)}
-            </NavLink>
+            </Link>
           ))}
         </nav>
       )}
+      <span
+        className="scroll-progress"
+        aria-hidden="true"
+        style={{ transform: `scaleX(${scrollProgress})` }}
+      />
     </header>
   );
 }

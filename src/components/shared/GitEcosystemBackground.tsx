@@ -2,13 +2,23 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useReducedMotion } from 'framer-motion';
 import { ENABLE_GIT_ECOSYSTEM_BACKGROUND } from '@/lib/constants';
-import { SiAngular, SiReact, SiTypescript, SiOpenjdk, SiSpringboot, SiPostgresql, SiDocker, SiGit } from 'react-icons/si';
+import {
+  SiAngular,
+  SiReact,
+  SiTypescript,
+  SiOpenjdk,
+  SiSpringboot,
+  SiPostgresql,
+  SiDocker,
+  SiGit,
+} from 'react-icons/si';
 
 interface Node {
   id: string;
   x: number;
   y: number;
   baseX: number;
+  baseY: number;
   vx: number;
   vy: number;
   side?: 'left' | 'right';
@@ -22,8 +32,8 @@ interface Node {
 
 const COLORS = {
   purple: 'rgba(139, 92, 246, 1)', // Frontend / Base
-  blue: 'rgba(59, 130, 246, 1)',   // Backend
-  green: 'rgba(16, 185, 129, 1)',  // Data
+  blue: 'rgba(59, 130, 246, 1)', // Backend
+  green: 'rgba(16, 185, 129, 1)', // Data
   muted: 'rgba(107, 114, 128, 0.8)', // Hashes, binaries
 };
 
@@ -47,7 +57,7 @@ export function GitEcosystemBackground() {
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const targetOpacityRef = useRef(0);
   const currentOpacityRef = useRef(0);
-  
+
   // State to hold tech nodes for React to render the SVG icons
   const [techNodes, setTechNodes] = useState<Node[]>([]);
   // We need to keep a mutable reference to all nodes for the animation loop
@@ -57,12 +67,17 @@ export function GitEcosystemBackground() {
   useEffect(() => {
     let opacity = 0.15; // default
     const path = location.pathname;
-    
-    if (path.startsWith('/projetos')) opacity = 0.15; // baixa
-    else if (path.startsWith('/stack')) opacity = 0.22; // média
-    else if (path.startsWith('/sobre')) opacity = 0.10; // muito baixa
-    else if (path.startsWith('/experiencia')) opacity = 0.15; // baixa
-    else if (path.startsWith('/contato')) opacity = 0.08; // mínima
+
+    if (path.startsWith('/projetos'))
+      opacity = 0.15; // baixa
+    else if (path.startsWith('/stack'))
+      opacity = 0.22; // média
+    else if (path.startsWith('/sobre'))
+      opacity = 0.1; // muito baixa
+    else if (path.startsWith('/experiencia'))
+      opacity = 0.15; // baixa
+    else if (path.startsWith('/contato'))
+      opacity = 0.08; // mínima
     else if (path === '/') opacity = 0.15; // baixa
 
     targetOpacityRef.current = opacity;
@@ -78,7 +93,7 @@ export function GitEcosystemBackground() {
 
     let animationFrameId: number;
     let isPaused = document.hidden;
-    
+
     // Set up canvas sizing
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
@@ -92,7 +107,9 @@ export function GitEcosystemBackground() {
 
     const initNodes = () => {
       const isMobile = window.innerWidth < 768;
-      const nodeCount = isMobile ? Math.floor(Math.random() * 11) + 10 : Math.floor(Math.random() * 21) + 25; // 10-20 mobile, 25-45 desktop
+      const nodeCount = isMobile
+        ? Math.floor(Math.random() * 11) + 10
+        : Math.floor(Math.random() * 21) + 25; // 10-20 mobile, 25-45 desktop
       const newNodes: Node[] = [];
 
       for (let i = 0; i < nodeCount; i++) {
@@ -100,7 +117,7 @@ export function GitEcosystemBackground() {
         let type: Node['type'] = 'branch';
         let text = '';
         let color = COLORS.purple;
-        let size = 3;
+        const size = 3;
         let IconComponent: React.ElementType | undefined;
 
         if (typeRand < 0.5) {
@@ -116,8 +133,10 @@ export function GitEcosystemBackground() {
         }
 
         const side = Math.random() > 0.5 ? 'left' : 'right';
-        const margin = window.innerWidth < 768 ? window.innerWidth * 0.15 : window.innerWidth * 0.25;
-        const startX = side === 'left' ? Math.random() * margin : window.innerWidth - (Math.random() * margin);
+        const margin =
+          window.innerWidth < 768 ? window.innerWidth * 0.15 : window.innerWidth * 0.25;
+        const startX =
+          side === 'left' ? Math.random() * margin : window.innerWidth - Math.random() * margin;
 
         newNodes.push({
           id: `node-${i}-${Date.now()}`,
@@ -137,13 +156,13 @@ export function GitEcosystemBackground() {
       }
 
       // Initialize baseX/Y after generating
-      newNodes.forEach(n => {
+      newNodes.forEach((n) => {
         n.baseX = n.x;
         n.baseY = n.y;
       });
 
       nodesRef.current = newNodes;
-      setTechNodes(newNodes.filter(n => n.type === 'tech'));
+      setTechNodes(newNodes.filter((n) => n.type === 'tech'));
     };
 
     const update = () => {
@@ -152,7 +171,7 @@ export function GitEcosystemBackground() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       const nodes = nodesRef.current;
-      
+
       ctx.clearRect(0, 0, width, height);
 
       // Smooth opacity transition
@@ -161,11 +180,11 @@ export function GitEcosystemBackground() {
 
       ctx.globalAlpha = currentOpacityRef.current;
 
-      const mouseRadius = width < 768 ? 0 : 160; 
+      const mouseRadius = width < 768 ? 0 : 160;
       const maxDisplacement = 30;
 
       // Update positions
-      nodes.forEach(node => {
+      nodes.forEach((node) => {
         if (!reducedMotion) {
           // Natural drift
           node.baseX += node.vx;
@@ -186,9 +205,9 @@ export function GitEcosystemBackground() {
           if (node.baseY > height + 50) node.baseY = -50;
 
           // Mouse repulsion
-          let dx = mouseRef.current.x - node.baseX;
-          let dy = mouseRef.current.y - node.baseY;
-          let distance = Math.hypot(dx, dy);
+          const dx = mouseRef.current.x - node.baseX;
+          const dy = mouseRef.current.y - node.baseY;
+          const distance = Math.hypot(dx, dy);
 
           let targetX = node.baseX;
           let targetY = node.baseY;
@@ -210,7 +229,7 @@ export function GitEcosystemBackground() {
           node.x = node.baseX;
           node.y = node.baseY;
         }
-        
+
         // Update DOM element if it exists (tech icons)
         if (node.type === 'tech' && node.domElement) {
           // Center the icon by offsetting by -12px (assuming 24x24 icon)
@@ -219,10 +238,8 @@ export function GitEcosystemBackground() {
         }
       });
 
-
-
       // Draw nodes (except tech icons which are DOM elements)
-      nodes.forEach(node => {
+      nodes.forEach((node) => {
         if (node.type !== 'tech') {
           ctx.font = 'bold 13px monospace';
           ctx.fillStyle = node.color;
@@ -263,24 +280,31 @@ export function GitEcosystemBackground() {
 
   if (!ENABLE_GIT_ECOSYSTEM_BACKGROUND) return null;
 
-  const isBlurredPage = ['/sobre', '/projetos', '/stack', '/experiencia', '/contato'].some(p => location.pathname.startsWith(p));
+  const isBlurredPage = ['/sobre', '/projetos', '/stack', '/experiencia', '/contato'].some((p) =>
+    location.pathname.startsWith(p),
+  );
 
   return (
     <>
       <canvas
         ref={canvasRef}
-        className={`fixed inset-0 -z-10 pointer-events-none transition-all duration-700 ${isBlurredPage ? 'blur-[4px]' : ''}`}
+        className={`pointer-events-none fixed inset-0 -z-10 transition-all duration-700 ${isBlurredPage ? 'blur-[4px]' : ''}`}
         aria-hidden="true"
       />
-      <div className={`fixed inset-0 -z-10 pointer-events-none overflow-hidden transition-all duration-700 ${isBlurredPage ? 'blur-[4px]' : ''}`} aria-hidden="true">
-        {techNodes.map(node => {
+      <div
+        className={`pointer-events-none fixed inset-0 -z-10 overflow-hidden transition-all duration-700 ${isBlurredPage ? 'blur-[4px]' : ''}`}
+        aria-hidden="true"
+      >
+        {techNodes.map((node) => {
           const Icon = node.IconComponent;
           if (!Icon) return null;
           return (
             <div
               key={node.id}
-              ref={el => { node.domElement = el; }}
-              className="absolute left-0 top-0 will-change-transform drop-shadow-md"
+              ref={(el) => {
+                node.domElement = el;
+              }}
+              className="absolute left-0 top-0 drop-shadow-md will-change-transform"
               style={{ color: node.color, opacity: 0 }}
             >
               <Icon size={28} />

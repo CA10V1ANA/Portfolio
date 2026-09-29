@@ -66,6 +66,7 @@ export function Skills() {
       id="skills"
       className="page-section border-y border-border bg-card/50"
       aria-labelledby="stack-title"
+      data-scroll-section
     >
       <div className="section-container">
         <div className="mb-12 max-w-3xl">

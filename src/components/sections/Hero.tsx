@@ -29,13 +29,13 @@ export function Hero() {
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
-              to="/sobre"
+              to="/#about"
               className="inline-flex min-h-12 items-center gap-3 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-secondary"
             >
               {t('home.ctaAbout')} <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
-              to="/projetos/js-boy"
+              to="/#projects"
               className="inline-flex min-h-12 items-center gap-3 rounded-md border border-border px-6 py-3 font-semibold transition-colors hover:border-accent hover:text-accent"
             >
               {t('home.ctaProject')} <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
