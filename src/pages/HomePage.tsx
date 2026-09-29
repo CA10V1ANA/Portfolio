@@ -1,14 +1,41 @@
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { About } from '@/components/sections/About';
-import { Contact } from '@/components/sections/Contact';
-import { Experience } from '@/components/sections/Experience';
+import { useLocation } from 'react-router-dom';
 import { Hero } from '@/components/sections/Hero';
-import { Projects } from '@/components/sections/Projects';
-import { Skills } from '@/components/sections/Skills';
+
+const About = lazy(() =>
+  import('@/components/sections/About').then((module) => ({ default: module.About })),
+);
+const Projects = lazy(() =>
+  import('@/components/sections/Projects').then((module) => ({ default: module.Projects })),
+);
+const Skills = lazy(() =>
+  import('@/components/sections/Skills').then((module) => ({ default: module.Skills })),
+);
+const Experience = lazy(() =>
+  import('@/components/sections/Experience').then((module) => ({ default: module.Experience })),
+);
+const Contact = lazy(() =>
+  import('@/components/sections/Contact').then((module) => ({ default: module.Contact })),
+);
 
 export function HomePage() {
   const reducedMotion = useReducedMotion();
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    const sectionId = hash.replace('#', '');
+    if (!sectionId) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(sectionId)?.scrollIntoView({
+        behavior: reducedMotion ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [hash, reducedMotion]);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-scroll-section]'));
