@@ -3,6 +3,7 @@ import { Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CONTACT_LINKS, PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
+import { BrandEditorialDivider } from '@/components/shared/BrandLogo';
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -11,7 +12,11 @@ export function Footer() {
   const FOOTER_LINKS = [
     { name: 'GitHub', href: SOCIAL_LINKS.github, icon: FaGithub },
     { name: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: FaLinkedin },
-    { name: t('footer.emailLabel', { email: CONTACT_LINKS.email.label }), href: CONTACT_LINKS.email.href, icon: Mail },
+    {
+      name: t('footer.emailLabel', { email: CONTACT_LINKS.email.label }),
+      href: CONTACT_LINKS.email.href,
+      icon: Mail,
+    },
     {
       name: t('footer.whatsappLabel', { phone: CONTACT_LINKS.whatsapp.label }),
       href: CONTACT_LINKS.whatsapp.href,
@@ -22,9 +27,15 @@ export function Footer() {
   return (
     <footer className="border-t border-border">
       <div className="section-container flex flex-col items-center gap-6 !py-12 text-center">
-        <Link to="/" className="font-display text-xl font-bold">
-          <span className="text-gradient">{PERSONAL_INFO.name}</span>
-        </Link>
+        <div className="flex flex-col items-center gap-2.5">
+          <Link
+            to="/"
+            className="font-display text-xl font-bold tracking-tight text-foreground transition-colors hover:text-accent"
+          >
+            {PERSONAL_INFO.name}
+          </Link>
+          <BrandEditorialDivider />
+        </div>
 
         <div className="flex items-center gap-3" role="group" aria-label={t('footer.socialLabel')}>
           {FOOTER_LINKS.map((social) => (
@@ -45,9 +56,7 @@ export function Footer() {
         <p className="text-sm text-muted-foreground">
           {t('footer.copyright', { year, name: PERSONAL_INFO.name })}
         </p>
-        <p className="text-xs text-muted-foreground/70">
-          {t('footer.builtWith')}
-        </p>
+        <p className="text-xs text-muted-foreground/70">{t('footer.builtWith')}</p>
       </div>
     </footer>
   );

@@ -2,6 +2,7 @@ import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
+import { BrandMonogram } from '@/components/shared/BrandLogo';
 
 export function Hero() {
   const { t } = useTranslation('pages');
@@ -12,10 +13,6 @@ export function Hero() {
       id="hero"
       className="relative isolate flex min-h-[90svh] items-center border-b border-border px-6 pb-20 pt-32 sm:px-8 lg:px-10"
     >
-      <div
-        className="pointer-events-none absolute right-0 top-0 -z-10 h-[36rem] w-[36rem] max-w-full rounded-full bg-primary/10 blur-[110px]"
-        aria-hidden="true"
-      />
       <div className="mx-auto grid w-full max-w-7xl gap-16 lg:grid-cols-[minmax(0,1.4fr)_minmax(300px,0.6fr)] lg:items-end">
         <div>
           <p className="mb-7 font-mono text-xs font-medium uppercase tracking-[0.24em] text-accent">
@@ -52,17 +49,7 @@ export function Hero() {
         </div>
 
         <div className="border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-9 lg:pt-0">
-          <p className="mb-5 hidden font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground sm:block">
-            {t('home.devFile')}
-          </p>
-          <pre className="hidden overflow-x-auto font-mono text-xs leading-7 text-muted-foreground sm:block sm:text-sm">
-            <code>{`const developer = {
-  name: "Caio Viana",
-  role: "Full Stack Developer",
-  focus: ["Web", "Backend",
-          "Software Engineering"]
-};`}</code>
-          </pre>
+          <BrandMonogram />
           <dl className="mt-8 grid gap-3 border-t border-border pt-6 font-mono text-xs sm:grid-cols-2 lg:grid-cols-1">
             <div className="flex gap-4">
               <dt className="text-muted-foreground">{t('home.locationLabel')}</dt>

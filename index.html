@@ -1,10 +1,23 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b0613" />
+    <meta name="theme-color" content="#f4efe7" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('dev-viana-theme');
+          var theme = stored === 'dark' || stored === 'light' ? stored : 'light';
+          var root = document.documentElement;
+          root.classList.remove('dark', 'light');
+          root.classList.add(theme);
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', theme === 'dark' ? '#151b1e' : '#f4efe7');
+        } catch (e) {}
+      })();
+    </script>
 
     <title>Caio Viana — Desenvolvedor Full Stack</title>
     <meta

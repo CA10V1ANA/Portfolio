@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { House, Menu, Moon, Sun, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { NAV_PATHS, PERSONAL_INFO } from '@/lib/constants';
+import { NAV_PATHS } from '@/lib/constants';
 import { useTheme } from '@/hooks/useTheme';
 import { cn } from '@/lib/utils';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { BrandSignature } from '@/components/shared/BrandLogo';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,14 +81,11 @@ export function Navbar() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-6 sm:px-8 lg:px-10">
         <Link
           to="/"
-          className="flex items-center gap-3 font-display text-sm font-bold tracking-tight sm:text-base"
+          className="inline-flex items-center py-1 transition-opacity hover:opacity-85"
           aria-label={t('a11y.homeLink')}
           onClick={() => setIsOpen(false)}
         >
-          <span className="font-mono text-lg text-accent" aria-hidden="true">
-            &gt;_
-          </span>
-          <span>{PERSONAL_INFO.firstName} Viana</span>
+          <BrandSignature />
         </Link>
 
         <nav className="hidden items-center gap-2 lg:flex" aria-label={t('a11y.mainNav')}>

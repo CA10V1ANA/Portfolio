@@ -31,19 +31,19 @@ interface Node {
 }
 
 const COLORS = {
-  purple: 'rgba(139, 92, 246, 1)', // Frontend / Base
-  blue: 'rgba(59, 130, 246, 1)', // Backend
-  green: 'rgba(16, 185, 129, 1)', // Data
-  muted: 'rgba(107, 114, 128, 0.8)', // Hashes, binaries
+  teal: 'rgba(19, 88, 110, 0.9)', // Frontend / Base (#13586E)
+  deepTeal: 'rgba(13, 68, 86, 0.9)', // Backend (#0D4456)
+  graphite: 'rgba(32, 40, 44, 0.85)', // Data (#20282C)
+  muted: 'rgba(78, 91, 97, 0.8)', // Hashes, binaries (#4E5B61)
 };
 
 const TECH_ICONS = [
-  { Icon: SiReact, color: COLORS.purple, name: 'React' },
-  { Icon: SiAngular, color: COLORS.purple, name: 'Angular' },
-  { Icon: SiTypescript, color: COLORS.purple, name: 'TypeScript' },
-  { Icon: SiOpenjdk, color: COLORS.blue, name: 'Java' },
-  { Icon: SiSpringboot, color: COLORS.blue, name: 'Spring' },
-  { Icon: SiPostgresql, color: COLORS.green, name: 'PostgreSQL' },
+  { Icon: SiReact, color: COLORS.teal, name: 'React' },
+  { Icon: SiAngular, color: COLORS.teal, name: 'Angular' },
+  { Icon: SiTypescript, color: COLORS.teal, name: 'TypeScript' },
+  { Icon: SiOpenjdk, color: COLORS.deepTeal, name: 'Java' },
+  { Icon: SiSpringboot, color: COLORS.deepTeal, name: 'Spring' },
+  { Icon: SiPostgresql, color: COLORS.graphite, name: 'PostgreSQL' },
   { Icon: SiDocker, color: COLORS.muted, name: 'Docker' },
   { Icon: SiGit, color: COLORS.muted, name: 'Git' },
 ];
@@ -116,14 +116,14 @@ export function GitEcosystemBackground() {
         const typeRand = Math.random();
         let type: Node['type'] = 'branch';
         let text = '';
-        let color = COLORS.purple;
+        let color = COLORS.teal;
         const size = 3;
         let IconComponent: React.ElementType | undefined;
 
         if (typeRand < 0.5) {
           type = 'branch';
           text = BRANCH_NAMES[Math.floor(Math.random() * BRANCH_NAMES.length)];
-          color = COLORS.purple;
+          color = COLORS.teal;
         } else {
           type = 'tech';
           const tech = TECH_ICONS[Math.floor(Math.random() * TECH_ICONS.length)];

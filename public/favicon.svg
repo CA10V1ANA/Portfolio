@@ -1,5 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="12" fill="#0b0613" />
-  <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="#2a1b38" stroke-width="2" />
-  <text x="10" y="42" font-family="monospace" font-size="30" font-weight="700" fill="#b78ae0">&gt;_</text>
+  <rect width="64" height="64" rx="12" fill="#F4EFE7" />
+  <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="#D8D0C4" stroke-width="2" />
+  <!-- Left bracket < in Grafite (#20282C) -->
+  <path
+    d="M23.5 21.5L12.5 32L23.5 42.5"
+    fill="none"
+    stroke="#20282C"
+    stroke-width="4.5"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+  />
+  <!-- Right bracket > in Grafite (#20282C) -->
+  <path
+    d="M40.5 21.5L51.5 32L40.5 42.5"
+    fill="none"
+    stroke="#20282C"
+    stroke-width="4.5"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+  />
+  <!-- Slash / in Azul-Petróleo (#13586E) -->
+  <path
+    d="M35.5 17.5L28.5 46.5"
+    fill="none"
+    stroke="#13586E"
+    stroke-width="4.5"
+    stroke-linecap="square"
+  />
 </svg>
