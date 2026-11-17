@@ -39,5 +39,7 @@
     "swagger": "Documentação de APIs REST.",
     "maven": "Build e dependências em projetos Java.",
     "vite": "Ferramentas de desenvolvimento frontend."
-  }
+  },
+  "pauseMotion": "Pausar animação",
+  "playMotion": "Animar stack"
 }

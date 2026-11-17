@@ -39,5 +39,7 @@
     "swagger": "REST API documentation.",
     "maven": "Build and dependency management for Java projects.",
     "vite": "Frontend development tooling."
-  }
+  },
+  "pauseMotion": "Pause animation",
+  "playMotion": "Animate stack"
 }
