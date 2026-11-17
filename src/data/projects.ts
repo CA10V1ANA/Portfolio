@@ -13,9 +13,11 @@ export const PROJECT_I18N_MAP: Record<string, string> = {
   'codementor-ia': 'codementorIa',
 };
 
+// Add real images from public/projects to screenshots; the first one becomes the cover.
 export const PROJECTS: Project[] = [
   {
     id: 'js-boy',
+    screenshots: [],
     title: 'JS BOY',
     status: 'staging',
     technologies: ['Java 21', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'Flyway'],
@@ -24,6 +26,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'pokedex',
+    screenshots: [],
     title: 'Pokédex — Pokémon Explorer',
     status: 'deployed',
     technologies: ['Angular 19', 'TypeScript', 'Signals', 'SCSS', 'PokéAPI', 'Vitest'],
@@ -33,6 +36,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'if-make',
+    screenshots: [],
     title: 'IF Make',
     status: 'deployed',
     technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
@@ -41,6 +45,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'devpilot',
+    screenshots: [],
     title: 'DevPilot',
     status: 'active',
     technologies: ['TypeScript', 'Runtime local'],

@@ -264,6 +264,110 @@
     @apply mt-5;
   }
 
+  .case-shell {
+    @apply relative py-4 sm:py-6;
+  }
+
+  .case-grid {
+    @apply grid items-start gap-10 lg:grid-cols-[1fr_0.85fr] lg:gap-16;
+  }
+
+  .case-visual {
+    @apply row-start-1 lg:sticky lg:top-28 lg:col-start-2 lg:row-start-auto;
+  }
+
+  .case-visual .project-cover {
+    @apply rounded-xl border border-border;
+  }
+
+  .case-visual .project-cover.has-image {
+    aspect-ratio: auto;
+  }
+
+  .case-visual .project-cover img {
+    height: auto;
+  }
+
+  .project-cover {
+    @apply relative isolate flex min-h-60 w-full min-w-0 flex-col justify-between overflow-hidden bg-muted p-6 sm:p-8;
+    aspect-ratio: 16 / 10;
+    color: hsl(var(--accent));
+    background-image: linear-gradient(135deg, hsl(var(--accent) / 0.05), hsl(var(--accent) / 0.13));
+  }
+
+  .project-cover::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0 -z-10;
+    background-image: radial-gradient(hsl(var(--accent) / 0.18) 0.6px, transparent 0.6px);
+    background-size: 18px 18px;
+    mask-image: linear-gradient(135deg, black, transparent 70%);
+  }
+
+  .project-cover-pokedex {
+    background-image: linear-gradient(160deg, hsl(var(--accent) / 0.13), hsl(var(--background)));
+  }
+
+  .project-cover-if-make {
+    @apply bg-background;
+    background-image: linear-gradient(45deg, hsl(var(--accent) / 0.12), transparent 75%);
+  }
+
+  .project-cover-devpilot {
+    background-image: radial-gradient(
+      ellipse at 100% 0%,
+      hsl(var(--accent) / 0.2),
+      transparent 80%
+    );
+  }
+
+  .cover-top {
+    @apply flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-widest;
+  }
+
+  .cover-name {
+    @apply relative z-10 my-8 flex flex-col gap-3;
+  }
+
+  .cover-name strong {
+    @apply font-display text-5xl font-semibold tracking-[-0.065em] sm:text-6xl;
+  }
+
+  .cover-name > span {
+    @apply max-w-64 text-sm;
+  }
+
+  .cover-bottom {
+    @apply font-mono text-[0.6rem] uppercase tracking-wider;
+  }
+
+  .cover-branches {
+    @apply pointer-events-none absolute inset-0 -z-10 h-full w-full;
+    stroke: hsl(var(--accent) / 0.18);
+    stroke-width: 1.2;
+  }
+
+  .cover-branches circle {
+    fill: hsl(var(--background));
+  }
+
+  .project-featured .project-cover {
+    @apply h-full;
+  }
+
+  .project-cover.has-image {
+    @apply block p-0;
+    background-image: none;
+  }
+
+  .project-cover img {
+    @apply h-full w-full object-cover object-top;
+    transition: transform 450ms var(--ease-emphasized);
+  }
+
+  .project-cover-link:hover img {
+    transform: scale(1.025);
+  }
+
   .theme-toggle svg {
     animation: theme-icon-enter 240ms ease-out both;
   }
@@ -321,29 +425,104 @@
   }
 
   .project-grid {
-    @apply grid gap-px overflow-hidden rounded-2xl border border-border bg-border lg:grid-cols-2;
+    @apply grid gap-8 md:grid-cols-2;
   }
 
   .project-card {
-    @apply relative flex min-h-[30rem] flex-col bg-background p-6 sm:p-9;
+    @apply flex min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-card;
     transition:
-      background-color var(--duration-default) var(--ease-out),
-      transform var(--duration-default) var(--ease-out);
+      border-color 200ms ease-out,
+      transform 450ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 450ms ease-out,
+      filter 450ms ease-out;
   }
 
-  .project-card::before {
-    content: '';
-    @apply absolute inset-y-0 left-0 w-px origin-top scale-y-0 bg-accent;
-    transition: transform var(--duration-default) var(--ease-out);
+  .project-card[data-project-reveal='pending'] {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(2px);
+  }
+
+  .project-card[data-project-reveal='visible'] {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  .project-card[data-project-reveal='visible'] .project-card-copy > * {
+    animation: hero-content-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--project-stagger, 0ms);
+  }
+
+  .project-card-copy > :nth-child(2) {
+    --project-stagger: 40ms;
+  }
+  .project-card-copy > :nth-child(3) {
+    --project-stagger: 70ms;
+  }
+  .project-card-copy > :nth-child(4) {
+    --project-stagger: 100ms;
+  }
+  .project-card-copy > :nth-child(5) {
+    --project-stagger: 130ms;
+  }
+  .project-card-copy > :nth-child(6) {
+    --project-stagger: 160ms;
+  }
+
+  .project-card:focus-within {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .project-card:focus-within .project-card-copy > * {
+    animation: none;
   }
 
   .project-card:hover {
-    @apply bg-card;
+    border-color: hsl(var(--accent) / 0.5);
+    transform: translateY(-3px);
   }
 
-  .project-card:hover::before,
-  .project-card:focus-within::before {
-    transform: scaleY(1);
+  .project-card-copy {
+    @apply flex flex-1 flex-col p-6 sm:p-8;
+  }
+
+  .project-featured {
+    @apply md:col-span-2 lg:grid lg:grid-cols-[1.1fr_1fr];
+  }
+
+  .project-card:last-child:nth-child(even) {
+    @apply md:col-span-2 md:grid md:grid-cols-[0.8fr_1fr];
+  }
+
+  .project-card:last-child .project-cover {
+    @apply h-full;
+  }
+
+  .project-cover-link {
+    @apply block min-w-0 overflow-hidden;
+  }
+
+  .project-cover-link .project-cover {
+    transform: perspective(1000px) rotateX(var(--cover-rotate-x, 0deg))
+      rotateY(var(--cover-rotate-y, 0deg));
+    transition: transform 180ms ease-out;
+    backface-visibility: hidden;
+  }
+
+  .project-card .text-link svg {
+    transition: transform 160ms ease-out;
+  }
+
+  .project-card .text-link:hover svg,
+  .project-card .text-link:focus-visible svg {
+    transform: translate(3px, -3px);
+  }
+
+  .project-cover-link:focus-visible {
+    outline-offset: -4px;
   }
 
   .project-card-topline {
@@ -670,10 +849,21 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero-copy > *,
-  .hero-identity {
+  .hero-identity,
+  .project-card[data-project-reveal] .project-card-copy > * {
     animation: none !important;
     opacity: 1;
     transform: none;
+  }
+  .project-card[data-project-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .project-cover-link .project-cover,
+  .project-card:hover,
+  .project-card .text-link svg {
+    transform: none !important;
   }
   html {
     scroll-behavior: auto;
@@ -762,8 +952,30 @@
     font-size: 0.55rem;
     gap: 0.5rem;
   }
+  .project-grid {
+    gap: 1.5rem;
+  }
+  .project-card-copy h3 {
+    font-size: 1.6rem;
+  }
+  .project-card-copy p:not(.eyebrow) {
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  .project-cover {
+    min-height: 13rem;
+  }
+  .cover-name strong {
+    font-size: 2.8rem;
+  }
+  .case-grid {
+    gap: 2rem;
+  }
   .page-section {
     padding-top: 7rem;
+  }
+  .project-toolbar {
+    margin-bottom: 2rem;
   }
   .stack-board {
     padding-inline: 1rem;
