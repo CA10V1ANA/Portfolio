@@ -9,18 +9,18 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="section-container page-section"
+      className="section-container"
       aria-labelledby="contact-title"
       data-scroll-section
     >
-      <div className="relative min-h-[65svh] rounded-2xl border border-border bg-background/95 px-6 py-10 shadow-sm backdrop-blur-md sm:px-12 sm:py-14">
+      <div className="section-panel contact-panel">
         <p className="eyebrow">{t('contact.eyebrow')}</p>
-        <h1
+        <h2
           id="contact-title"
           className="max-w-3xl font-display text-4xl font-semibold tracking-tight sm:text-6xl"
         >
           {t('contact.title')}
-        </h1>
+        </h2>
         <p className="mt-7 max-w-xl text-lg leading-7 text-muted-foreground">
           {t('contact.description')}
         </p>

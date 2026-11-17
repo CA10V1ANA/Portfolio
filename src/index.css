@@ -113,6 +113,18 @@
 }
 
 @layer components {
+  .section-panel {
+    @apply relative rounded-xl border border-border bg-card px-6 py-9 sm:px-12 sm:py-12;
+  }
+
+  .contact-panel {
+    @apply py-12 sm:py-16;
+  }
+
+  .contact-panel h2 {
+    @apply mt-5;
+  }
+
   .theme-toggle svg {
     animation: theme-icon-enter 240ms ease-out both;
   }
@@ -122,16 +134,21 @@
   }
 
   .section-container {
-    @apply mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-10;
+    @apply mx-auto w-full max-w-7xl px-6 py-20 sm:px-8 sm:py-24 lg:px-10;
   }
 
   .page-section {
-    min-height: calc(100svh - 5rem);
-    padding-top: 9rem;
+    padding-top: 8rem;
   }
 
   .page-title {
     @apply mt-3 font-display text-4xl font-semibold tracking-tight sm:text-6xl;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
 
   .eyebrow {
@@ -149,10 +166,6 @@
   .scroll-progress {
     @apply absolute inset-x-0 bottom-0 h-px origin-left bg-accent;
     transition: transform var(--duration-fast) var(--ease-out);
-  }
-
-  .scroll-portfolio > section {
-    scroll-margin-top: 5rem;
   }
 
   [data-scroll-section] {
@@ -530,6 +543,9 @@
 }
 
 @media (max-width: 639px) {
+  .page-section {
+    padding-top: 7rem;
+  }
   .stack-board {
     padding-inline: 1rem;
   }

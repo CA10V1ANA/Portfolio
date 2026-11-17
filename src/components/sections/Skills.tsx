@@ -64,16 +64,16 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="page-section border-y border-border bg-card/50"
+      className="border-y border-border bg-card/50"
       aria-labelledby="stack-title"
       data-scroll-section
     >
       <div className="section-container">
         <div className="mb-12 max-w-3xl">
           <p className="eyebrow">{t('eyebrow')}</p>
-          <h1 id="stack-title" className="page-title">
+          <h2 id="stack-title" className="page-title">
             {t('title')}
-          </h1>
+          </h2>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             {t('introduction')}
           </p>

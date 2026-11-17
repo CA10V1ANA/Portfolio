@@ -15,7 +15,7 @@
     }
   },
   "about": {
-    "eyebrow": "02 / Sobre mí",
+    "eyebrow": "03 / Sobre mí",
     "title": "Antes del código, el problema.",
     "p1": "Soy desarrollador Full Stack y estudiante de Ingeniería de Software. Mi trabajo abarca sistemas corporativos, proyectos creados para problemas reales y distintas capas de una aplicación.",
     "p2": "Me interesan el backend, el frontend, la arquitectura y el producto. En JS BOY, por ejemplo, desarrollo una plataforma de gestión de entregas para una empresa familiar.",
@@ -26,7 +26,7 @@
     }
   },
   "projectsSection": {
-    "eyebrow": "03 / Proyectos",
+    "eyebrow": "02 / Proyectos",
     "title": "Software con contexto real.",
     "description": "Una selección de productos, estudios y soluciones construidas desde el problema hasta la interfaz."
   },

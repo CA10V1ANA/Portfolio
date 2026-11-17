@@ -1,6 +1,6 @@
-import { lazy, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Hero } from '@/components/sections/Hero';
 
 const About = lazy(() =>
@@ -19,23 +19,8 @@ const Contact = lazy(() =>
   import('@/components/sections/Contact').then((module) => ({ default: module.Contact })),
 );
 
-export function HomePage() {
+function PortfolioSections() {
   const reducedMotion = useReducedMotion();
-  const { hash } = useLocation();
-
-  useEffect(() => {
-    const sectionId = hash.replace('#', '');
-    if (!sectionId) return;
-
-    const frame = window.requestAnimationFrame(() => {
-      document.getElementById(sectionId)?.scrollIntoView({
-        behavior: reducedMotion ? 'auto' : 'smooth',
-        block: 'start',
-      });
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [hash, reducedMotion]);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-scroll-section]'));
@@ -62,13 +47,30 @@ export function HomePage() {
   }, [reducedMotion]);
 
   return (
-    <div className="scroll-portfolio">
-      <Hero />
-      <About />
+    <>
       <Projects />
+      <About />
       <Skills />
       <Experience />
       <Contact />
+    </>
+  );
+}
+
+export function HomePage() {
+  const { t } = useTranslation('common');
+  return (
+    <div className="scroll-portfolio">
+      <Hero />
+      <Suspense
+        fallback={
+          <div className="section-container min-h-96 text-muted-foreground" role="status">
+            {t('status.loading')}
+          </div>
+        }
+      >
+        <PortfolioSections />
+      </Suspense>
     </div>
   );
 }

@@ -15,7 +15,7 @@
     }
   },
   "about": {
-    "eyebrow": "02 / About",
+    "eyebrow": "03 / About",
     "title": "Before the code, the problem.",
     "p1": "I'm a Full Stack Developer and Software Engineering student. My work spans enterprise systems, projects built for real-world problems and different layers of an application.",
     "p2": "I'm interested in backend, frontend, architecture and product. In JS BOY, for instance, I'm building a delivery management platform for a family business.",
@@ -26,7 +26,7 @@
     }
   },
   "projectsSection": {
-    "eyebrow": "03 / Projects",
+    "eyebrow": "02 / Projects",
     "title": "Software grounded in real context.",
     "description": "A selection of products, studies and solutions built from the problem through to the interface."
   },

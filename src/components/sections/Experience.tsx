@@ -11,21 +11,21 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="section-container page-section"
+      className="section-container"
       aria-labelledby="experience-title"
       data-scroll-section
     >
-      <div className="relative rounded-2xl border border-border bg-background/95 px-6 py-10 shadow-sm backdrop-blur-md sm:px-12 sm:py-14">
+      <div className="section-panel">
         <div className="max-w-3xl">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">
             {t('experience.eyebrow')}
           </p>
-          <h1
+          <h2
             id="experience-title"
             className="font-display text-4xl font-semibold tracking-tight sm:text-6xl"
           >
             {t('experience.title')}
-          </h1>
+          </h2>
           <p className="mt-6 leading-7 text-muted-foreground">{t('experience.subtitle')}</p>
         </div>
         <ol className="relative mt-14 border-l border-border pl-7 sm:pl-12">
