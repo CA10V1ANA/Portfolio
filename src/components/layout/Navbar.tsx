@@ -78,7 +78,7 @@ export function Navbar() {
           : 'border-transparent bg-transparent',
       )}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-6 sm:px-8 lg:px-10">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-2 px-4 sm:gap-5 sm:px-8 lg:px-10">
         <Link
           to="/"
           className="inline-flex items-center py-1 transition-opacity hover:opacity-85"
@@ -103,13 +103,16 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
           <LanguageSelector />
           <button
             type="button"
-            onClick={toggleTheme}
+            onClick={(event) => {
+              const bounds = event.currentTarget.getBoundingClientRect();
+              toggleTheme({ x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 });
+            }}
             aria-label={theme === 'dark' ? t('theme.light') : t('theme.dark')}
-            className="flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground"
+            className="theme-toggle flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground"
           >
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
