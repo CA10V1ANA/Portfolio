@@ -31,7 +31,8 @@
     "builtWith": "Desenvolvido com React, TypeScript e Tailwind CSS.",
     "socialLabel": "Redes sociais e contato",
     "emailLabel": "E-mail: {{email}}",
-    "whatsappLabel": "WhatsApp: {{phone}}"
+    "whatsappLabel": "WhatsApp: {{phone}}",
+    "replayIntro": "Rever abertura"
   },
   "a11y": {
     "skipToContent": "Pular para o conteúdo",

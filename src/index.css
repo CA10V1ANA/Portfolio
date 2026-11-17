@@ -113,6 +113,119 @@
 }
 
 @layer components {
+  .opening-intro {
+    @apply pointer-events-none fixed inset-0 z-[80] flex items-center justify-center overflow-hidden;
+  }
+
+  .opening-panel {
+    @apply absolute inset-y-0 w-1/2 bg-background;
+    animation: opening-panel-exit 700ms cubic-bezier(0.76, 0, 0.24, 1) 1400ms both;
+  }
+
+  .opening-panel-left {
+    left: 0;
+    --opening-direction: -1;
+  }
+  .opening-panel-right {
+    right: 0;
+    --opening-direction: 1;
+  }
+
+  .opening-brand {
+    @apply relative flex flex-col items-center gap-5;
+  }
+
+  .opening-code-line {
+    @apply font-mono text-[0.65rem] text-muted-foreground;
+    animation: opening-code-caption 1800ms ease-out both;
+  }
+
+  .opening-code-line > span {
+    @apply text-accent;
+  }
+
+  .opening-scene {
+    --code-unit: 1px;
+    @apply relative;
+    width: min(34rem, 100vw);
+    height: 23rem;
+  }
+
+  .opening-core {
+    @apply absolute inset-0 z-10 flex items-center justify-center;
+  }
+
+  .opening-tech-anchor {
+    @apply absolute left-1/2 top-1/2;
+    transform: translate(-50%, -50%);
+  }
+
+  .opening-tech {
+    @apply flex items-center gap-2 whitespace-nowrap rounded-md border border-accent/25 bg-card px-3 py-2 font-mono text-[0.65rem] text-foreground;
+    animation: opening-stack-merge 1450ms cubic-bezier(0.22, 1, 0.36, 1) var(--code-delay) both;
+  }
+
+  .opening-tech svg {
+    @apply h-4 w-4 text-accent;
+  }
+
+  .opening-code-orbit {
+    @apply absolute left-1/2 top-1/2 font-mono text-lg text-accent;
+    animation: opening-code-caption 1400ms ease-out both;
+  }
+
+  .opening-code-orbit-one {
+    transform: translate(-46px, -80px);
+  }
+  .opening-code-orbit-two {
+    transform: translate(30px, 75px);
+  }
+
+  .opening-symbol {
+    width: clamp(7rem, 17vw, 11rem);
+    @apply overflow-visible;
+    stroke: hsl(var(--foreground));
+    stroke-width: 5;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+  }
+
+  .opening-symbol path {
+    stroke-dasharray: 1;
+    animation: opening-stroke 450ms cubic-bezier(0.16, 1, 0.3, 1) 100ms both;
+  }
+
+  .opening-slash path {
+    stroke: hsl(var(--accent));
+    animation-delay: 220ms;
+  }
+  .opening-bracket-right path {
+    animation-delay: 300ms;
+  }
+  .opening-bracket-left {
+    --opening-direction: -1;
+  }
+  .opening-bracket-right {
+    --opening-direction: 1;
+  }
+  .opening-bracket {
+    animation: opening-bracket-exit 600ms cubic-bezier(0.76, 0, 0.24, 1) 1400ms both;
+  }
+  .opening-slash {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: opening-slash-exit 380ms ease-in 1440ms both;
+  }
+
+  .opening-signature {
+    @apply font-display text-xs font-bold tracking-[0.24em] text-foreground;
+    animation: opening-signature 2000ms ease-out both;
+  }
+
+  .opening-signature > span {
+    @apply text-accent;
+  }
+
   .action-primary,
   .action-secondary {
     @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-md px-5 py-3 text-sm font-semibold;
@@ -172,6 +285,10 @@
   }
   .hero-copy > :nth-child(5) {
     --hero-stagger: 240ms;
+  }
+
+  html[data-opening-intro='playing'] .portfolio-hero {
+    --hero-opening-delay: 1420ms;
   }
 
   .hero-identity {
@@ -723,6 +840,102 @@
   }
 }
 
+@keyframes opening-stack-merge {
+  0% {
+    opacity: 0;
+    transform: translate(
+        calc(var(--code-x) * var(--code-unit) * 1.13),
+        calc(var(--code-y) * var(--code-unit) * 1.13)
+      )
+      rotate(var(--code-rotation)) scale(0.88);
+  }
+  25%,
+  60% {
+    opacity: 1;
+    transform: translate(
+        calc(var(--code-x) * var(--code-unit)),
+        calc(var(--code-y) * var(--code-unit))
+      )
+      rotate(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(calc(var(--code-rotation) * -2)) scale(0.4);
+  }
+}
+
+@keyframes opening-code-caption {
+  0% {
+    opacity: 0;
+  }
+  30%,
+  65% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes opening-stroke {
+  from {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes opening-panel-exit {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(var(--opening-direction) * 101%));
+  }
+}
+
+@keyframes opening-bracket-exit {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(calc(var(--opening-direction) * 48px));
+    opacity: 0;
+  }
+}
+
+@keyframes opening-slash-exit {
+  from {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  to {
+    transform: scaleY(0.65);
+    opacity: 0;
+  }
+}
+
+@keyframes opening-signature {
+  0%,
+  20% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  35%,
+  75% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
 .theme-transition::view-transition-old(root),
 .theme-transition::view-transition-new(root) {
   animation: none;
@@ -865,6 +1078,9 @@
   .project-card .text-link svg {
     transform: none !important;
   }
+  .opening-intro {
+    display: none;
+  }
   html {
     scroll-behavior: auto;
   }
@@ -889,6 +1105,28 @@
 }
 
 @media (max-width: 639px) {
+  .opening-scene {
+    --code-unit: 0.65px;
+    height: 18rem;
+  }
+  .opening-tech {
+    padding: 0.45rem 0.55rem;
+    font-size: 0.55rem;
+    gap: 0.4rem;
+  }
+  .opening-tech svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+  .opening-code-line {
+    font-size: 0.5rem;
+  }
+  .opening-code-orbit-one {
+    transform: translate(-38px, -55px);
+  }
+  .opening-code-orbit-two {
+    transform: translate(30px, 55px);
+  }
   .portfolio-hero {
     padding-top: 8rem;
     padding-bottom: 0;

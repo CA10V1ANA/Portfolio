@@ -1,5 +1,5 @@
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
-import { Mail } from 'lucide-react';
+import { Mail, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CONTACT_LINKS, PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
@@ -56,7 +56,13 @@ export function Footer() {
         <p className="text-sm text-muted-foreground">
           {t('footer.copyright', { year, name: PERSONAL_INFO.name })}
         </p>
-        <p className="text-xs text-muted-foreground/70">{t('footer.builtWith')}</p>
+        <p className="text-xs text-muted-foreground">{t('footer.builtWith')}</p>
+        <a
+          href="/?intro=1"
+          className="inline-flex min-h-11 items-center gap-2 rounded-sm text-xs text-muted-foreground transition-colors hover:text-accent"
+        >
+          <RotateCcw size={13} aria-hidden="true" /> {t('footer.replayIntro')}
+        </a>
       </div>
     </footer>
   );

@@ -6,6 +6,7 @@ import { PortfolioLayout } from '@/components/layout/PortfolioLayout';
 import { NotFound } from '@/pages/NotFound';
 import { HomePage } from '@/pages/HomePage';
 import { ProjectPage } from '@/pages/ProjectPage';
+import { OpeningIntro } from '@/components/shared/OpeningIntro';
 
 function PageFallback() {
   const { t } = useTranslation('common');
@@ -19,6 +20,7 @@ function PageFallback() {
 function App() {
   return (
     <ThemeProvider>
+      <OpeningIntro />
       <Suspense fallback={<PageFallback />}>
         <Routes>
           <Route element={<PortfolioLayout />}>
