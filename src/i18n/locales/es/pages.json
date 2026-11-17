@@ -12,7 +12,11 @@
     "seo": {
       "title": "Caio Viana — Desarrollador Full Stack",
       "description": "Portafolio de Caio Viana, desarrollador Full Stack en Fortaleza, Brasil."
-    }
+    },
+    "ctaProjects": "Ver proyectos",
+    "ctaFeatured": "Explorar JS BOY",
+    "discipline": "Backend, interfaz y lo que conecta ambos.",
+    "selectedWork": "Trabajos seleccionados"
   },
   "about": {
     "eyebrow": "03 / Sobre mí",

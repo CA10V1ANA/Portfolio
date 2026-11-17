@@ -1,7 +1,7 @@
-import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, GitBranch } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
+import { PERSONAL_INFO } from '@/lib/constants';
 import { BrandMonogram } from '@/components/shared/BrandLogo';
 
 export function Hero() {
@@ -9,48 +9,39 @@ export function Hero() {
   const { t: tc } = useTranslation('common');
 
   return (
-    <section
-      id="hero"
-      className="relative isolate flex min-h-[90svh] items-center border-b border-border px-6 pb-20 pt-32 sm:px-8 lg:px-10"
-    >
-      <div className="mx-auto grid w-full max-w-7xl gap-16 lg:grid-cols-[minmax(0,1.4fr)_minmax(300px,0.6fr)] lg:items-end">
-        <div>
-          <p className="mb-7 font-mono text-xs font-medium uppercase tracking-[0.24em] text-accent">
-            {t('home.eyebrow')}
-          </p>
-          <h1 className="max-w-4xl font-display text-[clamp(4rem,10vw,8.75rem)] font-semibold leading-[0.96] tracking-[-0.075em]">
-            Caio <span className="text-accent">Viana.</span>
+    <section id="hero" className="portfolio-hero relative isolate border-b border-border">
+      <div className="hero-grid mx-auto w-full max-w-7xl">
+        <div className="hero-copy">
+          <p className="eyebrow mb-7">{t('home.eyebrow')}</p>
+          <h1 className="hero-title">
+            Caio <span>Viana.</span>
           </h1>
-          <p className="mt-10 max-w-[42rem] text-xl leading-relaxed text-muted-foreground sm:text-2xl">
-            {t('home.description')}
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link
-              to="/#about"
-              className="inline-flex min-h-12 items-center gap-3 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-secondary"
-            >
-              {t('home.ctaAbout')} <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
+          <p className="hero-description">{t('home.description')}</p>
+          <div className="hero-actions">
+            <Link to="/#projects" className="action-primary">
+              {t('home.ctaProjects')} <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link
-              to="/#projects"
-              className="inline-flex min-h-12 items-center gap-3 rounded-md border border-border px-6 py-3 font-semibold transition-colors hover:border-accent hover:text-accent"
-            >
-              {t('home.ctaProject')} <ArrowDownRight className="h-4 w-4" aria-hidden="true" />
+            <Link to="/projetos/js-boy" className="action-secondary">
+              {t('home.ctaFeatured')} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <a
-              href={SOCIAL_LINKS.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center gap-3 rounded-md border border-border px-6 py-3 font-semibold transition-colors hover:border-accent hover:text-accent"
-            >
-              GitHub <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
           </div>
+          <a className="hero-resume text-link" href={PERSONAL_INFO.resumeUrl} download>
+            {tc('actions.downloadResume')} <ArrowUpRight size={15} aria-hidden="true" />
+          </a>
         </div>
 
-        <div className="border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-9 lg:pt-0">
-          <BrandMonogram />
-          <dl className="mt-8 grid gap-3 border-t border-border pt-6 font-mono text-xs sm:grid-cols-2 lg:grid-cols-1">
+        <div className="hero-identity">
+          <div className="hero-identity-label" aria-hidden="true">
+            <GitBranch size={14} /> dev/viana <span>→ main</span>
+          </div>
+          <div className="hero-monogram">
+            <BrandMonogram />
+          </div>
+          <div className="hero-identity-stack" aria-hidden="true">
+            <span>Java / Spring</span>
+            <span>React / Angular</span>
+          </div>
+          <dl className="hero-facts">
             <div className="flex gap-4">
               <dt className="text-muted-foreground">{t('home.locationLabel')}</dt>
               <dd>{t('home.locationValue')}</dd>
@@ -60,14 +51,13 @@ export function Hero() {
               <dd>{t('home.educationValue')}</dd>
             </div>
           </dl>
-          <a
-            className="mt-8 inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-            href={PERSONAL_INFO.resumeUrl}
-            download
-          >
-            {tc('actions.downloadResume')} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </a>
         </div>
+      </div>
+      <div className="hero-bottom mx-auto max-w-7xl">
+        <span>{t('home.discipline')}</span>
+        <a href="#projects">
+          {t('home.selectedWork')} <ArrowDownRight size={14} aria-hidden="true" />
+        </a>
       </div>
     </section>
   );
