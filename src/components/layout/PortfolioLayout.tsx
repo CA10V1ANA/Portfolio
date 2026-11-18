@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Footer } from '@/components/layout/Footer';
 import { Navbar } from '@/components/layout/Navbar';
 import { RouteMetadata } from '@/components/layout/RouteMetadata';
+import { KineticGrid } from '@/components/ui/kinetic-grid';
 
 export function PortfolioLayout() {
   const location = useLocation();
@@ -65,6 +66,7 @@ export function PortfolioLayout() {
       <a className="skip-link" href="#main-content">
         {t('a11y.skipToContent')}
       </a>
+      <KineticGrid />
       <RouteMetadata />
       <Navbar />
       <main id="main-content" key={location.pathname} className="route-content">
