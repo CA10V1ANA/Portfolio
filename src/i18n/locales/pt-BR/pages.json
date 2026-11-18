@@ -41,21 +41,27 @@
     "current": "atual",
     "ongoing": "em andamento",
     "role": {
-      "acsAutomacao": "Estagiário de Desenvolvimento Full Stack",
-      "acsDesc1": "Manutenção e evolução de sistemas corporativos.",
-      "acsDesc2": "Implementação de funcionalidades e correção de bugs em aplicações e APIs REST."
+      "ravTitle": "Estagiário em Desenvolvimento de Sistemas",
+      "ravPeriod": "Mai/2026",
+      "ravDesc1": "Atuação na evolução e manutenção de sistemas corporativos, compreendendo fluxos entre interface, APIs, serviços externos e banco de dados.",
+      "ravDesc2": "Atuação no sistema Fiber, com manutenção de funcionalidades e integração de dados com serviços do Jarbis.",
+      "ravDesc3": "Investigação e correção de problemas em funcionalidades, analisando regras de negócio, requisições HTTP, respostas JSON e dados persistidos.",
+      "ravDesc4": "Trabalho diário com Groovy/Grails e Oracle, utilizando Git e GitHub para versionamento.",
+      "ravInternshipTitle": "Estágio escolar (EEEP Marwin)",
+      "ravInternshipPeriod": "Ago/2025 — Dez/2025"
     },
     "education": {
       "uniateneuField": "Engenharia de Software",
       "uniateneuDegree": "Bacharelado",
+      "uniateneuPeriod": "Jan/2026 — Dez/2029 (prev.)",
       "uniateneuDesc": "Formação com foco em engenharia de software, arquitetura de sistemas, estrutura de dados, banco de dados, desenvolvimento web e boas práticas de programação.",
-      "marwinField": "Desenvolvimento de Sistemas",
+      "marwinField": "Técnico em Desenvolvimento de Sistemas",
       "marwinDegree": "Ensino Médio e Técnico Integrado",
       "marwinDesc": "Formação técnica integrada ao ensino médio, com fundamentos de programação e desenvolvimento de sistemas."
     },
     "seo": {
       "title": "Experiência — Caio Viana",
-      "description": "Experiência profissional e formação em Engenharia de Software de Caio Viana."
+      "description": "Experiência profissional na Rav Tecnologia e formação em Engenharia de Software de Caio Viana."
     }
   },
   "contact": {

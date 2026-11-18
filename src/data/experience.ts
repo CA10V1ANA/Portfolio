@@ -2,10 +2,16 @@ import type { ExperienceItem } from '@/types';
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    id: 'acs-automacao',
-    company: 'ACS Automação Comercial e Sistemas',
-    startDate: '2025',
+    id: 'rav-tecnologia',
+    company: 'Rav Tecnologia',
+    startDate: '2026-05',
     current: true,
-    technologies: ['Java', 'Kotlin', 'Spring Boot', 'Angular', 'JPA / Hibernate', 'PostgreSQL', 'Git', 'Docker'],
+    technologies: ['Groovy / Grails', 'Oracle', 'APIs REST', 'HTTP / JSON', 'Git', 'GitHub'],
+  },
+  {
+    id: 'rav-tecnologia-estagio-escolar',
+    company: 'Rav Tecnologia',
+    startDate: '2025-08',
+    endDate: '2025-12',
   },
 ];

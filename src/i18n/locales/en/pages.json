@@ -41,21 +41,27 @@
     "current": "current",
     "ongoing": "in progress",
     "role": {
-      "acsAutomacao": "Full Stack Development Intern",
-      "acsDesc1": "Maintaining and evolving enterprise systems.",
-      "acsDesc2": "Implementing features and fixing bugs across applications and REST APIs."
+      "ravTitle": "Systems Development Intern",
+      "ravPeriod": "May/2026",
+      "ravDesc1": "Working on the evolution and maintenance of enterprise systems, understanding end-to-end flows across UI, APIs, external services, and databases.",
+      "ravDesc2": "Working on the Fiber system, maintaining features and integrating data with Jarbis services.",
+      "ravDesc3": "Investigating and fixing feature issues by analyzing business rules, HTTP requests, JSON responses, and persisted data.",
+      "ravDesc4": "Developing with Groovy/Grails and Oracle, using Git and GitHub for version control.",
+      "ravInternshipTitle": "School Internship (EEEP Marwin)",
+      "ravInternshipPeriod": "Aug/2025 — Dec/2025"
     },
     "education": {
       "uniateneuField": "Software Engineering",
       "uniateneuDegree": "Bachelor's degree",
+      "uniateneuPeriod": "Jan/2026 — Dec/2029 (expected)",
       "uniateneuDesc": "Focused on software engineering, systems architecture, data structures, databases, web development and programming best practices.",
-      "marwinField": "Systems Development",
+      "marwinField": "Systems Development Technician",
       "marwinDegree": "High School with Integrated Technical Diploma",
       "marwinDesc": "Technical training integrated with high school education, covering programming fundamentals and systems development."
     },
     "seo": {
       "title": "Experience — Caio Viana",
-      "description": "Professional experience and Software Engineering education of Caio Viana."
+      "description": "Professional experience at Rav Tecnologia and Software Engineering education of Caio Viana."
     }
   },
   "contact": {

@@ -4,7 +4,8 @@ import { EXPERIENCE } from '@/data/experience';
 
 export function Experience() {
   const { t } = useTranslation('pages');
-  const role = EXPERIENCE[0];
+  const currentRole = EXPERIENCE[0];
+  const schoolInternship = EXPERIENCE[1];
   const degree = EDUCATION[0];
   const technical = EDUCATION[1];
 
@@ -35,20 +36,23 @@ export function Experience() {
               aria-hidden="true"
             />
             <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              feat/full-stack-experience
+              feat/enterprise-systems
             </p>
-            <h3 className="mt-3 text-2xl font-semibold">{t('experience.role.acsAutomacao')}</h3>
+            <h3 className="mt-3 text-2xl font-semibold">{t('experience.role.ravTitle')}</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              {role.company} · {role.startDate} — {t('experience.current')}
+              {currentRole.company} · {t('experience.role.ravPeriod')} — {t('experience.current')}
             </p>
             <ul className="mt-5 max-w-3xl list-disc space-y-2 pl-5 leading-7 text-muted-foreground">
-              <li>{t('experience.role.acsDesc1')}</li>
-              <li>{t('experience.role.acsDesc2')}</li>
+              <li>{t('experience.role.ravDesc1')}</li>
+              <li>{t('experience.role.ravDesc2')}</li>
+              <li>{t('experience.role.ravDesc3')}</li>
+              <li>{t('experience.role.ravDesc4')}</li>
             </ul>
             <p className="mt-5 font-mono text-xs text-muted-foreground">
-              {role.technologies?.join(' · ')}
+              {currentRole.technologies?.join(' · ')}
             </p>
           </li>
+
           <li className="relative border-b border-border py-10">
             <span
               className="absolute -left-[2.05rem] top-11 h-3 w-3 rounded-full border-2 border-accent bg-background sm:-left-[3.35rem]"
@@ -61,9 +65,27 @@ export function Experience() {
               {t('experience.education.uniateneuField')}
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              {degree.institution} · {t('experience.ongoing')}
+              {degree.institution} · {t('experience.education.uniateneuPeriod')} ·{' '}
+              {t('experience.ongoing')}
             </p>
           </li>
+
+          <li className="relative border-b border-border py-10">
+            <span
+              className="absolute -left-[2.05rem] top-11 h-3 w-3 rounded-full border-2 border-accent bg-background sm:-left-[3.35rem]"
+              aria-hidden="true"
+            />
+            <p className="font-mono text-xs uppercase tracking-widest text-accent">
+              feat/school-internship
+            </p>
+            <h3 className="mt-3 text-2xl font-semibold">
+              {t('experience.role.ravInternshipTitle')}
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {schoolInternship.company} · {t('experience.role.ravInternshipPeriod')}
+            </p>
+          </li>
+
           <li className="relative pt-10">
             <span
               className="absolute -left-[2.05rem] top-11 h-3 w-3 rounded-full border-2 border-accent bg-background sm:-left-[3.35rem]"
