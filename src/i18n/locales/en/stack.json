@@ -54,7 +54,5 @@
     "testcontainers": "Real container-backed integration tests for API flows and persistence.",
     "vitest": "Fast unit testing for logic and components in Vite and TypeScript projects.",
     "react-testing-library": "User-centric behavioral UI tests for React components."
-  },
-  "pauseMotion": "Pause animation",
-  "playMotion": "Animate stack"
+  }
 }

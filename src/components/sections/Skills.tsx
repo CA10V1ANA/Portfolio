@@ -15,7 +15,6 @@ const technologyIndex = (technology: PortfolioTechnology) =>
 
 export function Skills() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [autoplay, setAutoplay] = useState(false);
   const [manualUntil, setManualUntil] = useState(0);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -41,11 +40,11 @@ export function Skills() {
   }, []);
 
   useEffect(() => {
-    if (!autoplay || reducedMotion || hovered || focused || hidden) return;
+    if (reducedMotion || hovered || focused || hidden) return;
     const delay = Math.max(6000, manualUntil - Date.now());
     const timer = window.setTimeout(() => setActiveIndex(technologyIndex(next)), delay);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, autoplay, focused, hidden, hovered, manualUntil, next, reducedMotion]);
+  }, [activeIndex, focused, hidden, hovered, manualUntil, next, reducedMotion]);
 
   function select(index: number) {
     setActiveIndex(index);
@@ -58,7 +57,7 @@ export function Skills() {
   }
 
   const orbitNodes = [previous, active, next];
-  const paused = Boolean(!autoplay || reducedMotion || hidden || hovered || focused);
+  const paused = Boolean(reducedMotion || hidden || hovered || focused);
   const branchStart = 125 + activeBranchIndex * 250;
   const branchLabel = t(`branches.${active.branch}`);
 
@@ -78,18 +77,6 @@ export function Skills() {
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             {t('introduction')}
           </p>
-        </div>
-
-        <div className="mb-5 flex justify-end">
-          <button
-            type="button"
-            className="action-secondary text-sm"
-            aria-pressed={autoplay}
-            onClick={() => setAutoplay((value) => !value)}
-            disabled={Boolean(reducedMotion)}
-          >
-            {autoplay ? t('pauseMotion') : t('playMotion')}
-          </button>
         </div>
 
         <div

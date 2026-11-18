@@ -54,7 +54,5 @@
     "testcontainers": "Pruebas de integración con contenedores reales para validar persistencia y APIs.",
     "vitest": "Pruebas unitarias rápidas para lógica y componentes en proyectos Vite y TypeScript.",
     "react-testing-library": "Pruebas de interfaz centradas en el comportamiento real del usuario en React."
-  },
-  "pauseMotion": "Pausar animación",
-  "playMotion": "Animar stack"
+  }
 }
