@@ -3,21 +3,13 @@ import { flushSync } from 'react-dom';
 import { InkTransitionController } from '@/lib/ink/inkController';
 import { ThemeContext, type Theme } from './theme-context';
 
-const STORAGE_KEY = 'dev-viana-theme';
 const THEME_COLORS: Record<Theme, string> = {
   light: '#f4efe7',
   dark: '#151b1e',
 };
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'light';
-  try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored === 'dark' || stored === 'light') return stored;
-  } catch {
-    /* Storage blocked: fall back to the default light theme. */
-  }
-  // Light is the default theme; dark only applies after an explicit user choice.
+  // Always open in light when entering the site; dark is toggled per visit.
   return 'light';
 }
 
@@ -67,11 +59,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         const next: Theme = current === 'dark' ? 'light' : 'dark';
 
         const commitTheme = (instantSnap: boolean) => {
-          try {
-            window.localStorage.setItem(STORAGE_KEY, next);
-          } catch {
-            /* Switching still works. */
-          }
           const root = document.documentElement;
           if (instantSnap) {
             root.classList.add('ink-instant-flip');
