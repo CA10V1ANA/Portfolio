@@ -6,9 +6,9 @@ import type { Project } from '@/types';
  */
 export const PROJECT_I18N_MAP: Record<string, string> = {
   'js-boy': 'jsBoy',
-  pokedex: 'pokedex',
+  'sonho-de-pudim': 'sonhoDePudim',
+  'md-films': 'mdFilms',
   'if-make': 'ifMake',
-  devpilot: 'devpilot',
   gymflow: 'gymflow',
   'codementor-ia': 'codementorIa',
 };
@@ -25,13 +25,23 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
-    id: 'pokedex',
+    id: 'sonho-de-pudim',
     screenshots: [],
-    title: 'Pokédex — Pokémon Explorer',
+    title: 'Sonho de Pudim',
     status: 'deployed',
-    technologies: ['Angular 19', 'TypeScript', 'Signals', 'SCSS', 'PokéAPI', 'Vitest'],
-    githubUrl: 'https://github.com/CA10V1ANA/Pokedex',
-    demoUrl: 'https://ca10v1ana.github.io/Pokedex/',
+    technologies: ['Angular 22', 'TypeScript', 'Signals', 'SCSS', 'Vercel'],
+    githubUrl: 'https://github.com/CA10V1ANA/sonho-de-pudim',
+    demoUrl: 'https://sonho-de-pudim.vercel.app',
+    featured: true,
+  },
+  {
+    id: 'md-films',
+    screenshots: [],
+    title: 'Madu Films',
+    status: 'active',
+    technologies: ['Angular 22', 'TypeScript', 'Angular Router', 'SCSS', 'Vercel'],
+    githubUrl: 'https://github.com/CA10V1ANA/Md-films',
+    demoUrl: 'https://md-films-sigma.vercel.app',
     featured: true,
   },
   {
@@ -41,14 +51,6 @@ export const PROJECTS: Project[] = [
     status: 'deployed',
     technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
     demoUrl: 'https://if-make.vercel.app/',
-    featured: true,
-  },
-  {
-    id: 'devpilot',
-    screenshots: [],
-    title: 'DevPilot',
-    status: 'active',
-    technologies: ['TypeScript', 'Runtime local'],
     featured: true,
   },
   {

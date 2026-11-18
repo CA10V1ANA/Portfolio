@@ -420,7 +420,7 @@
     mask-image: linear-gradient(135deg, black, transparent 70%);
   }
 
-  .project-cover-pokedex {
+  .project-cover-sonho-de-pudim {
     background-image: linear-gradient(160deg, hsl(var(--accent) / 0.13), hsl(var(--background)));
   }
 
@@ -429,7 +429,7 @@
     background-image: linear-gradient(45deg, hsl(var(--accent) / 0.12), transparent 75%);
   }
 
-  .project-cover-devpilot {
+  .project-cover-md-films {
     background-image: radial-gradient(
       ellipse at 100% 0%,
       hsl(var(--accent) / 0.2),

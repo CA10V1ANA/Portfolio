@@ -8,14 +8,23 @@
     "problem": "Los procesos manuales y la información descentralizada dificultaban el seguimiento de las entregas.",
     "contribution": "Desarrollo de la aplicación web, API y base de datos, con autenticación por perfil y evolución continua del flujo operacional."
   },
-  "pokedex": {
-    "subtitle": "Catálogo interactivo de Pokémon",
-    "category": "Proyecto de estudio · Frontend",
-    "statusLabel": "Completado",
-    "context": "Proyecto de estudio · Frontend",
-    "description": "Pokédex moderna y responsiva para explorar, buscar, filtrar y guardar Pokémon como favoritos, consumiendo datos de la PokéAPI en tiempo real.",
-    "problem": "Organizar una gran cantidad de información de la PokéAPI en una experiencia rápida, visual y fácil de explorar.",
-    "contribution": "Desarrollo de la aplicación Angular, arquitectura de componentes, estado reactivo con Signals, integración con la PokéAPI, persistencia de favoritos y pruebas unitarias."
+  "sonhoDePudim": {
+    "subtitle": "Vitrina digital y pedidos",
+    "category": "Proyecto para cliente · Repostería artesanal",
+    "statusLabel": "Publicado · Completado",
+    "context": "Proyecto para cliente · Repostería artesanal",
+    "description": "Sitio institucional y vitrina digital para la repostería artesanal Sonho de Pudim, con presentación de sabores y tamaños, prueba social y atención integrada a iFood y WhatsApp.",
+    "problem": "Organizar tamaños, versiones tradicional y sin lactosa y distintos canales de pedido (iFood, eventos, reventa y atención directa) en una experiencia clara en el móvil.",
+    "contribution": "Desarrollo completo en Angular con Signals y SCSS, modal unificado de pedidos y presupuestos por WhatsApp, animaciones de scroll y publicación continua en Vercel."
+  },
+  "mdFilms": {
+    "subtitle": "Portafolio audiovisual y presupuestos",
+    "category": "Proyecto para cliente · Audiovisual",
+    "statusLabel": "En desarrollo · Publicado",
+    "context": "Proyecto para cliente · Audiovisual",
+    "description": "Portafolio y catálogo de paquetes para la profesional audiovisual Madu Reis, reuniendo trabajos con filtros, planes de cobertura y constructor de presupuesto personalizado para WhatsApp.",
+    "problem": "Presentar paquetes de fotografía y video con flexibilidad para personalizar horas, equipo y entregas sin fricción al solicitar presupuesto.",
+    "contribution": "Desarrollo en Angular 22 con rutas, galería filtrable, modal multipaso para paquete personalizado, composición automática de mensaje para WhatsApp, pruebas de reglas y deploy en Vercel."
   },
   "ifMake": {
     "subtitle": "Portafolio de Social Media",
@@ -23,13 +32,6 @@
     "statusLabel": "Publicado",
     "context": "Proyecto para cliente",
     "description": "Sitio web para presentar los servicios, trabajos y posicionamiento profesional de una clienta de social media."
-  },
-  "devpilot": {
-    "subtitle": "Agente de apoyo al liderazgo técnico",
-    "category": "AI Engineering",
-    "statusLabel": "En desarrollo",
-    "context": "AI Engineering",
-    "description": "Agente personal creado para apoyar decisiones técnicas durante un hackathon, con planificación, debugging, revisión de código y control de contexto por proyecto."
   },
   "gymflow": {
     "subtitle": "Gestión de gimnasios",

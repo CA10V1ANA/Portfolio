@@ -38,7 +38,7 @@ export function ProjectVisual({ project }: { project: Project }) {
         <circle cx="450" cy="265" r="7" />
       </svg>
       <div className="cover-name">
-        <strong>{project.id === 'pokedex' ? 'Pokédex' : project.title}</strong>
+        <strong>{project.title}</strong>
         <span>{t(`${key}.subtitle`)}</span>
       </div>
       <span className="cover-bottom">{project.technologies.slice(0, 3).join(' / ')}</span>

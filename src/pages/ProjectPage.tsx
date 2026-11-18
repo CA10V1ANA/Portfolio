@@ -3,7 +3,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PROJECTS, PROJECT_I18N_MAP } from '@/data/projects';
-import { PROJECT_PATH, SOCIAL_LINKS } from '@/lib/constants';
+import { PROJECT_PATH } from '@/lib/constants';
 import { ProjectVisual } from '@/components/shared/ProjectVisual';
 
 const FEATURED_PROJECTS = PROJECTS.filter((project) => project.featured).slice(0, 4);
@@ -136,16 +136,6 @@ export function ProjectPage() {
               {project.docsUrl && (
                 <a className="text-link" href={project.docsUrl} target="_blank" rel="noreferrer">
                   {tc('actions.viewDocs')} <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              )}
-              {project.id === 'devpilot' && (
-                <a
-                  className="text-link"
-                  href={SOCIAL_LINKS.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {tc('actions.exploreGithub')} <ArrowUpRight size={16} aria-hidden="true" />
                 </a>
               )}
             </div>

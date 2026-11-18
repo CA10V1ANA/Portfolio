@@ -8,14 +8,23 @@
     "problem": "Manual processes and decentralized information made it hard to track deliveries.",
     "contribution": "Building the web application, API and database, with role-based authentication and ongoing evolution of the operational flow."
   },
-  "pokedex": {
-    "subtitle": "Interactive Pokémon catalog",
-    "category": "Study project · Frontend",
-    "statusLabel": "Completed",
-    "context": "Study project · Frontend",
-    "description": "Modern, responsive Pokédex for exploring, searching, filtering and favoriting Pokémon using real-time data from the PokéAPI.",
-    "problem": "Organizing a large amount of PokéAPI data into a fast, visual and easy-to-explore experience.",
-    "contribution": "Building the Angular application, component architecture, reactive state with Signals, PokéAPI integration, local favorites and unit tests."
+  "sonhoDePudim": {
+    "subtitle": "Digital storefront & orders",
+    "category": "Client project · Artisan bakery",
+    "statusLabel": "Published · Completed",
+    "context": "Client project · Artisan bakery",
+    "description": "Institutional website and digital storefront for the artisan bakery Sonho de Pudim, showcasing flavors and sizes, social proof, and integrated iFood and WhatsApp ordering.",
+    "problem": "Bringing sizes, traditional and lactose-free options, and multiple ordering channels (iFood, events, wholesale, and direct support) together in a fast mobile experience.",
+    "contribution": "End-to-end development in Angular with Signals and SCSS, unified modal for orders and event quotes via WhatsApp, scroll animations, and Vercel deployment."
+  },
+  "mdFilms": {
+    "subtitle": "Audiovisual portfolio & quotes",
+    "category": "Client project · Audiovisual",
+    "statusLabel": "In development · Published",
+    "context": "Client project · Audiovisual",
+    "description": "Portfolio and package catalog for audiovisual professional Madu Reis, combining filterable work, event coverage packages, and a custom quote builder sent to WhatsApp.",
+    "problem": "Presenting wedding and event photo/film packages while letting clients customize hours, crew, and deliverables without friction.",
+    "contribution": "Built in Angular 22 with routing, filterable gallery, multi-step custom package modal, automated WhatsApp quote builder, rule tests, and Vercel deployment."
   },
   "ifMake": {
     "subtitle": "Social Media Portfolio",
@@ -23,13 +32,6 @@
     "statusLabel": "Published",
     "context": "Client project",
     "description": "Website to showcase the services, work and professional positioning of a social media client."
-  },
-  "devpilot": {
-    "subtitle": "Technical leadership support agent",
-    "category": "AI Engineering",
-    "statusLabel": "In development",
-    "context": "AI Engineering",
-    "description": "Personal agent built to support technical decisions during a hackathon, with planning, debugging, code review and per-project context control."
   },
   "gymflow": {
     "subtitle": "Gym management system",
