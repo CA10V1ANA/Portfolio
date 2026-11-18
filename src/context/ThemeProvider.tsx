@@ -15,16 +15,16 @@ function getInitialTheme(): Theme {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === 'dark' || stored === 'light') return stored;
   } catch {
-    /* System preference is available even when storage is blocked. */
+    /* Storage blocked: fall back to the default light theme. */
   }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  // Light is the default theme; dark only applies after an explicit user choice.
+  return 'light';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const themeRef = useRef<Theme>(theme);
   themeRef.current = theme;
-  const explicitChoice = useRef(false);
   const transitioning = useRef(false);
   const inkRef = useRef<InkTransitionController | null>(null);
 
@@ -41,24 +41,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       metaThemeColor.setAttribute('content', THEME_COLORS[theme]);
     }
   }, [theme]);
-
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      explicitChoice.current = stored === 'dark' || stored === 'light';
-    } catch {
-      /* Keep following the system if storage is unavailable. */
-    }
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const update = () => {
-      if (!explicitChoice.current) {
-        setTheme(media.matches ? 'dark' : 'light');
-        inkRef.current?.invalidate();
-      }
-    };
-    media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
 
   useEffect(() => {
     // Touch/mobile devices use the instant GPU View Transitions reveal directly to avoid
@@ -85,7 +67,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         const next: Theme = current === 'dark' ? 'light' : 'dark';
 
         const commitTheme = (instantSnap: boolean) => {
-          explicitChoice.current = true;
           try {
             window.localStorage.setItem(STORAGE_KEY, next);
           } catch {
