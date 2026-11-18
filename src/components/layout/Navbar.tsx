@@ -30,9 +30,6 @@ export function Navbar() {
 
   useEffect(() => {
     if (location.pathname !== '/') return;
-    const sections = NAV_PATHS.map((link) => document.getElementById(link.section)).filter(
-      (section): section is HTMLElement => Boolean(section),
-    );
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -42,8 +39,33 @@ export function Navbar() {
       },
       { rootMargin: '-28% 0px -58% 0px', threshold: [0, 0.2, 0.6] },
     );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+
+    const observed = new Set<HTMLElement>();
+    const syncSections = () => {
+      for (const link of NAV_PATHS) {
+        const el = document.getElementById(link.section);
+        if (el && !observed.has(el)) {
+          observed.add(el);
+          observer.observe(el);
+        }
+      }
+    };
+
+    syncSections();
+    const main = document.getElementById('main-content');
+    const mutationObserver = main
+      ? new MutationObserver(() => {
+          syncSections();
+        })
+      : null;
+    if (main && mutationObserver) {
+      mutationObserver.observe(main, { childList: true, subtree: true });
+    }
+
+    return () => {
+      mutationObserver?.disconnect();
+      observer.disconnect();
+    };
   }, [location.pathname]);
 
   useEffect(() => {

@@ -31,8 +31,8 @@ export const GITHUB_USERNAME = 'CA10V1ANA';
  */
 export const NAV_PATHS = [
   { key: 'home', path: '/', section: 'hero' },
-  { key: 'about', path: '/#about', section: 'about' },
   { key: 'projects', path: '/#projects', section: 'projects' },
+  { key: 'about', path: '/#about', section: 'about' },
   { key: 'stack', path: '/#skills', section: 'skills' },
   { key: 'experience', path: '/#experience', section: 'experience' },
   { key: 'contact', path: '/#contact', section: 'contact' },

@@ -59,7 +59,7 @@ export function PortfolioLayout() {
       heading.tabIndex = -1;
       heading.focus({ preventScroll: true });
     }
-  }, [location.hash, location.pathname]);
+  }, [location.hash, location.key, location.pathname]);
 
   return (
     <>
