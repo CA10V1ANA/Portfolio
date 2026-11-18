@@ -15,7 +15,7 @@ const SPREAD = {
 } as const;
 
 const FADE_OUT_MS = 150;
-const IDLE_DEBOUNCE_MS = 300;
+const IDLE_DEBOUNCE_MS = 900;
 const PRELOAD_BRAND_ASSETS = ['/brand/logo-dv-light.png', '/brand/logo-dv-dark.png'];
 
 function easePower3Out(t: number): number {
@@ -174,7 +174,7 @@ export class InkTransitionController {
       childList: true,
       characterData: true,
       attributes: true,
-      attributeFilter: ['class', 'style', 'hidden', 'src', 'srcset', 'data-project-reveal', 'open'],
+      attributeFilter: ['class', 'hidden', 'src', 'srcset', 'data-project-reveal', 'open'],
     });
 
     this.rootObserver = new MutationObserver(() => {

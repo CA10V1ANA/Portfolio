@@ -15,9 +15,9 @@ export const THEME_BACKGROUNDS: Record<Theme, string> = {
 const isCoarsePointer = () =>
   typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 
-/** Device-pixel scale capped to keep GPU textures fast and within WebGL limits. */
+/** Device-pixel scale capped to keep GPU textures and html2canvas captures responsive. */
 export function renderScale(): number {
-  const cap = isCoarsePointer() ? 1.5 : 2;
+  const cap = isCoarsePointer() ? 1 : 1.5;
   return Math.min(window.devicePixelRatio || 1, cap);
 }
 

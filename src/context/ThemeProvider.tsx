@@ -61,6 +61,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // Touch/mobile devices use the instant GPU View Transitions reveal directly to avoid
+    // blocking the mobile CPU with html2canvas DOM snapshots on scroll and tap.
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
     const controller = new InkTransitionController(() => themeRef.current);
     inkRef.current = controller;
     return () => {
