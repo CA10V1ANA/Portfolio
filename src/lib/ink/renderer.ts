@@ -15,7 +15,7 @@ export interface InkFrame {
 }
 
 export const INK_PARAMS = {
-  duration: 1.4,
+  duration: 0.95,
   tendril: 1,
   noiseScale: 1,
   softness: 1.4,

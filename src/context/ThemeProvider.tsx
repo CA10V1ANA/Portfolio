@@ -129,7 +129,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
           root.classList.add('theme-transition');
           transitioning.current = true;
           try {
-            const transition = doc.startViewTransition(() => commitTheme(false));
+            const transition = doc.startViewTransition(() => commitTheme(true));
             void transition.ready.catch(() => undefined);
             void transition.finished
               .catch(() => undefined)

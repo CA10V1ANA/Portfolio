@@ -967,7 +967,7 @@ html.ink-instant-flip *::after {
 }
 .theme-transition::view-transition-new(root) {
   z-index: 2;
-  animation: theme-reveal 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: theme-reveal 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes theme-reveal {

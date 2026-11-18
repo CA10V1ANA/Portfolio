@@ -1,4 +1,3 @@
-import { useTheme } from '@/hooks/useTheme';
 import { cn } from '@/lib/utils';
 
 interface BrandSignatureProps {
@@ -60,17 +59,27 @@ interface BrandMonogramProps {
  * Alterna automaticamente entre as versões com fundo transparente para modo claro e escuro.
  */
 export function BrandMonogram({ className, imgClassName }: BrandMonogramProps) {
-  const { theme } = useTheme();
-  const src = theme === 'dark' ? '/brand/logo-dv-dark.png' : '/brand/logo-dv-light.png';
+  // Both variants stay decoded in memory and swap via CSS, so the theme flip never
+  // waits on a network request or image decode.
+  const imgClass = cn('h-auto w-full max-w-[13.5rem] select-none object-contain', imgClassName);
 
   return (
     <div className={cn('inline-flex items-center', className)}>
       <img
-        src={src}
+        src="/brand/logo-dv-light.png"
         alt="Dev Viana — Desenvolvendo Soluções"
         width={480}
         height={446}
-        className={cn('h-auto w-full max-w-[13.5rem] select-none object-contain', imgClassName)}
+        decoding="async"
+        className={cn(imgClass, 'dark:hidden')}
+      />
+      <img
+        src="/brand/logo-dv-dark.png"
+        alt="Dev Viana — Desenvolvendo Soluções"
+        width={480}
+        height={446}
+        decoding="async"
+        className={cn(imgClass, 'hidden dark:block')}
       />
     </div>
   );

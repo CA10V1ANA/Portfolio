@@ -17,8 +17,8 @@ const isCoarsePointer = () =>
 
 /** Device-pixel scale capped to keep GPU textures and html2canvas captures responsive. */
 export function renderScale(): number {
-  const cap = isCoarsePointer() ? 1 : 1.5;
-  return Math.min(window.devicePixelRatio || 1, cap);
+  // 1x keeps html2canvas captures short; the ink overlay is only visible for < 1s.
+  return isCoarsePointer() ? 1 : Math.min(window.devicePixelRatio || 1, 1);
 }
 
 /** Identifies the current viewport layout + scroll position that a snapshot covers. */

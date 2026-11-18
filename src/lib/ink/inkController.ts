@@ -14,8 +14,8 @@ const SPREAD = {
   cleanupPow: 2,
 } as const;
 
-const FADE_OUT_MS = 150;
-const IDLE_DEBOUNCE_MS = 900;
+const FADE_OUT_MS = 120;
+const IDLE_DEBOUNCE_MS = 600;
 const PRELOAD_BRAND_ASSETS = ['/brand/logo-dv-light.png', '/brand/logo-dv-dark.png'];
 
 function easePower3Out(t: number): number {
@@ -226,12 +226,12 @@ export class InkTransitionController {
 
     this.toggling = true;
     try {
+      // Never block the click on an html2canvas capture: if the pre-warmed snapshot is
+      // stale (e.g. right after scrolling), fall back to the instant GPU View Transition
+      // and refresh the snapshot in the background for the next toggle.
       if (!renderer.hasValid(fromTheme, key)) {
-        const snap = await this.captureFor(fromTheme, scale, key);
-        if (this.disposed || renderer.isLost || this.reducedMotion.matches || !snap) {
-          return false;
-        }
-        renderer.upload(snap);
+        this.scheduleCapture(IDLE_DEBOUNCE_MS);
+        return false;
       }
 
       const center = origin ?? { x: window.innerWidth / 2, y: 40 };
