@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { flushSync } from 'react-dom';
+import { InkTransitionController } from '@/lib/ink/inkController';
 import { ThemeContext, type Theme } from './theme-context';
 
 const STORAGE_KEY = 'dev-viana-theme';
@@ -21,8 +22,11 @@ function getInitialTheme(): Theme {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const themeRef = useRef<Theme>(theme);
+  themeRef.current = theme;
   const explicitChoice = useRef(false);
   const transitioning = useRef(false);
+  const inkRef = useRef<InkTransitionController | null>(null);
 
   useLayoutEffect(() => {
     const root = window.document.documentElement;
@@ -47,66 +51,107 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const update = () => {
-      if (!explicitChoice.current) setTheme(media.matches ? 'dark' : 'light');
+      if (!explicitChoice.current) {
+        setTheme(media.matches ? 'dark' : 'light');
+        inkRef.current?.invalidate();
+      }
     };
     media.addEventListener('change', update);
     return () => media.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    const controller = new InkTransitionController(() => themeRef.current);
+    inkRef.current = controller;
+    return () => {
+      controller.dispose();
+      if (inkRef.current === controller) {
+        inkRef.current = null;
+      }
+    };
   }, []);
 
   const value = useMemo(
     () => ({
       theme,
       toggleTheme: (origin?: { x: number; y: number }) => {
-        if (transitioning.current) return;
-        const next = theme === 'dark' ? 'light' : 'dark';
-        const update = () => {
+        if (transitioning.current || inkRef.current?.isBusy) return;
+        const current = themeRef.current;
+        const next: Theme = current === 'dark' ? 'light' : 'dark';
+
+        const commitTheme = (instantSnap: boolean) => {
           explicitChoice.current = true;
           try {
             window.localStorage.setItem(STORAGE_KEY, next);
           } catch {
             /* Switching still works. */
           }
+          const root = document.documentElement;
+          if (instantSnap) {
+            root.classList.add('ink-instant-flip');
+          }
           flushSync(() => setTheme(next));
+          if (instantSnap) {
+            void root.offsetHeight;
+            requestAnimationFrame(() => root.classList.remove('ink-instant-flip'));
+          }
         };
-        const doc = document as Document & {
-          startViewTransition?: (callback: () => void) => {
-            finished: Promise<void>;
-            ready: Promise<void>;
+
+        const runFallback = () => {
+          const doc = document as Document & {
+            startViewTransition?: (callback: () => void) => {
+              finished: Promise<void>;
+              ready: Promise<void>;
+            };
           };
+          if (
+            !doc.startViewTransition ||
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ) {
+            commitTheme(false);
+            return;
+          }
+          const root = document.documentElement;
+          const x = origin?.x ?? window.innerWidth / 2;
+          const y = origin?.y ?? 40;
+          const radius = Math.hypot(
+            Math.max(x, window.innerWidth - x),
+            Math.max(y, window.innerHeight - y),
+          );
+          root.style.setProperty('--theme-x', `${x}px`);
+          root.style.setProperty('--theme-y', `${y}px`);
+          root.style.setProperty('--theme-radius', `${radius}px`);
+          root.classList.add('theme-transition');
+          transitioning.current = true;
+          try {
+            const transition = doc.startViewTransition(() => commitTheme(false));
+            void transition.ready.catch(() => undefined);
+            void transition.finished
+              .catch(() => undefined)
+              .finally(() => {
+                root.classList.remove('theme-transition');
+                transitioning.current = false;
+              });
+          } catch {
+            root.classList.remove('theme-transition');
+            transitioning.current = false;
+            commitTheme(false);
+          }
         };
-        if (
-          !doc.startViewTransition ||
-          window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        ) {
-          update();
+
+        const ink = inkRef.current;
+        if (!ink) {
+          runFallback();
           return;
         }
-        const root = document.documentElement;
-        const x = origin?.x ?? window.innerWidth / 2;
-        const y = origin?.y ?? 40;
-        const radius = Math.hypot(
-          Math.max(x, window.innerWidth - x),
-          Math.max(y, window.innerHeight - y),
-        );
-        root.style.setProperty('--theme-x', `${x}px`);
-        root.style.setProperty('--theme-y', `${y}px`);
-        root.style.setProperty('--theme-radius', `${radius}px`);
-        root.classList.add('theme-transition');
-        transitioning.current = true;
-        try {
-          const transition = doc.startViewTransition(update);
-          void transition.ready.catch(() => undefined);
-          void transition.finished
-            .catch(() => undefined)
-            .finally(() => {
-              root.classList.remove('theme-transition');
-              transitioning.current = false;
-            });
-        } catch {
-          root.classList.remove('theme-transition');
-          transitioning.current = false;
-          update();
-        }
+
+        void ink
+          .toggle(origin, next, () => commitTheme(true))
+          .then((handled) => {
+            if (!handled) {
+              runFallback();
+            }
+          });
       },
     }),
     [theme],

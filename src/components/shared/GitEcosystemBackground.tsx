@@ -292,6 +292,7 @@ export function GitEcosystemBackground() {
         aria-hidden="true"
       />
       <div
+        data-ink-ignore-mutations=""
         className={`pointer-events-none fixed inset-0 -z-10 overflow-hidden transition-all duration-700 ${isBlurredPage ? 'blur-[4px]' : ''}`}
         aria-hidden="true"
       >

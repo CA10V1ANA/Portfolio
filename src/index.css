@@ -936,6 +936,26 @@
   }
 }
 
+.ink-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.ink-canvas.is-active {
+  visibility: visible;
+}
+
+html.ink-instant-flip *,
+html.ink-instant-flip *::before,
+html.ink-instant-flip *::after {
+  transition-property: none !important;
+}
+
 .theme-transition::view-transition-old(root),
 .theme-transition::view-transition-new(root) {
   animation: none;
