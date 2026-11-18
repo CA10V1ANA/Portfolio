@@ -31,7 +31,7 @@ export const PROJECTS: Project[] = [
     status: 'deployed',
     technologies: ['Angular 22', 'TypeScript', 'Signals', 'SCSS', 'Vercel'],
     githubUrl: 'https://github.com/CA10V1ANA/sonho-de-pudim',
-    demoUrl: 'https://sonho-de-pudim.vercel.app',
+    demoUrl: 'https://sonho-de-pudim-hazel.vercel.app/',
     featured: true,
   },
   {
@@ -41,7 +41,7 @@ export const PROJECTS: Project[] = [
     status: 'active',
     technologies: ['Angular 22', 'TypeScript', 'Angular Router', 'SCSS', 'Vercel'],
     githubUrl: 'https://github.com/CA10V1ANA/Md-films',
-    demoUrl: 'https://md-films-sigma.vercel.app',
+    demoUrl: 'https://md-films-sigma.vercel.app/pacotes',
     featured: true,
   },
   {

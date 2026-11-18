@@ -112,8 +112,21 @@ export function Projects() {
                   ))}
                 </ul>
 
-                <div className="mt-auto flex flex-wrap gap-x-6 gap-y-3 pt-9">
-                  <Link className="text-link" to={PROJECT_PATH(project)}>
+                <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-9">
+                  {project.demoUrl && (
+                    <a
+                      className="inline-flex min-h-10 items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground transition-colors hover:bg-secondary"
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {tc('actions.viewProject')} <ArrowUpRight size={14} aria-hidden="true" />
+                    </a>
+                  )}
+                  <Link
+                    className={project.demoUrl ? 'text-link text-muted-foreground' : 'text-link'}
+                    to={PROJECT_PATH(project)}
+                  >
                     {tc('actions.viewCase')} <ArrowUpRight size={16} aria-hidden="true" />
                   </Link>
                   {project.githubUrl && (
@@ -121,7 +134,7 @@ export function Projects() {
                       className="text-link text-muted-foreground"
                       href={project.githubUrl}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       {tc('actions.viewCode')} <ArrowUpRight size={16} aria-hidden="true" />
                     </a>
